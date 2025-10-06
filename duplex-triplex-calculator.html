@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculateur PEB – Duplex / Triplex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --peb-ink: #1f2c3d;
+      --peb-ink-soft: #4b627c;
+      --peb-green: #2fae6b;
+      --peb-green-strong: #1b7d4b;
+      --peb-green-ghost: #e9f7ef;
+      --peb-sun: #ffd166;
+      --peb-red: #c1292e;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow-lg: 0 20px 45px rgba(28, 68, 92, 0.18);
+      --shadow-md: 0 10px 28px rgba(28, 68, 92, 0.14);
+      --shadow-sm: 0 3px 12px rgba(20, 48, 67, 0.12);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 18% 18%, rgba(47, 174, 107, 0.08), transparent 45%),
+        radial-gradient(circle at 78% 12%, rgba(255, 209, 102, 0.12), transparent 50%),
+        linear-gradient(180deg, #f8fbff 0%, #f1f9f5 45%, #ebf6ef 100%);
+      padding: clamp(1.5rem, 2.5vw + 1rem, 3.5rem);
+      color: var(--peb-ink);
+    }
+
+    .calculator-shell {
+      width: min(100%, 380px);
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 2.2rem clamp(1.4rem, 4vw, 2.4rem) 2.6rem;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .calculator-shell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(140% 110% at 12% 10%, rgba(47, 174, 107, 0.12), transparent 50%),
+        radial-gradient(85% 80% at 110% 0%, rgba(31, 44, 61, 0.12), transparent 70%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+
+    .calculator-shell header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .title {
+      font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.8rem);
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      margin: 0.45rem 0 0;
+      color: var(--peb-ink-soft);
+    }
+
+    .field {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .field label {
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      letter-spacing: 0.01em;
+    }
+
+    .slider-wrap {
+      display: grid;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .slider-track {
+      width: 100%;
+      appearance: none;
+      height: 0.65rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--peb-green) var(--p, 25%), rgba(31, 44, 61, 0.12) var(--p, 25%));
+      outline: none;
+      border: none;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .slider-track:focus-visible {
+      box-shadow: 0 0 0 3px rgba(47, 174, 107, 0.35);
+    }
+
+    .slider-track::-webkit-slider-runnable-track {
+      height: 100%;
+      border-radius: inherit;
+      background: transparent;
+    }
+
+    .slider-track::-moz-range-track {
+      height: 100%;
+      border-radius: inherit;
+      background: transparent;
+    }
+
+    .slider-track::-webkit-slider-thumb {
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 4px solid var(--peb-green);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: grab;
+    }
+
+    .slider-track:active::-webkit-slider-thumb {
+      transform: scale(1.07);
+      cursor: grabbing;
+    }
+
+    .slider-track::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 4px solid var(--peb-green);
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: grab;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .input-wrap input[type='number'] {
+      width: 120px;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(31, 44, 61, 0.2);
+      font: inherit;
+      font-weight: 700;
+      text-align: right;
+      color: var(--peb-ink);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-wrap input[type='number']:focus-visible {
+      border-color: var(--peb-green);
+      box-shadow: 0 0 0 3px rgba(47, 174, 107, 0.15);
+      outline: none;
+    }
+
+    .input-wrap .unit {
+      font-weight: 600;
+      color: var(--peb-ink-soft);
+    }
+
+    .value-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(47, 174, 107, 0.1);
+      color: var(--peb-green-strong);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .price-card {
+      margin-top: 1.7rem;
+      background: linear-gradient(145deg, rgba(47, 174, 107, 0.08) 0%, rgba(47, 174, 107, 0.02) 100%);
+      border-radius: var(--radius-md);
+      padding: 1.6rem clamp(1rem, 3vw, 1.6rem);
+      display: grid;
+      gap: 1.1rem;
+      border: 1px solid rgba(31, 44, 61, 0.08);
+    }
+
+    .price-rows {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .row--off .label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--peb-ink-soft);
+    }
+
+    .row--off .amount {
+      font-weight: 800;
+      color: var(--peb-red);
+      position: relative;
+    }
+
+    .row--off .amount::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      height: 2px;
+      background: rgba(193, 41, 46, 0.8);
+      top: 55%;
+      transform: rotate(-4deg);
+    }
+
+    .row--promo .label {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--peb-ink);
+    }
+
+    .row--promo .amount {
+      font-size: clamp(2.4rem, 2rem + 2vw, 3.2rem);
+      font-weight: 800;
+      color: var(--peb-ink);
+      letter-spacing: -0.01em;
+    }
+
+    .vat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(31, 44, 61, 0.75);
+    }
+
+    .extra-info {
+      font-size: 0.85rem;
+      color: var(--peb-ink-soft);
+      min-height: 1.2em;
+      transition: color 0.2s ease;
+    }
+
+    .promo-note {
+      border-radius: var(--radius-sm);
+      background: var(--peb-green-ghost);
+      padding: 0.85rem 0.95rem;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .promo-note strong {
+      color: var(--peb-green-strong);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      align-self: center;
+      background: var(--peb-green);
+      color: #ffffff;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tooltip button {
+      background: transparent;
+      border: none;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .tooltip button:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.8);
+      outline-offset: 2px;
+    }
+
+    .tooltip-content {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      translate: -50% 0;
+      min-width: 220px;
+      max-width: min(280px, 80vw);
+      padding: 0.8rem 1rem;
+      background: var(--peb-ink);
+      color: #ffffff;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .tooltip[data-open="true"] .tooltip-content,
+    .tooltip button:focus + .tooltip-content {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .tooltip-content::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      translate: -50% 0;
+      border: 6px solid transparent;
+      border-top-color: var(--peb-ink);
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 2rem;
+      padding: 1rem 1.2rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--peb-ink) 0%, #2d4869 100%);
+      color: #ffffff;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .cta:hover,
+    .cta:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 26px rgba(31, 44, 61, 0.25);
+      outline: none;
+    }
+
+    .cta .cta-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .cta span {
+      display: inline-flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1.25;
+    }
+
+    .cta small {
+      font-size: 0.76rem;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="calculator-shell peb-scope" data-tarif="dplx">
+    <header>
+      <p class="value-chip" aria-live="polite">
+        Surface sélectionnée : <span id="surface-value">75 m²</span>
+      </p>
+      <h1 class="title">Tarif PEB – Duplex / Triplex</h1>
+      <p class="subtitle">Obtenez votre attestation en moins de 24 heures.</p>
+    </header>
+
+    <section class="field" aria-labelledby="surface-label">
+      <label id="surface-label" for="surface-input">
+        Superficie
+        <span class="unit" aria-hidden="true">18 → 450&nbsp;m²</span>
+      </label>
+      <div class="slider-wrap">
+        <input
+          id="surface-input"
+          class="slider-track peb-slider"
+          type="range"
+          min="18"
+          max="450"
+          step="1"
+          value="75"
+          aria-describedby="surface-help"
+          aria-valuemin="18"
+          aria-valuemax="450"
+          aria-valuenow="75"
+          aria-valuetext="75 mètres carrés"
+        />
+        <p id="surface-help" class="sr-only">
+          Glissez ou utilisez les flèches du clavier pour ajuster la surface en mètres carrés.
+        </p>
+      </div>
+      <div class="input-wrap">
+        <label class="sr-only" for="surface-number">Saisissez la surface en mètres carrés</label>
+        <input
+          id="surface-number"
+          class="peb-input"
+          type="number"
+          min="18"
+          max="450"
+          step="1"
+          value="75"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="unit">m²</span>
+      </div>
+    </section>
+
+    <section class="price-card" aria-live="polite" aria-label="Tarifs calculés">
+      <div class="price-rows">
+        <div class="row row--off">
+          <span class="label">Tarif catalogue</span>
+          <span class="amount" id="price-off">275 €</span>
+        </div>
+        <div class="row row--promo">
+          <div>
+            <span class="label">Tarif promotionnel</span>
+            <span class="vat">TVA incluse</span>
+          </div>
+          <div class="amount" id="price-promo">225 €</div>
+        </div>
+      </div>
+      <p class="extra-info" id="extra-info" role="status"></p>
+      <div class="promo-note" role="note" aria-label="Offre express">
+        <span class="badge">
+          🚀 <strong>PEB sous 24h</strong>
+        </span>
+        <span class="tooltip" data-open="false">
+          <button type="button" aria-expanded="false" aria-controls="tooltip-content" aria-label="Voir les conditions de l'offre">
+            <svg class="hint__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.18"></circle>
+              <path d="M11 10h2v7h-2zm0-3h2v2h-2z" fill="currentColor"></path>
+            </svg>
+          </button>
+          <span id="tooltip-content" class="tooltip-content" role="tooltip">
+            <strong>Jusqu'au 15/10/2025</strong><br />
+            Offre soumise à disponibilité et réception complète des documents requis (valeur 60 € TTC).
+          </span>
+        </span>
+      </div>
+    </section>
+
+    <a
+      id="cta"
+      class="cta peb-cta"
+      href="https://pebify.be/contact/?type=Duplex%20%2F%20Triplex&surface=75&code=DM-75&price_label=prix%20promo&price=225&price_promo=225&price_off=275#form"
+    >
+      <span class="cta-icon" aria-hidden="true">📅</span>
+      <span>
+        Réserver un rendez-vous
+        <small>Pour <span id="cta-surface">75 m²</span></small>
+      </span>
+    </a>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const CONFIG = {
+        limits: { min: 18, max: 450, pivot: 350, baseOff: 475, basePromo: 285 },
+        labels: { type: 'Duplex / Triplex' },
+        urls: { contact: 'https://pebify.be/contact/' },
+        grids: {
+          off: [
+            { min: 0, max: 75, price: 275 },
+            { min: 76, max: 100, price: 295 },
+            { min: 101, max: 125, price: 320 },
+            { min: 126, max: 150, price: 345 },
+            { min: 151, max: 200, price: 375 },
+            { min: 201, max: 250, price: 395 },
+            { min: 251, max: 300, price: 445 },
+            { min: 301, max: 350, price: 475 },
+            { min: 351, max: 450, price: '>350' }
+          ],
+          promo: [
+            { min: 0, max: 75, price: 225 },
+            { min: 76, max: 100, price: 225 },
+            { min: 101, max: 125, price: 225 },
+            { min: 126, max: 150, price: 225 },
+            { min: 151, max: 200, price: 225 },
+            { min: 201, max: 250, price: 255 },
+            { min: 251, max: 300, price: 255 },
+            { min: 301, max: 350, price: 285 },
+            { min: 351, max: 450, price: '>350' }
+          ]
+        }
+      };
+
+      const surfaceRange = document.getElementById('surface-input');
+      const surfaceNumber = document.getElementById('surface-number');
+      const surfaceValue = document.getElementById('surface-value');
+      const priceOff = document.getElementById('price-off');
+      const pricePromo = document.getElementById('price-promo');
+      const ctaSurface = document.getElementById('cta-surface');
+      const cta = document.getElementById('cta');
+      const extraInfo = document.getElementById('extra-info');
+      const tooltip = document.querySelector('.tooltip');
+      const tooltipButton = tooltip?.querySelector('button');
+      const tooltipContent = tooltip?.querySelector('.tooltip-content');
+
+      let lastOff = 275;
+      let lastPromo = 225;
+      let hrefCache = new Map();
+      let debounce;
+
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+      const toNumber = (value) => Number(String(value).replace(/[^\d]/g, '')) || 0;
+      const formatCurrency = (value) => `${value.toLocaleString('fr-BE')} €`;
+
+      const getPrice = (surface, grid, overPivotBase) => {
+        const found = grid.find((entry) => surface >= entry.min && surface <= entry.max);
+        if (!found) return 0;
+        if (found.price === '>350') {
+          return surface > CONFIG.limits.pivot
+            ? overPivotBase + (surface - CONFIG.limits.pivot)
+            : overPivotBase;
+        }
+        return found.price;
+      };
+
+      const updateGradient = (range, value) => {
+        const { min, max } = CONFIG.limits;
+        const percent = ((value - min) / (max - min)) * 100;
+        range.style.setProperty('--p', `${percent}%`);
+      };
+
+      const buildHref = (surface, promo, off) => {
+        const key = `${surface}-${promo}-${off}`;
+        if (hrefCache.has(key)) return hrefCache.get(key);
+
+        const params = new URLSearchParams({
+          type: CONFIG.labels.type,
+          surface: String(surface),
+          code: `DM-${surface}`,
+          price_label: 'prix promo',
+          price: String(promo),
+          price_promo: String(promo),
+          price_off: String(off)
+        });
+        const url = `${CONFIG.urls.contact}?${params.toString()}#form`;
+        hrefCache.set(key, url);
+        return url;
+      };
+
+      const animateValue = (node, from, to) => {
+        if (from === to) {
+          node.textContent = formatCurrency(to);
+          return;
+        }
+        const start = performance.now();
+        const duration = 220;
+        const step = (timestamp) => {
+          const progress = Math.min((timestamp - start) / duration, 1);
+          const eased = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+          const value = Math.round(from + (to - from) * eased);
+          node.textContent = formatCurrency(value);
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+
+      const updateExtraInfo = (surface) => {
+        if (surface <= CONFIG.limits.pivot) {
+          extraInfo.textContent = '';
+          return;
+        }
+        extraInfo.textContent = `Au-delà de ${CONFIG.limits.pivot} m², comptez +1 € par m² supplémentaire.`;
+      };
+
+      const sync = (value, { fromRange = false } = {}) => {
+        const surface = clamp(Math.round(value), CONFIG.limits.min, CONFIG.limits.max);
+        surfaceRange.value = String(surface);
+        surfaceNumber.value = String(surface);
+        surfaceRange.setAttribute('aria-valuenow', surface);
+        surfaceRange.setAttribute('aria-valuetext', `${surface} mètres carrés`);
+        surfaceValue.textContent = `${surface} m²`;
+        ctaSurface.textContent = `${surface} m²`;
+
+        updateGradient(surfaceRange, surface);
+
+        const offPrice = getPrice(surface, CONFIG.grids.off, CONFIG.limits.baseOff);
+        const promoPrice = getPrice(surface, CONFIG.grids.promo, CONFIG.limits.basePromo);
+
+        animateValue(priceOff, lastOff, offPrice);
+        animateValue(pricePromo, lastPromo, promoPrice);
+
+        lastOff = offPrice;
+        lastPromo = promoPrice;
+
+        cta.href = buildHref(surface, promoPrice, offPrice);
+        updateExtraInfo(surface);
+
+        if (fromRange) {
+          surfaceRange.blur();
+        }
+      };
+
+      surfaceRange.addEventListener('input', (event) => {
+        sync(Number(event.target.value));
+      });
+
+      surfaceNumber.addEventListener('input', (event) => {
+        window.clearTimeout(debounce);
+        debounce = window.setTimeout(() => {
+          sync(toNumber(event.target.value));
+        }, 120);
+      });
+
+      surfaceNumber.addEventListener('change', (event) => {
+        sync(toNumber(event.target.value));
+      });
+
+      const closeTooltip = () => {
+        tooltip?.setAttribute('data-open', 'false');
+        tooltipButton?.setAttribute('aria-expanded', 'false');
+      };
+
+      tooltipButton?.addEventListener('click', (event) => {
+        event.preventDefault();
+        const expanded = tooltip.getAttribute('data-open') === 'true';
+        tooltip.setAttribute('data-open', String(!expanded));
+        tooltipButton.setAttribute('aria-expanded', String(!expanded));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!tooltip || !tooltipContent) return;
+        if (tooltip.contains(event.target)) return;
+        closeTooltip();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeTooltip();
+          tooltipButton?.focus();
+        }
+      });
+
+      sync(Number(surfaceNumber.value || surfaceRange.value || CONFIG.limits.min));
+    })();
+  </script>
+</body>
+</html>
