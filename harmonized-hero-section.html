@@ -1,0 +1,747 @@
+<!-- SECTION HERO HARMONISÉE - TARIFS PEB APPARTEMENT -->
+<style>
+/* ============================================
+   VARIABLES & RESET - RESPECT CHARTE COULEUR
+   ============================================ */
+:root {
+  --color-navy-900: #1A2332;
+  --color-navy-850: #202C3D;
+  --color-navy-800: #2C3E50;
+  --color-green-500: #339966;
+  --color-green-300: #3BC97F;
+  --color-gold-500: #FFD700;
+  --color-gold-600: #FFC700;
+  --text-strong: #F8FAFC;
+  --text-muted: #A7B1C2;
+  --surface-elev: #233044;
+  --border-soft: rgba(255,255,255,.12);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.25);
+  --header-height: 80px;
+}
+
+/* ============================================
+   SECTION HERO - STRUCTURE DE BASE
+   ============================================ */
+.pebify-hero-appart {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--color-navy-900);
+  color: var(--text-strong);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ============================================
+   FOND D'IMAGE AVEC OVERLAY GRADIENT
+   ============================================ */
+.pebify-hero-appart::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg,
+      rgba(26,35,50,0.92) 0%,
+      rgba(26,35,50,0.85) 50%,
+      rgba(26,35,50,0.75) 100%
+    ),
+    url('https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt.webp') center/cover no-repeat;
+  z-index: -1;
+}
+
+.pebify-hero-appart::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(51,153,102,0.08) 0%, transparent 60%);
+  z-index: -1;
+  animation: pulseGlow 8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ============================================
+   CONTAINER & LAYOUT - CENTRÉ ET SIMPLIFIÉ
+   ============================================ */
+.pebify-hero-appart__container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: calc(var(--header-height) + 2rem) 1.5rem 4rem;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .pebify-hero-appart__container {
+    padding: calc(var(--header-height) + 3rem) 2rem 6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 60px;
+  }
+
+  .pebify-hero-appart__container {
+    padding: calc(var(--header-height) + 1.5rem) 1.5rem 3rem;
+  }
+}
+
+/* ============================================
+   BADGE EXPERT AGRÉÉ
+   ============================================ */
+.pebify-hero-appart__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.4);
+  border-radius: 999px;
+  color: var(--color-gold-500);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 1.5rem;
+  animation: slideInDown 0.6s ease-out;
+}
+
+.pebify-hero-appart__badge-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   TITRES & TEXTE
+   ============================================ */
+.pebify-hero-appart__title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  color: var(--text-strong);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.pebify-hero-appart__title-highlight {
+  color: var(--color-green-300);
+  position: relative;
+  display: inline-block;
+}
+
+.pebify-hero-appart__subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   PRIX HERO (taille XXL pour seniors)
+   ============================================ */
+.pebify-hero-appart__price-box {
+  background: var(--surface-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 0 auto 2rem;
+  max-width: 500px;
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.pebify-hero-appart__price-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.pebify-hero-appart__price-value {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  color: var(--color-green-300);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.pebify-hero-appart__price-detail {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   ÉLÉMENTS DE RÉASSURANCE (USPs)
+   ============================================ */
+.pebify-hero-appart__usps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.pebify-hero-appart__usp {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+.pebify-hero-appart__usp-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-green-300);
+  margin-top: 2px;
+}
+
+.pebify-hero-appart__usp-text {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--text-strong);
+  font-weight: 500;
+}
+
+/* ============================================
+   BOUTONS CTA
+   ============================================ */
+.pebify-hero-appart__cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeInUp 0.8s ease-out 1s both;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 640px) {
+  .pebify-hero-appart__cta-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.pebify-hero-appart__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 1.125rem 2rem;
+  border-radius: 12px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pebify-hero-appart__btn--primary {
+  background: linear-gradient(180deg, var(--color-green-300) 0%, var(--color-green-500) 100%);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(51,153,102,0.35);
+}
+
+.pebify-hero-appart__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(51,153,102,0.45);
+}
+
+.pebify-hero-appart__btn--secondary {
+  background: var(--surface-elev);
+  color: var(--text-strong);
+  border: 1px solid var(--border-soft);
+}
+
+.pebify-hero-appart__btn--secondary:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.pebify-hero-appart__btn--calculator {
+  background: linear-gradient(180deg, #FFD700 0%, #FFC700 100%);
+  color: var(--color-navy-900);
+  box-shadow: 0 6px 24px rgba(255,199,0,0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.pebify-hero-appart__btn--calculator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.pebify-hero-appart__btn--calculator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,199,0,0.45);
+}
+
+.pebify-hero-appart__btn:focus-visible {
+  outline: 3px solid var(--color-gold-500);
+  outline-offset: 3px;
+}
+
+.pebify-hero-appart__btn-icon {
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+}
+
+/* ============================================
+   SOCIAL PROOF (Avis Google)
+   ============================================ */
+.pebify-hero-appart__social-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-soft);
+  animation: fadeInUp 0.8s ease-out 1.2s both;
+}
+
+.pebify-hero-appart__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.pebify-hero-appart__star {
+  width: 18px;
+  height: 18px;
+  fill: var(--color-gold-500);
+}
+
+.pebify-hero-appart__rating-text {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.pebify-hero-appart__rating-text strong {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+/* ============================================
+   FLÈCHE DE SCROLL VERS LE CALCULATEUR
+   ============================================ */
+.pebify-hero-appart__scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  animation: fadeInUp 0.8s ease-out 1.4s both, bounce 2s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+.pebify-hero-appart__scroll-indicator:hover {
+  opacity: 0.7;
+}
+
+.pebify-hero-appart__scroll-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pebify-hero-appart__scroll-arrow {
+  width: 32px;
+  height: 32px;
+  color: var(--color-green-300);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ============================================
+   SECTION DE TRANSITION
+   ============================================ */
+.pebify-transition {
+  background: linear-gradient(180deg, var(--color-navy-900) 0%, var(--color-navy-850) 100%);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pebify-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--color-green-300) 50%,
+    transparent 100%
+  );
+}
+
+.pebify-transition__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pebify-transition__title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-green-300);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.pebify-transition__subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.pebify-transition__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.pebify-transition__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.pebify-transition__feature:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-4px);
+}
+
+.pebify-transition__feature-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-green-300);
+}
+
+.pebify-transition__feature-text {
+  font-size: 0.9375rem;
+  color: var(--text-strong);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ============================================
+   ACCESSIBILITÉ & ÉTATS FOCUS
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   RESPONSIVE MOBILE-FIRST
+   ============================================ */
+@media (max-width: 640px) {
+  .pebify-hero-appart__price-box {
+    padding: 1.5rem;
+  }
+
+  .pebify-hero-appart__btn {
+    width: 100%;
+  }
+
+  .pebify-hero-appart__scroll-indicator {
+    bottom: 1rem;
+  }
+
+  .pebify-transition__features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   PERFORMANCE: REDUCE MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   SMOOTH SCROLL
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+</style>
+
+<!-- HTML STRUCTURE -->
+<section class="pebify-hero-appart" itemscope itemtype="https://schema.org/Service">
+  <div class="pebify-hero-appart__container">
+
+    <!-- Badge Expert Agréé -->
+    <div class="pebify-hero-appart__badge">
+      <svg class="pebify-hero-appart__badge-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+      <span itemprop="provider" itemscope itemtype="https://schema.org/LocalBusiness">
+        <span itemprop="name">Expert agréé n°001862747</span>
+      </span>
+    </div>
+
+    <!-- Titre H1 SEO -->
+    <h1 class="pebify-hero-appart__title" itemprop="name">
+      Tarif Certificat PEB
+      <span class="pebify-hero-appart__title-highlight">Appartement</span>
+      à Bruxelles
+    </h1>
+
+    <!-- Sous-titre -->
+    <p class="pebify-hero-appart__subtitle" itemprop="description">
+      Prix transparent pour votre appartement. Service complet incluant analyse technique détaillée et recommandations personnalisées. Devis immédiat avec notre calculateur.
+    </p>
+
+    <!-- Prix Hero XXL -->
+    <div class="pebify-hero-appart__price-box">
+      <div class="pebify-hero-appart__price-label">À partir de</div>
+      <div class="pebify-hero-appart__price-value" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <span itemprop="price" content="105">105 €</span>
+        <meta itemprop="priceCurrency" content="EUR">
+      </div>
+      <div class="pebify-hero-appart__price-detail">TTC · Selon superficie · Tout compris</div>
+    </div>
+
+    <!-- USPs / Points de Réassurance -->
+    <div class="pebify-hero-appart__usps">
+      <div class="pebify-hero-appart__usp">
+        <svg class="pebify-hero-appart__usp-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="pebify-hero-appart__usp-text">Rendez-vous généralement sous 24h à 48h maximum</span>
+      </div>
+      <div class="pebify-hero-appart__usp">
+        <svg class="pebify-hero-appart__usp-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="pebify-hero-appart__usp-text">Certificat officiel reçu en 48h par email</span>
+      </div>
+      <div class="pebify-hero-appart__usp">
+        <svg class="pebify-hero-appart__usp-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="pebify-hero-appart__usp-text">Garantie conformité 100% ou remboursé</span>
+      </div>
+    </div>
+
+    <!-- CTAs Principaux -->
+    <div class="pebify-hero-appart__cta-group">
+      <a href="tel:+32484630815" class="pebify-hero-appart__btn pebify-hero-appart__btn--primary" aria-label="Appeler pour prendre rendez-vous">
+        <svg class="pebify-hero-appart__btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+        <span>Appelez-moi : 0484 63 08 15</span>
+      </a>
+      <a href="#calculateur-peb" class="pebify-hero-appart__btn pebify-hero-appart__btn--calculator" aria-label="Calculer mon tarif personnalisé">
+        <svg class="pebify-hero-appart__btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        <span>Calculer mon tarif</span>
+      </a>
+      <a href="#formulaire-contact" class="pebify-hero-appart__btn pebify-hero-appart__btn--secondary" aria-label="Obtenir un devis gratuit par formulaire">
+        <svg class="pebify-hero-appart__btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span>Obtenir mon devis gratuit</span>
+      </a>
+    </div>
+
+    <!-- Social Proof -->
+    <div class="pebify-hero-appart__social-proof">
+      <div class="pebify-hero-appart__stars" aria-label="Note 4.9 sur 5 étoiles">
+        <svg class="pebify-hero-appart__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="pebify-hero-appart__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="pebify-hero-appart__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="pebify-hero-appart__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="pebify-hero-appart__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      </div>
+      <span class="pebify-hero-appart__rating-text">
+        <strong>4.9/5</strong> sur Google · 42 avis vérifiés
+      </span>
+    </div>
+
+    <!-- Indicateur de scroll -->
+    <a href="#calculateur-peb" class="pebify-hero-appart__scroll-indicator" aria-label="Défiler vers le calculateur">
+      <span class="pebify-hero-appart__scroll-text">Calculez votre tarif</span>
+      <svg class="pebify-hero-appart__scroll-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+
+  </div>
+</section>
+
+<!-- SECTION DE TRANSITION -->
+<section class="pebify-transition">
+  <div class="pebify-transition__content">
+    <h2 class="pebify-transition__title">Calculez votre tarif personnalisé</h2>
+    <p class="pebify-transition__subtitle">
+      Utilisez notre calculateur interactif pour obtenir instantanément le prix exact de votre certificat PEB selon votre type de bien et sa superficie.
+    </p>
+
+    <div class="pebify-transition__features">
+      <div class="pebify-transition__feature">
+        <svg class="pebify-transition__feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span class="pebify-transition__feature-text">Résultat instantané</span>
+      </div>
+
+      <div class="pebify-transition__feature">
+        <svg class="pebify-transition__feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="pebify-transition__feature-text">Prix garanti</span>
+      </div>
+
+      <div class="pebify-transition__feature">
+        <svg class="pebify-transition__feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="pebify-transition__feature-text">Offre promotionnelle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANCRE POUR LE CALCULATEUR -->
+<div id="calculateur-peb"></div>
+
+<!-- SCHEMA.ORG JSON-LD pour SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Certificat PEB Appartement Bruxelles",
+  "description": "Service de certification énergétique PEB pour appartements à Bruxelles. Prix transparent dès 105€ TTC, rendez-vous rapide sous 48h, certificat conforme garanti.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "PEBify",
+    "image": "https://pebify.be/wp-content/uploads/2025/05/pebify_logo_expert-peb-bruxelles-150px.png",
+    "telephone": "+32-484-630815",
+    "email": "info@pebify.be",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bruxelles",
+      "addressRegion": "Bruxelles-Capitale",
+      "addressCountry": "BE"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bruxelles"
+    },
+    "priceRange": "€€"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "105",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2025-01-01",
+    "priceValidUntil": "2025-12-31"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
