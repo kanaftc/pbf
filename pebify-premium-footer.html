@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEBify Premium Footer</title>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           PEBify Premium Footer - CSS Architecture
+           Version: 2.0 Premium Edition
+           Author: PEBify Design System
+           ===================================================== */
+
+        /* CSS Custom Properties - Design Tokens */
+        :root {
+            /* Navy Palette - Structure & Credibility */
+            --navy-900: #1A2332;
+            --navy-850: #202C3D;
+            --navy-800: #2C3E50;
+            --navy-700: #34495E;
+            --navy-150: #DDE3ED;
+
+            /* Green Palette - PEBify Signature */
+            --green-700: #2F855A;
+            --green-500: #339966;
+            --green-300: #3BC97F;
+            --green-150: #D6F3C2;
+
+            /* Gold Palette - Premium Accent */
+            --gold-700: #FFB700;
+            --gold-600: #FFC700;
+            --gold-500: #FFD700;
+
+            /* Neutral & Typography */
+            --text-primary: #F8FAFC;
+            --text-secondary: #A7B1C2;
+            --surface-elevated: #233044;
+            --border-soft: rgba(255, 255, 255, 0.12);
+            --border-medium: rgba(255, 255, 255, 0.2);
+
+            /* Spacing System */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+
+            /* Typography Scale */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Playfair Display', Georgia, serif;
+
+            /* Animation Tokens */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            /* Shadows */
+            --shadow-glow-green: 0 0 30px rgba(51, 153, 102, 0.3);
+            --shadow-glow-gold: 0 0 20px rgba(255, 215, 0, 0.2);
+            --shadow-elevated: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--navy-900);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* =====================================================
+           PREMIUM FOOTER ARCHITECTURE
+           ===================================================== */
+
+        .pebify-footer {
+            position: relative;
+            background: linear-gradient(180deg, var(--navy-850) 0%, var(--navy-900) 100%);
+            overflow: hidden;
+        }
+
+        /* Animated Background Pattern */
+        .pebify-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(51, 153, 102, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            animation: backgroundPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Decorative Top Border with Gradient Animation */
+        .footer-top-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--green-700) 0%,
+                var(--green-500) 25%,
+                var(--gold-500) 50%,
+                var(--green-500) 75%,
+                var(--green-700) 100%);
+            background-size: 200% 100%;
+            animation: gradientFlow 8s linear infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* Container System */
+        .footer-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-3xl) var(--space-xl);
+        }
+
+        /* =====================================================
+           PREMIUM HEADER SECTION
+           ===================================================== */
+
+        .footer-premium-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding-bottom: var(--space-3xl);
+            border-bottom: 1px solid var(--border-soft);
+            position: relative;
+        }
+
+        /* Logo Container with Glow Effect */
+        .footer-logo-container {
+            position: relative;
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-logo {
+            max-width: 220px;
+            height: auto;
+            filter: brightness(1.1) drop-shadow(0 4px 20px rgba(51, 153, 102, 0.3));
+            transition: var(--transition-slow);
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2) drop-shadow(0 8px 30px rgba(51, 153, 102, 0.5));
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: linear-gradient(135deg, var(--gold-700) 0%, var(--gold-500) 100%);
+            color: var(--navy-900);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-lg);
+            box-shadow: var(--shadow-glow-gold);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: var(--shadow-glow-gold); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.4); }
+        }
+
+        .premium-badge i {
+            font-size: 0.875rem;
+        }
+
+        /* Tagline */
+        .footer-tagline {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--green-300) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-description {
+            max-width: 600px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* CTA Button Premium */
+        .footer-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+            padding: var(--space-md) var(--space-2xl);
+            background: linear-gradient(135deg, var(--green-500) 0%, var(--green-700) 100%);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-spring);
+            box-shadow: var(--shadow-glow-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .footer-cta-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(51, 153, 102, 0.5);
+        }
+
+        .footer-cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .footer-cta-primary:focus-visible {
+            outline: 3px solid var(--green-300);
+            outline-offset: 3px;
+        }
+
+        .footer-cta-primary i {
+            transition: var(--transition-base);
+        }
+
+        .footer-cta-primary:hover i {
+            transform: translateX(4px);
+        }
+
+        /* =====================================================
+           MAIN COLUMNS GRID
+           ===================================================== */
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        /* Column Styling */
+        .footer-column {
+            position: relative;
+        }
+
+        .column-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--green-300);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            position: relative;
+            display: inline-block;
+        }
+
+        .column-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--green-500);
+            transition: var(--transition-base);
+        }
+
+        .footer-column:hover .column-title::after {
+            width: 60px;
+            background: var(--gold-500);
+        }
+
+        /* Navigation Links */
+        .footer-nav {
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 400;
+            transition: var(--transition-base);
+            position: relative;
+            padding: var(--space-xs) 0;
+        }
+
+        .footer-nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--green-300);
+            transition: var(--transition-base);
+        }
+
+        .footer-nav a:hover {
+            color: var(--text-primary);
+            transform: translateX(8px);
+        }
+
+        .footer-nav a:hover::before {
+            width: 100%;
+        }
+
+        .footer-nav a:focus-visible {
+            outline: 2px solid var(--green-300);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        .footer-nav a i {
+            font-size: 0.75rem;
+            color: var(--green-500);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition-base);
+        }
+
+        .footer-nav a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Premium Link Highlight */
+        .footer-nav a.premium-link {
+            color: var(--gold-500);
+            font-weight: 500;
+        }
+
+        .footer-nav a.premium-link i {
+            color: var(--gold-500);
+        }
+
+        /* Contact Information */
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            transition: var(--transition-base);
+        }
+
+        .contact-item:hover {
+            color: var(--text-primary);
+        }
+
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--surface-elevated);
+            border-radius: 12px;
+            color: var(--green-500);
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: var(--transition-spring);
+            border: 1px solid var(--border-soft);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--green-500);
+            color: var(--text-primary);
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: var(--shadow-glow-green);
+        }
+
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .contact-value {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+
+        a.contact-value:hover {
+            color: var(--green-300);
+        }
+
+        a.contact-value:focus-visible {
+            outline: 2px solid var(--green-300);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            margin-top: var(--space-lg);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: var(--transition-spring);
+            border: 1px solid var(--border-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--green-500);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: var(--transition-slow);
+            z-index: 0;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-4px) rotate(-5deg);
+            box-shadow: var(--shadow-glow-green);
+            border-color: var(--green-500);
+        }
+
+        .social-link:hover::before {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+        }
+
+        .social-link:focus-visible {
+            outline: 3px solid var(--green-300);
+            outline-offset: 3px;
+        }
+
+        /* WhatsApp Special Styling */
+        .social-link.whatsapp:hover {
+            background: #25D366;
+            border-color: #25D366;
+        }
+
+        .social-link.whatsapp:hover::before {
+            background: #25D366;
+        }
+
+        /* Facebook Special Styling */
+        .social-link.facebook:hover {
+            background: #1877F2;
+            border-color: #1877F2;
+        }
+
+        .social-link.facebook:hover::before {
+            background: #1877F2;
+        }
+
+        /* Instagram Special Styling */
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #F09433, #E6683C, #DC2743, #CC2366, #BC1888);
+            border-color: #E6683C;
+        }
+
+        .social-link.instagram:hover::before {
+            background: linear-gradient(45deg, #F09433, #E6683C, #DC2743, #CC2366, #BC1888);
+        }
+
+        /* =====================================================
+           NEWSLETTER SECTION
+           ===================================================== */
+
+        .newsletter-section {
+            grid-column: span 2;
+            background: var(--surface-elevated);
+            padding: var(--space-xl);
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(51, 153, 102, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .newsletter-description {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--navy-850);
+            border: 1px solid var(--border-medium);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            font-family: var(--font-primary);
+            transition: var(--transition-base);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(51, 153, 102, 0.3);
+        }
+
+        .newsletter-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--green-500);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: var(--transition-spring);
+        }
+
+        .newsletter-submit:hover {
+            background: var(--green-700);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-green);
+        }
+
+        .newsletter-submit:focus-visible {
+            outline: 3px solid var(--green-300);
+            outline-offset: 3px;
+        }
+
+        .newsletter-submit i {
+            transition: var(--transition-base);
+        }
+
+        .newsletter-submit:hover i {
+            transform: translateX(4px);
+        }
+
+        /* =====================================================
+           TRUST BADGES SECTION
+           ===================================================== */
+
+        .trust-section {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2xl);
+            padding: var(--space-2xl) 0;
+            border-top: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft);
+            margin-bottom: var(--space-3xl);
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--surface-elevated);
+            border-radius: 12px;
+            border: 1px solid var(--border-soft);
+            transition: var(--transition-spring);
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-4px);
+            border-color: var(--green-500);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .trust-badge-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--green-500) 0%, var(--green-700) 100%);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+        }
+
+        .trust-badge-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trust-badge-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .trust-badge-label {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-xs);
+        }
+
+        /* Gold Badge Variant */
+        .trust-badge.premium .trust-badge-icon {
+            background: linear-gradient(135deg, var(--gold-600) 0%, var(--gold-700) 100%);
+            color: var(--navy-900);
+        }
+
+        /* =====================================================
+           BOTTOM BAR
+           ===================================================== */
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-xl);
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .copyright a {
+            color: var(--green-300);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+
+        .copyright a:hover {
+            color: var(--green-500);
+        }
+
+        .copyright a:focus-visible {
+            outline: 2px solid var(--green-300);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .legal-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .legal-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--green-300);
+            transition: var(--transition-base);
+        }
+
+        .legal-link:hover {
+            color: var(--text-primary);
+        }
+
+        .legal-link:hover::after {
+            width: 100%;
+        }
+
+        .legal-link:focus-visible {
+            outline: 2px solid var(--green-300);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--green-500);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition-spring);
+            box-shadow: var(--shadow-glow-green);
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--green-700);
+            transform: translateY(-4px);
+        }
+
+        .back-to-top:focus-visible {
+            outline: 3px solid var(--green-300);
+            outline-offset: 3px;
+        }
+
+        /* =====================================================
+           RESPONSIVE DESIGN - MOBILE FIRST
+           ===================================================== */
+
+        /* Tablet Breakpoint */
+        @media (max-width: 1024px) {
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .newsletter-section {
+                grid-column: span 2;
+            }
+
+            .trust-section {
+                gap: var(--space-lg);
+            }
+        }
+
+        /* Mobile Landscape */
+        @media (max-width: 768px) {
+            .footer-container {
+                padding: var(--space-2xl) var(--space-lg);
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+
+            .newsletter-section {
+                grid-column: span 1;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .trust-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .trust-badge {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .legal-links {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Mobile Portrait */
+        @media (max-width: 480px) {
+            .footer-tagline {
+                font-size: 1.25rem;
+            }
+
+            .footer-cta-primary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-logo {
+                max-width: 180px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-soft: rgba(255, 255, 255, 0.3);
+                --border-medium: rgba(255, 255, 255, 0.5);
+            }
+
+            .footer-nav a:focus-visible,
+            .social-link:focus-visible,
+            .footer-cta-primary:focus-visible {
+                outline-width: 4px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .pebify-footer {
+                background: white !important;
+                color: black !important;
+            }
+
+            .pebify-footer::before,
+            .footer-top-accent,
+            .back-to-top {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Premium PEBify Footer -->
+    <footer class="pebify-footer" role="contentinfo" aria-label="Footer principal de PEBify">
+        <!-- Animated Top Accent -->
+        <div class="footer-top-accent" aria-hidden="true"></div>
+
+        <div class="footer-container">
+            <!-- Premium Header Section -->
+            <header class="footer-premium-header">
+                <div class="footer-logo-container">
+                    <a href="https://pebify.be" aria-label="Accueil PEBify">
+                        <img
+                            src="https://pebify.be/wp-content/uploads/2020/12/logo-pebify-peb-bruxelles-1.webp"
+                            alt="PEBify - Certificat PEB Bruxelles"
+                            class="footer-logo"
+                            loading="lazy"
+                            width="220"
+                            height="auto"
+                        >
+                    </a>
+                </div>
+
+                <span class="premium-badge">
+                    <i class="fas fa-crown" aria-hidden="true"></i>
+                    Certifié Excellence
+                </span>
+
+                <h2 class="footer-tagline">Votre Certificat PEB en Toute Simplicité</h2>
+
+                <p class="footer-description">
+                    Expert certifié en performance énergétique des bâtiments à Bruxelles.
+                    Service rapide, prix transparent et accompagnement personnalisé pour tous vos projets immobiliers.
+                </p>
+
+                <a href="https://pebify.be/#tarifs-certificat-peb-bruxelles" class="footer-cta-primary">
+                    <i class="fas fa-calculator" aria-hidden="true"></i>
+                    Calculer mon prix
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </header>
+
+            <!-- Main Content Grid -->
+            <div class="footer-columns">
+                <!-- Column 1: Services -->
+                <nav class="footer-column" aria-labelledby="services-title">
+                    <h3 class="column-title" id="services-title">Nos Services</h3>
+                    <ul class="footer-nav">
+                        <li>
+                            <a href="https://pebify.be/services/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                Tarifs PEB
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/services/certificat-peb-appartement-bruxelles/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                PEB Appartement
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/services/certificat-peb-duplex-triplex-bruxelles/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                PEB Duplex / Triplex
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/services/certificat-peb-maison-bruxelles/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                PEB Maison
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/#pix_popup_6509" class="premium-link">
+                                <i class="fas fa-crown" aria-hidden="true"></i>
+                                Voir tous mes prix
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Column 2: Informations -->
+                <nav class="footer-column" aria-labelledby="info-title">
+                    <h3 class="column-title" id="info-title">Informations</h3>
+                    <ul class="footer-nav">
+                        <li>
+                            <a href="https://pebify.be">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/a-propos/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                À Propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/blog-certificat-peb/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/faq/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pebify.be/a-propos-ai/">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                À Propos AI
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Column 3: Contact -->
+                <section class="footer-column" aria-labelledby="contact-title">
+                    <h3 class="column-title" id="contact-title">Contact</h3>
+                    <ul class="contact-info">
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span class="contact-label">Téléphone</span>
+                                <a href="tel:+32484630815" class="contact-value">+32 484 63 08 15</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span class="contact-label">Email</span>
+                                <a href="mailto:info@pebify.be" class="contact-value">info@pebify.be</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span class="contact-label">Localisation</span>
+                                <a href="https://maps.app.goo.gl/q9RnGYWnFRypYjq2A"
+                                   class="contact-value"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Bruxelles, Belgique
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Social Media -->
+                    <div class="social-section">
+                        <div class="social-links">
+                            <a href="https://wa.me/32484630815?text=Bonjour%20%F0%9F%91%8BJe%20vous%20contacte%20suite%20%C3%A0%20ma%20visite%20sur%20votre%20site.Pouvez-vous%20m%E2%80%99aider%20%3F%20"
+                               class="social-link whatsapp"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Contactez-nous sur WhatsApp">
+                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.facebook.com/pebify.brussels"
+                               class="social-link facebook"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Suivez-nous sur Facebook">
+                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.instagram.com/pebify.brussels"
+                               class="social-link instagram"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Suivez-nous sur Instagram">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Column 4: Newsletter (Spans 2 columns on desktop) -->
+                <div class="footer-column newsletter-section">
+                    <div class="newsletter-content">
+                        <h3 class="newsletter-title">Restez Informé</h3>
+                        <p class="newsletter-description">
+                            Recevez nos conseils exclusifs sur le PEB et l'efficacité énergétique directement dans votre boîte mail.
+                        </p>
+                        <form class="newsletter-form" aria-label="Inscription à la newsletter">
+                            <input
+                                type="email"
+                                class="newsletter-input"
+                                placeholder="Votre adresse email"
+                                aria-label="Adresse email pour la newsletter"
+                                required
+                                autocomplete="email"
+                            >
+                            <button type="submit" class="newsletter-submit">
+                                S'inscrire
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Badges Section -->
+            <section class="trust-section" aria-label="Indicateurs de confiance">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-certificate" aria-hidden="true"></i>
+                    </div>
+                    <div class="trust-badge-content">
+                        <span class="trust-badge-value">100%</span>
+                        <span class="trust-badge-label">Certifié Officiel</span>
+                    </div>
+                </div>
+
+                <div class="trust-badge premium">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <div class="trust-badge-content">
+                        <span class="trust-badge-value">5/5</span>
+                        <span class="trust-badge-label">Avis Clients</span>
+                    </div>
+                </div>
+
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
+                    </div>
+                    <div class="trust-badge-content">
+                        <span class="trust-badge-value">48h</span>
+                        <span class="trust-badge-label">Délai Express</span>
+                    </div>
+                </div>
+
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                    </div>
+                    <div class="trust-badge-content">
+                        <span class="trust-badge-value">Prix</span>
+                        <span class="trust-badge-label">Transparent & Fixe</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; <span id="current-year"></span> <a href="https://pebify.be">PEBify</a>.
+                    Tous droits réservés. Certifié PEB Bruxelles.
+                </p>
+
+                <nav class="legal-links" aria-label="Liens légaux">
+                    <a href="https://pebify.be/contact/" class="legal-link">Contact</a>
+                    <a href="https://pebify.be/politique-de-confidentialite/" class="legal-link">Politique de Confidentialité</a>
+                    <a href="https://pebify.be/conditions-generales-de-vente-pebify/" class="legal-link">CGV</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button
+        class="back-to-top"
+        id="backToTop"
+        aria-label="Retour en haut de la page"
+        title="Retour en haut">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        /**
+         * PEBify Premium Footer - JavaScript Module
+         * Version: 2.0 Premium Edition
+         * Features: Micro-interactions, Accessibility, Performance
+         */
+
+        (function() {
+            'use strict';
+
+            // =====================================================
+            // INITIALIZATION
+            // =====================================================
+
+            document.addEventListener('DOMContentLoaded', function() {
+                initCurrentYear();
+                initBackToTop();
+                initNewsletterForm();
+                initLinkAnimations();
+                initIntersectionObserver();
+                initKeyboardNavigation();
+            });
+
+            // =====================================================
+            // CURRENT YEAR
+            // =====================================================
+
+            function initCurrentYear() {
+                const yearElement = document.getElementById('current-year');
+                if (yearElement) {
+                    yearElement.textContent = new Date().getFullYear();
+                }
+            }
+
+            // =====================================================
+            // BACK TO TOP BUTTON
+            // =====================================================
+
+            function initBackToTop() {
+                const backToTopButton = document.getElementById('backToTop');
+                if (!backToTopButton) return;
+
+                let isScrolling = false;
+
+                // Throttled scroll handler
+                function handleScroll() {
+                    if (!isScrolling) {
+                        window.requestAnimationFrame(function() {
+                            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                            if (scrollPosition > 400) {
+                                backToTopButton.classList.add('visible');
+                            } else {
+                                backToTopButton.classList.remove('visible');
+                            }
+
+                            isScrolling = false;
+                        });
+                        isScrolling = true;
+                    }
+                }
+
+                window.addEventListener('scroll', handleScroll, { passive: true });
+
+                // Smooth scroll to top
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // =====================================================
+            // NEWSLETTER FORM
+            // =====================================================
+
+            function initNewsletterForm() {
+                const form = document.querySelector('.newsletter-form');
+                if (!form) return;
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const input = form.querySelector('.newsletter-input');
+                    const button = form.querySelector('.newsletter-submit');
+                    const email = input.value.trim();
+
+                    if (!isValidEmail(email)) {
+                        showFormFeedback(input, 'Email invalide', 'error');
+                        return;
+                    }
+
+                    // Simulate submission (replace with actual API call)
+                    button.disabled = true;
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+
+                    setTimeout(function() {
+                        showFormFeedback(input, 'Merci ! Vous êtes inscrit.', 'success');
+                        input.value = '';
+                        button.disabled = false;
+                        button.innerHTML = 'S\'inscrire <i class="fas fa-paper-plane"></i>';
+                    }, 1500);
+                });
+            }
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function showFormFeedback(input, message, type) {
+                // Remove existing feedback
+                const existingFeedback = input.parentNode.querySelector('.form-feedback');
+                if (existingFeedback) {
+                    existingFeedback.remove();
+                }
+
+                // Create feedback element
+                const feedback = document.createElement('div');
+                feedback.className = 'form-feedback';
+                feedback.textContent = message;
+                feedback.style.cssText = `
+                    position: absolute;
+                    bottom: -25px;
+                    left: 0;
+                    font-size: 0.8125rem;
+                    font-weight: 500;
+                    color: ${type === 'success' ? '#3BC97F' : '#ff6b6b'};
+                    animation: fadeInUp 0.3s ease;
+                `;
+
+                // Add animation keyframes if not exists
+                if (!document.querySelector('#formFeedbackStyles')) {
+                    const style = document.createElement('style');
+                    style.id = 'formFeedbackStyles';
+                    style.textContent = `
+                        @keyframes fadeInUp {
+                            from {
+                                opacity: 0;
+                                transform: translateY(10px);
+                            }
+                            to {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                input.parentNode.style.position = 'relative';
+                input.parentNode.appendChild(feedback);
+
+                // Auto remove after 3 seconds
+                setTimeout(function() {
+                    if (feedback.parentNode) {
+                        feedback.style.opacity = '0';
+                        feedback.style.transform = 'translateY(-10px)';
+                        setTimeout(() => feedback.remove(), 300);
+                    }
+                }, 3000);
+            }
+
+            // =====================================================
+            // LINK ANIMATIONS
+            // =====================================================
+
+            function initLinkAnimations() {
+                const links = document.querySelectorAll('.footer-nav a');
+
+                links.forEach(function(link) {
+                    link.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateX(8px)';
+                    });
+
+                    link.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateX(0)';
+                    });
+                });
+            }
+
+            // =====================================================
+            // INTERSECTION OBSERVER FOR ANIMATIONS
+            // =====================================================
+
+            function initIntersectionObserver() {
+                if (!('IntersectionObserver' in window)) return;
+
+                const observerOptions = {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe elements for fade-in animation
+                const elementsToAnimate = document.querySelectorAll('.footer-column, .trust-badge');
+
+                elementsToAnimate.forEach(function(element, index) {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                    observer.observe(element);
+                });
+            }
+
+            // =====================================================
+            // KEYBOARD NAVIGATION
+            // =====================================================
+
+            function initKeyboardNavigation() {
+                // Enhanced focus management
+                const focusableElements = document.querySelectorAll(
+                    '.pebify-footer a, .pebify-footer button, .pebify-footer input'
+                );
+
+                focusableElements.forEach(function(element) {
+                    element.addEventListener('focus', function() {
+                        this.style.outline = '3px solid #3BC97F';
+                        this.style.outlineOffset = '3px';
+                    });
+
+                    element.addEventListener('blur', function() {
+                        this.style.outline = '';
+                        this.style.outlineOffset = '';
+                    });
+                });
+
+                // Skip link functionality (if needed)
+                document.addEventListener('keydown', function(e) {
+                    // ESC key closes any open modals or resets focus
+                    if (e.key === 'Escape') {
+                        document.activeElement.blur();
+                    }
+                });
+            }
+
+            // =====================================================
+            // UTILITY FUNCTIONS
+            // =====================================================
+
+            // Debounce function for performance
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Throttle function for performance
+            function throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                };
+            }
+
+        })();
+    </script>
+</body>
+</html>
