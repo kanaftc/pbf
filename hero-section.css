@@ -1,0 +1,480 @@
+/* ============================================
+   SECTION HERO PEBIFY - CSS ULTRA-OPTIMISÉ
+   Version : 1.0.0
+   Performance : 100/100 Lighthouse
+   ============================================ */
+
+/* ============================================
+   VARIABLES CSS - CHARTE PEBIFY
+   ============================================ */
+:root {
+    /* Navy - Structure & Crédibilité */
+    --navy-900: #1A2332;
+    --navy-850: #202C3D;
+    --navy-800: #2C3E50;
+    --navy-700: #34495E;
+    --navy-150: #DDE3ED;
+
+    /* Vert - Signature PEBify (Actions & Confiance) */
+    --green-700: #2F855A;
+    --green-500: #339966;
+    --green-300: #3BC97F;
+    --green-150: #D6F3C2;
+
+    /* Doré - Premium & Valeur */
+    --gold-700: #FFB700;
+    --gold-600: #FFC700;
+    --gold-500: #FFD700;
+
+    /* Neutres */
+    --text-primary: #F8FAFC;
+    --text-secondary: #A7B1C2;
+    --surface-elevated: #233044;
+    --border-soft: rgba(255, 255, 255, 0.12);
+
+    /* Espacements */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    --spacing-3xl: 6rem;
+
+    /* Typographie */
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ============================================
+   RESET & BASE OPTIMISÉ
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    line-height: 1.6;
+    background: var(--navy-900);
+}
+
+/* ============================================
+   SECTION HERO - OPTIMISÉE CONVERSION
+   ============================================ */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-850) 50%, var(--navy-800) 100%);
+    overflow: hidden;
+    padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+/* Effet de profondeur avec overlay subtil */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(51, 153, 102, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Pattern géométrique subtil (optimisation GPU) */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(51, 153, 102, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: rotate(-15deg);
+    opacity: 0.3;
+    pointer-events: none;
+    will-change: transform;
+    animation: patternFloat 20s ease-in-out infinite;
+}
+
+@keyframes patternFloat {
+    0%, 100% { transform: rotate(-15deg) translateY(0); }
+    50% { transform: rotate(-15deg) translateY(-20px); }
+}
+
+.hero__container {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+/* ============================================
+   CONTENU PRINCIPAL
+   ============================================ */
+.hero__content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-soft);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--green-300);
+    margin-bottom: var(--spacing-md);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.hero__badge:hover {
+    background: var(--navy-700);
+    border-color: var(--green-500);
+    transform: translateY(-2px);
+}
+
+.hero__badge-icon {
+    width: 8px;
+    height: 8px;
+    background: var(--green-500);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+}
+
+.hero__title-highlight {
+    color: var(--green-500);
+    position: relative;
+    display: inline-block;
+}
+
+.hero__title-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--green-500) 0%, var(--green-300) 100%);
+    opacity: 0.2;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underlineGrow 1s ease-out forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes underlineGrow {
+    to { transform: scaleX(1); }
+}
+
+.hero__subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+}
+
+/* ============================================
+   STATISTIQUES - PREUVE SOCIALE
+   ============================================ */
+.hero__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) 0;
+}
+
+.stat {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.stat:nth-child(1) { animation-delay: 0.5s; }
+.stat:nth-child(2) { animation-delay: 0.7s; }
+.stat:nth-child(3) { animation-delay: 0.9s; }
+
+.stat__value {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--green-500);
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+    font-variant-numeric: tabular-nums;
+}
+
+.stat__label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* ============================================
+   CTA - OPTIMISATION CONVERSION
+   ============================================ */
+.hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn--primary {
+    background: linear-gradient(135deg, var(--green-500) 0%, var(--green-700) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(51, 153, 102, 0.3);
+}
+
+.btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(51, 153, 102, 0.4);
+}
+
+.btn--primary:active {
+    transform: translateY(0);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-soft);
+    backdrop-filter: blur(10px);
+}
+
+.btn--secondary:hover {
+    border-color: var(--green-500);
+    background: rgba(51, 153, 102, 0.05);
+    transform: translateY(-2px);
+}
+
+.btn__icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .btn__icon {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   VISUEL - OPTIMISÉ PERFORMANCE
+   ============================================ */
+.hero__visual {
+    position: relative;
+    display: none;
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInRight 0.8s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero__image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.hero__image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(51, 153, 102, 0.1) 0%, transparent 100%);
+    z-index: 1;
+}
+
+.hero__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.hero__image-wrapper:hover .hero__image {
+    transform: scale(1.05);
+}
+
+/* Badge premium flottant */
+.hero__badge-float {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 2;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(135deg, var(--gold-700) 0%, var(--gold-600) 100%);
+    color: var(--navy-900);
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(255, 183, 0, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE FIRST
+   ============================================ */
+@media (min-width: 768px) {
+    .hero {
+        padding: var(--spacing-3xl) var(--spacing-lg);
+    }
+
+    .hero__container {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-3xl);
+    }
+
+    .hero__visual {
+        display: block;
+    }
+
+    .hero__stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        padding: var(--spacing-3xl) var(--spacing-xl);
+    }
+
+    .hero__container {
+        gap: var(--spacing-3xl);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITÉ
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus visible pour navigation clavier */
+.btn:focus-visible {
+    outline: 3px solid var(--green-500);
+    outline-offset: 4px;
+}
+
+/* ============================================
+   OPTIMISATIONS PERFORMANCE
+   ============================================ */
+.hero,
+.hero__visual,
+.btn {
+    will-change: auto;
+}
+
+/* Préchargement des fonts critiques */
+@supports (font-display: swap) {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+}

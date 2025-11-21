@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PEBify - Experts en certification énergétique PEB en Belgique. Plus de 5000 certificats délivrés avec excellence et rapidité.">
+    <title>À Propos de PEBify - Expert PEB Certifié en Belgique</title>
+
+    <!-- CSS External -->
+    <link rel="stylesheet" href="hero-section.css">
+
+    <!-- Preload font critique -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+    <!-- SECTION HERO - À PROPOS PEBIFY -->
+    <section class="hero" itemscope itemtype="https://schema.org/AboutPage">
+        <div class="hero__container">
+
+            <!-- CONTENU PRINCIPAL -->
+            <div class="hero__content">
+
+                <!-- Badge Expert -->
+                <div class="hero__badge">
+                    <span class="hero__badge-icon" aria-hidden="true"></span>
+                    <span>Certifiés & Reconnus depuis 2015</span>
+                </div>
+
+                <!-- Titre Principal (H1 - SEO) -->
+                <h1 class="hero__title" itemprop="name">
+                    Votre <span class="hero__title-highlight">Expert PEB</span> de Confiance en Belgique
+                </h1>
+
+                <!-- Sous-titre / Value Proposition -->
+                <p class="hero__subtitle" itemprop="description">
+                    Nous accompagnons propriétaires et professionnels de l'immobilier avec des certificats PEB précis, rapides et conformes. Votre tranquillité d'esprit est notre priorité.
+                </p>
+
+                <!-- Statistiques - Preuve Sociale -->
+                <div class="hero__stats">
+                    <div class="stat">
+                        <div class="stat__value">5000+</div>
+                        <div class="stat__label">Certificats délivrés</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__value">48h</div>
+                        <div class="stat__label">Délai moyen</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__value">4.9/5</div>
+                        <div class="stat__label">Satisfaction client</div>
+                    </div>
+                </div>
+
+                <!-- CTA - Appel à l'Action -->
+                <div class="hero__cta">
+                    <a href="#devis" class="btn btn--primary" aria-label="Obtenir un devis gratuit">
+                        <span>Devis gratuit en 2 min</span>
+                        <svg class="btn__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+
+                    <a href="#expertise" class="btn btn--secondary" aria-label="Découvrir notre expertise">
+                        <span>Notre expertise</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- VISUEL - Image Premium -->
+            <div class="hero__visual">
+                <div class="hero__image-wrapper">
+                    <!-- Badge Premium Flottant -->
+                    <div class="hero__badge-float">
+                        Certifié EPBD
+                    </div>
+
+                    <!-- Image placeholder - À remplacer par votre visuel -->
+                    <!-- RECOMMANDATIONS :
+                         - Format : WebP avec fallback JPG
+                         - Dimensions : 1200x1000px
+                         - Poids : < 200kb optimisé
+                         - Utiliser srcset pour responsive
+                    -->
+                    <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='500' viewBox='0 0 600 500'%3E%3Crect fill='%23233044' width='600' height='500'/%3E%3Cpath fill='%23339966' fill-opacity='0.1' d='M0 250L300 0L600 250L300 500Z'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter, sans-serif' font-size='20' fill='%23A7B1C2'%3EPEBify Expert%3C/text%3E%3C/svg%3E"
+                        alt="Expert PEB certifié réalisant une inspection énergétique professionnelle"
+                        class="hero__image"
+                        width="600"
+                        height="500"
+                        loading="lazy"
+                    >
+
+                    <!-- EXEMPLE AVEC IMAGE RÉELLE (à décommenter) :
+                    <picture>
+                        <source srcset="images/hero-expert.webp 1x, images/hero-expert@2x.webp 2x" type="image/webp">
+                        <source srcset="images/hero-expert.jpg 1x, images/hero-expert@2x.jpg 2x" type="image/jpeg">
+                        <img
+                            src="images/hero-expert.jpg"
+                            alt="Expert PEB certifié réalisant une inspection énergétique professionnelle"
+                            class="hero__image"
+                            width="1200"
+                            height="1000"
+                            loading="lazy"
+                        >
+                    </picture>
+                    -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Schema.org JSON-LD pour SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "PEBify",
+        "url": "https://pebify.be",
+        "logo": "https://pebify.be/logo.png",
+        "description": "Expert en certification énergétique PEB en Belgique",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BE"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "bestRating": "5",
+            "ratingCount": "500"
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Belgium"
+        }
+    }
+    </script>
+
+</body>
+</html>
