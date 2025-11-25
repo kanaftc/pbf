@@ -1,0 +1,467 @@
+<!-- START OF INTEGRATION CODE FOR WORDPRESS -->
+<!-- Paste this code directly into a Custom HTML block in WordPress -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+.peb-widget-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.peb-widget-wrapper {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    background-color: #f5f7fa;
+    padding: 40px 16px;
+}
+
+.peb-widget-section {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.peb-widget-header {
+    margin-bottom: 32px;
+}
+
+.peb-widget-h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1A2332;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.peb-widget-subtitle {
+    font-size: 1rem;
+    color: #1A2332;
+    font-weight: 600;
+}
+
+.peb-widget-green-text {
+    font-size: 1.125rem;
+    font-weight: 900;
+    color: #339966;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+}
+
+.peb-widget-card {
+    position: relative;
+    background-color: #1A2332;
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    box-shadow: 0 15px 35px rgba(26, 35, 50, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: visible;
+}
+
+.peb-widget-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at top right, rgba(51, 153, 102, 0.06), transparent 50%);
+    border-radius: 16px;
+}
+
+.peb-widget-left {
+    flex: 1;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.peb-widget-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.peb-widget-badge-green {
+    background-color: #339966;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.peb-widget-badge-gold {
+    background-color: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.peb-widget-h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.peb-widget-h3 span {
+    font-style: italic;
+    color: #FFD700;
+}
+
+.peb-widget-quote {
+    position: relative;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    border-top: 2px solid #339966;
+    width: 100%;
+    max-width: 600px;
+}
+
+.peb-widget-quote p {
+    color: #cbd5e1;
+    font-style: italic;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.peb-widget-quote span {
+    color: #F8FAFC;
+    font-weight: 600;
+    font-style: normal;
+    display: block;
+    margin-top: 4px;
+}
+
+.peb-widget-features {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.peb-widget-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: #F8FAFC;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.peb-widget-feature:last-child {
+    margin-bottom: 0;
+}
+
+.peb-widget-feature svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #339966;
+}
+
+.peb-widget-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #339966;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s;
+    animation: bounce-gentle 2s infinite;
+}
+
+.peb-widget-cta:hover {
+    color: #2da868;
+}
+
+.peb-widget-cta svg {
+    transition: transform 0.2s;
+}
+
+.peb-widget-cta:hover svg {
+    transform: translateY(4px);
+}
+
+@keyframes bounce-gentle {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60% { transform: translateY(-3px); }
+}
+
+.peb-widget-right {
+    flex-shrink: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.peb-widget-photo-container {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    margin-bottom: 12px;
+}
+
+.peb-widget-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.1);
+    object-fit: cover;
+    background-color: #2C3E50;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.peb-widget-status-dot {
+    position: absolute;
+    bottom: 24px;
+    left: 32px;
+    width: 24px;
+    height: 24px;
+    background-color: #339966;
+    border: 3px solid #1A2332;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(51, 153, 102, 0.3);
+    z-index: 20;
+}
+
+.peb-widget-action-btn {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background-color: white;
+    color: #1A2332;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.peb-widget-action-btn:hover {
+    transform: scale(1.1);
+}
+
+.peb-widget-btn-email {
+    top: 32px;
+    right: -8px;
+    z-index: 30;
+}
+
+.peb-widget-btn-email:hover {
+    background-color: #2C3E50;
+    color: white;
+}
+
+.peb-widget-btn-whatsapp {
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    z-index: 40;
+}
+
+.peb-widget-btn-whatsapp:hover {
+    background-color: #25D366;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.peb-widget-btn-phone {
+    bottom: 32px;
+    right: -8px;
+    z-index: 30;
+}
+
+.peb-widget-btn-phone:hover {
+    background-color: #339966;
+    color: white;
+}
+
+.peb-widget-name {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.peb-widget-name-text {
+    display: block;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.peb-widget-role {
+    display: block;
+    color: #339966;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+}
+
+/* Responsive - Desktop */
+@media (min-width: 768px) {
+    .peb-widget-card {
+        flex-direction: row;
+        padding: 40px;
+    }
+
+    .peb-widget-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .peb-widget-badges {
+        justify-content: flex-start;
+    }
+
+    .peb-widget-quote {
+        padding-top: 0;
+        padding-left: 16px;
+        border-top: none;
+        border-left: 3px solid #339966;
+    }
+
+    .peb-widget-quote span {
+        display: inline;
+        margin-top: 0;
+    }
+
+    .peb-widget-features {
+        width: auto;
+    }
+
+    .peb-widget-right {
+        margin-right: 24px;
+    }
+
+    .peb-widget-photo-container {
+        width: 320px;
+        height: 320px;
+    }
+}
+</style>
+
+<div class="peb-widget-wrapper">
+    <section class="peb-widget-section">
+
+        <!-- Header Section -->
+        <header class="peb-widget-header">
+            <h2 class="peb-widget-h2">Besoin d'un certificat PEB à Bruxelles ?</h2>
+            <div>
+                <span class="peb-widget-subtitle">Un tarif juste ? Des conseils d'expert ?</span>
+                <p class="peb-widget-green-text">VOUS ÊTES AU BON ENDROIT.</p>
+            </div>
+        </header>
+
+        <!-- Main Card -->
+        <div class="peb-widget-card">
+
+            <!-- Left Content -->
+            <div class="peb-widget-left">
+
+                <!-- Badges -->
+                <div class="peb-widget-badges">
+                    <span class="peb-widget-badge-green">OFFRE PEB RÉSIDENTIEL</span>
+                    <span class="peb-widget-badge-gold">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        TARIF FIXE GARANTI
+                    </span>
+                </div>
+
+                <!-- Headline -->
+                <h3 class="peb-widget-h3">Je réalise votre certificat PEB <span>personnellement</span>.</h3>
+
+                <!-- Quote -->
+                <div class="peb-widget-quote">
+                    <p>"14 ans d'expérience dans l'immobilier, probablement parmi les certificateurs les plus passionnés. <span>J'aime ce que je fais et je fais ce que j'aime.</span>"</p>
+                </div>
+
+                <!-- Features -->
+                <div class="peb-widget-features">
+                    <div class="peb-widget-feature">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <span><strong>Tout inclus :</strong> Déplacement, Conseils, Remise du rapport</span>
+                    </div>
+                    <div class="peb-widget-feature">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <span>Prix affiché = Prix demandé (Zéro surprise)</span>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <a href="https://pebify.be/#prix-peb-bruxelles" class="peb-widget-cta">
+                    <span>Calculez le prix de votre certificat PEB en quelques secondes</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </a>
+            </div>
+
+            <!-- Right Content: Profile -->
+            <div class="peb-widget-right">
+
+                <div class="peb-widget-photo-container">
+                    <img src="https://pebify.be/wp-content/uploads/2025/10/certificateur-peb-bruxelles-milad-mollaey-badge-250px.webp" alt="Milad Mollaey - Expert PEB" class="peb-widget-photo" loading="lazy">
+
+                    <div class="peb-widget-status-dot" title="Disponible"></div>
+
+                    <!-- Email Button -->
+                    <a href="mailto:info@pebify.be" class="peb-widget-action-btn peb-widget-btn-email" aria-label="Envoyer un email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </a>
+
+                    <!-- WhatsApp Button -->
+                    <a href="https://wa.me/32484630815" target="_blank" rel="noopener noreferrer" class="peb-widget-action-btn peb-widget-btn-whatsapp" aria-label="Contacter par WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </a>
+
+                    <!-- Phone Button -->
+                    <a href="tel:+32484630815" class="peb-widget-action-btn peb-widget-btn-phone" aria-label="Appeler par téléphone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Name -->
+                <div class="peb-widget-name">
+                    <span class="peb-widget-name-text">Milad Mollaey</span>
+                    <span class="peb-widget-role">Votre expert PEB dédié</span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<!-- END OF INTEGRATION CODE FOR WORDPRESS -->
