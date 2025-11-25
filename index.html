@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Strip Widget</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; }
+
+        /* Custom Animations */
+        .animate-bounce-gentle {
+            animation: bounce-gentle 2s infinite;
+        }
+        @keyframes bounce-gentle {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- START OF INTEGRATION CODE -->
+    <!-- Copy everything inside this section tag to integrate -->
+    <section class="w-full max-w-[1050px] mx-auto text-center font-sans">
+
+        <!-- Header Section - Transparent Background with Navy Text -->
+        <header class="mb-6 md:mb-8 bg-transparent">
+            <h2 class="text-2xl md:text-[1.8rem] font-extrabold text-[#1A2332] mb-2 leading-tight">
+                Besoin d'un certificat PEB à Bruxelles ?
+            </h2>
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-base text-[#1A2332] font-medium">
+                    Un tarif juste ? Des conseils d'expert ?
+                </span>
+                <span class="text-lg font-black text-[#339966] uppercase tracking-wider">
+                    VOUS ÊTES AU BON ENDROIT.
+                </span>
+            </div>
+        </header>
+
+        <!-- Main Card (Navy #1A2332) - Optimized UX -->
+        <div class="relative bg-[#1A2332] rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-10 shadow-[0_20px_50px_rgba(26,35,50,0.35)] border border-white/10 overflow-hidden md:overflow-visible">
+
+            <!-- Decorative Background Texture -->
+            <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(51,153,102,0.08),transparent_50%)] rounded-2xl"></div>
+            <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_bottom_left,rgba(255,215,0,0.03),transparent_40%)] rounded-2xl"></div>
+
+            <!-- Left Content: Promise & Bio -->
+            <div class="flex-1 z-10 text-center md:text-left flex flex-col items-center md:items-start w-full">
+
+                <!-- Top Badges -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 mb-4">
+                    <span class="bg-[#339966] text-white text-[0.65rem] sm:text-[0.7rem] font-bold px-2.5 sm:px-3 py-1 rounded uppercase tracking-[0.5px] shadow-sm">
+                        OFFRE PEB RÉSIDENTIEL
+                    </span>
+                    <span class="bg-[#FFD700]/10 border border-[#FFD700]/30 text-[#FFD700] text-[0.65rem] sm:text-[0.7rem] font-bold px-2.5 sm:px-3 py-1 rounded uppercase tracking-[0.5px] flex items-center gap-1.5 shadow-sm">
+                        <!-- Lock Icon -->
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        TARIF FIXE GARANTI
+                    </span>
+                </div>
+
+                <!-- Headline -->
+                <h3 class="text-xl sm:text-2xl md:text-[1.5rem] font-bold text-white mb-4 leading-[1.25]">
+                    Je réalise votre certificat PEB <span class="italic text-[#FFD700]">personnellement</span>.
+                </h3>
+
+                <!-- Quote Block -->
+                <div class="relative mb-5 pt-3 md:pt-0 pl-0 md:pl-4 border-t-2 md:border-t-0 md:border-l-[3px] border-[#339966] w-full max-w-2xl">
+                    <p class="text-[#A7B1C2] italic leading-relaxed text-[0.9rem] sm:text-[0.95rem]">
+                        "14 ans d'expérience dans l'immobilier, probablement parmi les certificateurs les plus passionnés. <span class="text-[#F8FAFC] font-semibold not-italic block md:inline mt-1 md:mt-0">J'aime ce que je fais et je fais ce que j'aime.</span>"
+                    </p>
+                </div>
+
+                <!-- Features List -->
+                <div class="bg-white/[0.07] backdrop-blur-sm rounded-xl p-3 sm:p-4 mb-6 w-full md:w-auto text-left border border-white/10 shadow-inner">
+                    <div class="flex items-start gap-3 mb-2.5 text-[#F8FAFC] text-[0.85rem] sm:text-[0.9rem]">
+                        <!-- Check Circle Icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#339966] shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <span><strong class="font-semibold">Tout inclus :</strong> Déplacement, Conseils, Remise du rapport</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-[#F8FAFC] text-[0.85rem] sm:text-[0.9rem]">
+                        <!-- Check Circle Icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#339966] shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <span>Prix affiché = Prix demandé <span class="text-[#A7B1C2]">(Zéro surprise)</span></span>
+                    </div>
+                </div>
+
+                <!-- CTA Nudge -->
+                <a href="https://pebify.be/#prix-peb-bruxelles" class="inline-flex items-center justify-center md:justify-start gap-2 text-[#339966] hover:text-[#3db877] font-bold text-sm cursor-pointer animate-bounce-gentle group transition-colors duration-200">
+                    <span>Calculez le prix de votre certificat PEB en quelques secondes</span>
+                    <!-- Chevron Down Icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-y-1 transition-transform duration-200"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </a>
+            </div>
+
+            <!-- Right Content: Expert Profile -->
+            <div class="shrink-0 z-10 flex flex-col items-center md:mr-4 lg:mr-6">
+
+                <!-- Photo Container -->
+                <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 mb-3">
+
+                    <!-- Main Image -->
+                    <img src="https://pebify.be/wp-content/uploads/2025/10/certificateur-peb-bruxelles-milad-mollaey-badge-250px.webp" alt="Milad Mollaey - Expert PEB" class="w-full h-full rounded-full border-[5px] sm:border-[6px] border-white/15 object-cover bg-[#2C3E50] shadow-[0_10px_40px_rgba(0,0,0,0.4)]" loading="lazy">
+
+                    <!-- Status Dot (Available) -->
+                    <div class="absolute bottom-5 sm:bottom-6 left-6 sm:left-8 w-5 h-5 sm:w-6 sm:h-6 bg-[#339966] border-[3px] border-[#1A2332] rounded-full shadow-[0_0_0_3px_rgba(51,153,102,0.25),0_0_12px_rgba(51,153,102,0.4)] z-20" title="Disponible"></div>
+
+                    <!-- Action Buttons -->
+
+                    <!-- 1. Email (Top Right) -->
+                    <a href="mailto:info@pebify.be" class="absolute top-6 sm:top-8 -right-1 sm:-right-2 w-11 h-11 sm:w-14 sm:h-14 bg-white hover:bg-[#1A2332] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_25px_rgba(0,0,0,0.35)] z-30 focus:outline-none focus:ring-2 focus:ring-[#339966] focus:ring-offset-2" aria-label="Envoyer un email">
+                        <svg width="20" height="20" class="sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </a>
+
+                    <!-- 2. WhatsApp (Center Right) -->
+                    <a href="https://wa.me/32484630815" target="_blank" rel="noopener noreferrer" class="absolute top-1/2 -right-4 sm:-right-6 -translate-y-1/2 w-13 h-13 sm:w-16 sm:h-16 bg-white hover:bg-[#25D366] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_25px_rgba(37,211,102,0.4)] z-40 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2" aria-label="Contacter par WhatsApp" style="width: 3.25rem; height: 3.25rem;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 sm:w-6 sm:h-6"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </a>
+
+                    <!-- 3. Phone (Bottom Right) -->
+                    <a href="tel:+32484630815" class="absolute bottom-6 sm:bottom-8 -right-1 sm:-right-2 w-11 h-11 sm:w-14 sm:h-14 bg-white hover:bg-[#339966] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_25px_rgba(51,153,102,0.4)] z-30 focus:outline-none focus:ring-2 focus:ring-[#339966] focus:ring-offset-2" aria-label="Appeler par téléphone">
+                        <svg width="20" height="20" class="sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </a>
+
+                </div>
+
+                <!-- Name & Role -->
+                <div class="text-center mt-3 sm:mt-4">
+                    <span class="block text-white font-bold text-xl sm:text-2xl tracking-tight">Milad Mollaey</span>
+                    <span class="block text-[#339966] text-xs sm:text-sm font-bold uppercase tracking-wider mt-1">
+                    Votre expert PEB dédié
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- END OF INTEGRATION CODE -->
+
+</body>
+</html>
