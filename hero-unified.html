@@ -1,0 +1,657 @@
+<!-- PEBIFY Hero Unifié v2025.12 • Ultra Premium • Performance Optimized -->
+<style>
+:root {
+  --peb-header-offset: 110px;
+}
+
+.pebify-hero {
+  /* Reset & Base */
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Design Tokens */
+  --navy-900: #1a2332;
+  --navy-800: #243044;
+  --gold: #FFD700;
+  --gold-glow: rgba(255, 215, 0, 0.25);
+  --green: #339966;
+  --green-light: #3BC97F;
+  --white: #ffffff;
+  --white-10: rgba(255, 255, 255, 0.1);
+  --white-60: rgba(255, 255, 255, 0.6);
+  --overlay: rgba(0, 0, 0, 0.45);
+  --tooltip-bg: rgba(26, 35, 50, 0.96);
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --pad-x: clamp(1rem, 5vw, 2.5rem);
+}
+
+.pebify-hero *,
+.pebify-hero *::before,
+.pebify-hero *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(var(--peb-header-offset) + 20px) var(--pad-x) var(--space-xl);
+  overflow: hidden;
+  background-color: var(--navy-900);
+  contain: layout style paint;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MEDIA BACKGROUND (Video + Image)
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  contain: strict;
+}
+
+.pebify-hero__video,
+.pebify-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.pebify-hero__skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, #1a2332 8%, #2C3E50 18%, #1a2332 33%);
+  background-size: 200% 100%;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+}
+
+.pebify-hero__skeleton.is-animating {
+  animation: peb-shimmer 1.5s linear infinite;
+}
+
+.pebify-hero__skeleton.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  animation: none;
+  pointer-events: none;
+}
+
+@keyframes peb-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CONTENT CONTAINER
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EXPERT BADGE (Avatar + Name)
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__expert {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 16px 8px 8px;
+  background: var(--overlay);
+  border: 1px solid var(--white-10);
+  border-radius: 50px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+@media (min-width: 641px) {
+  .pebify-hero__expert {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+.pebify-hero__expert:hover {
+  transform: translateY(-2px);
+  border-color: var(--green);
+}
+
+.pebify-hero__avatar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pebify-hero__avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  object-fit: cover;
+  display: block;
+  background: var(--navy-800);
+}
+
+.pebify-hero__avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--green-light), var(--green));
+  border: 2px solid var(--navy-900);
+  border-radius: 50%;
+}
+
+.pebify-hero__expert-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.pebify-hero__expert-name {
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pebify-hero__expert-role {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pebify-hero__expert-role svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TITLE
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__title {
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRICE BLOCK
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.pebify-hero__price {
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 40px var(--gold-glow);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.05em;
+}
+
+.pebify-hero__price-prefix {
+  font-size: 0.28em;
+  font-weight: 700;
+  text-transform: lowercase;
+  opacity: 0.9;
+}
+
+.pebify-hero__price-currency {
+  font-size: 0.55em;
+  font-weight: 800;
+}
+
+.pebify-hero__price-tax {
+  font-size: 0.22em;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-left: 0.1em;
+}
+
+.pebify-hero__price-subtitle {
+  color: var(--white-60);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.pebify-hero__price-subtitle span {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.pebify-hero__price-subtitle svg {
+  width: 16px;
+  height: 16px;
+  color: var(--green-light);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CTA BUTTON
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__cta-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space-sm);
+}
+
+.pebify-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1.1rem 2.2rem;
+  background: linear-gradient(135deg, var(--green) 0%, #267a4b 100%);
+  color: var(--white);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 60px;
+  border: 2px solid var(--green-light);
+  box-shadow:
+    0 8px 30px rgba(51, 153, 102, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.pebify-hero__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.pebify-hero__cta:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 40px rgba(51, 153, 102, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--gold);
+}
+
+.pebify-hero__cta:hover::before {
+  opacity: 1;
+}
+
+.pebify-hero__cta svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GOOGLE BADGE
+   ═══════════════════════════════════════════════════════════ */
+
+.pebify-hero__google {
+  position: absolute;
+  bottom: -14px;
+  background: rgba(20, 25, 35, 0.95);
+  border: 1px solid var(--white-10);
+  padding: 8px 16px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+@media (min-width: 641px) {
+  .pebify-hero__google {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(20, 25, 35, 0.88);
+  }
+}
+
+.pebify-hero__google:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+}
+
+.pebify-hero__google-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.pebify-hero__google-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.pebify-hero__google-star {
+  width: 14px;
+  height: 14px;
+  fill: var(--gold);
+  filter: drop-shadow(0 0 3px var(--gold-glow));
+}
+
+.pebify-hero__google-rating {
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.pebify-hero__google-rating span {
+  opacity: 0.6;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+
+@media (min-width: 641px) {
+  .pebify-hero__image {
+    display: none;
+  }
+
+  .pebify-hero__avatar-img {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pebify-hero__video {
+    display: none;
+  }
+
+  .pebify-hero__title {
+    font-size: 2.4rem;
+  }
+
+  .pebify-hero__price {
+    font-size: 4.5rem;
+  }
+
+  .pebify-hero__cta {
+    width: 100%;
+    max-width: 320px;
+    padding: 1rem 1.8rem;
+    font-size: 1.05rem;
+  }
+
+  .pebify-hero__price-subtitle {
+    flex-direction: column;
+    gap: 0.3em;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pebify-hero__section {
+    min-height: auto;
+    padding-top: calc(var(--peb-header-offset) + 10px);
+    padding-bottom: var(--space-md);
+  }
+
+  .pebify-hero__content {
+    gap: var(--space-sm);
+  }
+
+  .pebify-hero__title {
+    font-size: 2rem;
+  }
+
+  .pebify-hero__price {
+    font-size: 3rem;
+  }
+
+  .pebify-hero__expert {
+    display: none;
+  }
+}
+</style>
+
+<div id="pebify-hero" class="pebify-hero">
+  <section class="pebify-hero__section">
+
+    <!-- Background Media -->
+    <div class="pebify-hero__media">
+      <div class="pebify-hero__skeleton" aria-hidden="true"></div>
+
+      <video class="pebify-hero__video"
+             playsinline muted loop preload="none"
+             poster="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt-desktop.jpg">
+        <source src="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-panorama.webm" type="video/webm">
+        <source src="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt.mp4" type="video/mp4">
+      </video>
+
+      <picture>
+        <source media="(max-width: 640px)"
+                srcset="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt-mobile-1.webp"
+                type="image/webp">
+        <img class="pebify-hero__image"
+             src="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt-mobile-1.jpg"
+             alt="Certificat PEB Bruxelles"
+             loading="eager"
+             fetchpriority="high"
+             decoding="async">
+      </picture>
+    </div>
+
+    <!-- Content -->
+    <div class="pebify-hero__content">
+
+      <!-- Expert Badge -->
+      <div class="pebify-hero__expert">
+        <div class="pebify-hero__avatar">
+          <img class="pebify-hero__avatar-img"
+               src="https://pebify.be/wp-content/uploads/2025/10/certificateur-peb-bruxelles-milad-mollaey-badge-250px.webp"
+               alt="Milad Mollaey"
+               loading="eager"
+               width="54"
+               height="54">
+          <div class="pebify-hero__avatar-status" aria-label="Disponible"></div>
+        </div>
+        <div class="pebify-hero__expert-info">
+          <span class="pebify-hero__expert-name">Milad Mollaey</span>
+          <span class="pebify-hero__expert-role">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Certificateur agréé Bruxelles
+          </span>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <h1 class="pebify-hero__title">Certificat PEB Bruxelles</h1>
+
+      <!-- Price Block -->
+      <div class="pebify-hero__price-block">
+        <div class="pebify-hero__price" aria-label="Prix à partir de 105 euros TTC">
+          <span class="pebify-hero__price-prefix">dès</span>
+          <span>105</span>
+          <span class="pebify-hero__price-currency">€</span>
+          <span class="pebify-hero__price-tax">TTC</span>
+        </div>
+        <p class="pebify-hero__price-subtitle">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Prix fixe garanti
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Tout compris
+          </span>
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="pebify-hero__cta-wrapper">
+        <a href="https://pebify.be/#tarifs-certificat-peb-bruxelles" class="pebify-hero__cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          Calculer mon prix
+        </a>
+
+        <!-- Google Badge -->
+        <div class="pebify-hero__google">
+          <svg class="pebify-hero__google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <div class="pebify-hero__google-stars">
+            <svg class="pebify-hero__google-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="pebify-hero__google-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="pebify-hero__google-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="pebify-hero__google-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="pebify-hero__google-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <span class="pebify-hero__google-rating">4.9<span>/5</span></span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var hero = document.getElementById('pebify-hero');
+  if (!hero) return;
+
+  var skeleton = hero.querySelector('.pebify-hero__skeleton');
+  var video = hero.querySelector('video');
+  var img = hero.querySelector('.pebify-hero__image');
+  var isDesktop = window.matchMedia('(min-width: 641px)').matches;
+
+  // Mobile: Hide skeleton when image loads
+  if (!isDesktop && img) {
+    if (img.complete && img.naturalHeight > 0) {
+      skeleton.classList.add('is-loaded');
+    } else {
+      img.onload = function() { skeleton.classList.add('is-loaded'); };
+      img.onerror = function() { skeleton.classList.add('is-loaded'); };
+    }
+  }
+
+  // Desktop: Lazy load video with IntersectionObserver
+  if (video && isDesktop) {
+    skeleton.classList.add('is-animating');
+
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        video.play().then(function() {
+          skeleton.classList.add('is-loaded');
+        }).catch(function() {
+          skeleton.classList.add('is-loaded');
+        });
+        observer.disconnect();
+      }
+    }, { rootMargin: '100px' });
+
+    observer.observe(video);
+  }
+
+  // Dynamic header offset (deferred)
+  function updateHeaderOffset() {
+    var headers = document.querySelectorAll('header, .site-header, #masthead, [data-elementor-type="header"]');
+    var offset = 0;
+
+    headers.forEach(function(h) {
+      var style = getComputedStyle(h);
+      if ((style.position === 'fixed' || style.position === 'sticky') && h.offsetHeight > 0) {
+        offset = Math.max(offset, h.offsetHeight);
+      }
+    });
+
+    var adminBar = document.getElementById('wpadminbar');
+    if (adminBar) offset += adminBar.offsetHeight;
+
+    if (offset > 0) {
+      hero.style.setProperty('--peb-header-offset', offset + 'px');
+    }
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(updateHeaderOffset);
+  } else {
+    setTimeout(updateHeaderOffset, 100);
+  }
+})();
+</script>
