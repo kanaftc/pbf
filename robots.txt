@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://atmos-technics.be/sitemap.xml
+
+# Disallow crawling of admin or private sections
+Disallow: /admin/
+Disallow: /private/
