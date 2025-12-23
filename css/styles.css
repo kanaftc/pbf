@@ -364,10 +364,15 @@ section {
   z-index: var(--z-dropdown);
 }
 
-.nav-item:hover .dropdown {
+.nav-item:hover .dropdown,
+.nav-item.dropdown-open .dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+.nav-item.dropdown-open .nav-link svg {
+  transform: rotate(180deg);
 }
 
 .dropdown-link {

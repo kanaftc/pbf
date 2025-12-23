@@ -12,12 +12,51 @@
   // ==========================================================================
   document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
+    initDesktopDropdowns();
     initStickyHeader();
     initFAQAccordion();
     initSmoothScroll();
     initFormValidation();
     initLazyLoading();
   });
+
+  // ==========================================================================
+  // Desktop Dropdowns (click to toggle)
+  // ==========================================================================
+  function initDesktopDropdowns() {
+    const dropdownLinks = document.querySelectorAll('.nav-link.has-dropdown');
+
+    dropdownLinks.forEach(function(link) {
+      const parent = link.closest('.nav-item');
+      const dropdown = parent.querySelector('.dropdown');
+
+      if (!dropdown) return;
+
+      // Click to toggle dropdown
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Close other dropdowns
+        document.querySelectorAll('.nav-item.dropdown-open').forEach(function(item) {
+          if (item !== parent) {
+            item.classList.remove('dropdown-open');
+          }
+        });
+
+        parent.classList.toggle('dropdown-open');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-item')) {
+        document.querySelectorAll('.nav-item.dropdown-open').forEach(function(item) {
+          item.classList.remove('dropdown-open');
+        });
+      }
+    });
+  }
 
   // ==========================================================================
   // Mobile Menu
