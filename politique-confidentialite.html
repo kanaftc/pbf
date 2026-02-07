@@ -1,0 +1,561 @@
+<!-- ===================== Politique de Confidentialité – Pebify (Optimisée) ===================== -->
+<style>
+  /* ── Reset & Custom Properties ─────────────────────────────────── */
+  #peb-privacy {
+    --green: #2FAE6B;
+    --green-dark: #1C7C4C;
+    --green-light: rgba(47,174,107,.07);
+    --navy: #1E293B;
+    --muted: #475569;
+    --border: #e2e8f0;
+    --bg: #fff;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,.07);
+    --transition: .2s cubic-bezier(.4,0,.2,1);
+
+    background: var(--bg);
+    color: var(--navy);
+    font: 400 1rem/1.75 'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  #peb-privacy *, #peb-privacy *::before, #peb-privacy *::after {
+    box-sizing: border-box;
+  }
+
+  /* ── Typography ────────────────────────────────────────────────── */
+  #peb-privacy h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0 0 .5rem;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+  }
+
+  #peb-privacy h1 span {
+    color: var(--green);
+  }
+
+  #peb-privacy .subtitle {
+    color: var(--muted);
+    font-size: .95rem;
+    margin: 0 0 2.5rem;
+  }
+
+  #peb-privacy h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 .75rem;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+  }
+
+  #peb-privacy h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--green);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 700;
+    border-radius: 8px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  #peb-privacy p {
+    margin: 0 0 1rem;
+    color: var(--navy);
+  }
+
+  #peb-privacy strong { font-weight: 600; }
+
+  /* ── Sections (cards) ──────────────────────────────────────────── */
+  #peb-privacy .section {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    margin: 0 0 1.25rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition), border-color var(--transition);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 200px;
+  }
+
+  #peb-privacy .section:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--green);
+  }
+
+  /* ── Lists ─────────────────────────────────────────────────────── */
+  #peb-privacy ul {
+    margin: .25rem 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  #peb-privacy li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin: .4rem 0;
+    color: var(--navy);
+    line-height: 1.65;
+  }
+
+  #peb-privacy li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .6rem;
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+
+  /* ── Links ─────────────────────────────────────────────────────── */
+  #peb-privacy a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition);
+  }
+
+  #peb-privacy a:hover,
+  #peb-privacy a:focus-visible {
+    color: var(--green-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #peb-privacy a:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* ── Contact block ─────────────────────────────────────────────── */
+  #peb-privacy .contact-block {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem;
+    margin: .75rem 0 1rem;
+    line-height: 1.8;
+  }
+
+  #peb-privacy .contact-block p { margin: 0; }
+
+  /* ── Duration badges ───────────────────────────────────────────── */
+  #peb-privacy .duration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .75rem;
+    margin: .75rem 0 1rem;
+  }
+
+  #peb-privacy .duration-card {
+    background: var(--green-light);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  #peb-privacy .duration-card .time {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1.2;
+  }
+
+  #peb-privacy .duration-card .label {
+    display: block;
+    font-size: .85rem;
+    color: var(--muted);
+    margin-top: .25rem;
+  }
+
+  /* ── Rights grid ───────────────────────────────────────────────── */
+  #peb-privacy .rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: .5rem;
+    margin: .5rem 0 1rem;
+  }
+
+  #peb-privacy .right-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .65rem .85rem;
+    background: var(--green-light);
+    border-radius: 8px;
+    font-size: .9rem;
+    color: var(--navy);
+    font-weight: 500;
+    transition: background var(--transition);
+  }
+
+  #peb-privacy .right-item:hover {
+    background: rgba(47,174,107,.12);
+  }
+
+  #peb-privacy .right-item svg {
+    flex-shrink: 0;
+    color: var(--green);
+  }
+
+  /* ── Divider ───────────────────────────────────────────────────── */
+  #peb-privacy hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ── TOC (table of contents) ───────────────────────────────────── */
+  #peb-privacy .toc {
+    background: linear-gradient(135deg, var(--green-light), rgba(47,174,107,.03));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 0 0 2rem;
+  }
+
+  #peb-privacy .toc-title {
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--green);
+    margin: 0 0 .75rem;
+  }
+
+  #peb-privacy .toc-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: .3rem .75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #peb-privacy .toc-list li { padding: 0; margin: 0; }
+  #peb-privacy .toc-list li::before { display: none; }
+
+  #peb-privacy .toc-list a {
+    display: block;
+    padding: .35rem .5rem;
+    border-radius: 6px;
+    font-size: .88rem;
+    color: var(--navy);
+    font-weight: 400;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  #peb-privacy .toc-list a:hover {
+    background: rgba(47,174,107,.1);
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+
+  /* ── Footer / CTA ──────────────────────────────────────────────── */
+  #peb-privacy .footer-block {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  #peb-privacy .footer-block p {
+    color: var(--muted);
+    font-size: .9rem;
+    line-height: 1.65;
+    margin: 0 0 1.25rem;
+  }
+
+  #peb-privacy .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--green);
+    color: #fff;
+    padding: .75rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: .95rem;
+    text-decoration: none;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 14px rgba(47,174,107,.25);
+  }
+
+  #peb-privacy .btn:hover,
+  #peb-privacy .btn:focus-visible {
+    background: var(--green-dark);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(28,124,76,.3);
+    text-decoration: none;
+  }
+
+  #peb-privacy .btn svg {
+    transition: transform var(--transition);
+  }
+
+  #peb-privacy .btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* ── Scroll animations ─────────────────────────────────────────── */
+  #peb-privacy .section {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  #peb-privacy .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .45s cubic-bezier(.4,0,.2,1), transform .45s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ── Print ─────────────────────────────────────────────────────── */
+  @media print {
+    #peb-privacy { padding: 20px 0; max-width: 100%; }
+    #peb-privacy .section { break-inside: avoid; box-shadow: none; border-color: #ccc; }
+    #peb-privacy .toc, #peb-privacy .btn, #peb-privacy .footer-block { display: none; }
+    #peb-privacy a { color: var(--navy); }
+    #peb-privacy a[href]::after { content: ' (' attr(href) ')'; font-size: .8em; color: var(--muted); }
+  }
+
+  /* ── Responsive ────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    #peb-privacy { padding: 40px 16px 60px; }
+    #peb-privacy .section { padding: 1.25rem; }
+    #peb-privacy .rights-grid { grid-template-columns: 1fr; }
+    #peb-privacy .toc-list { grid-template-columns: 1fr; }
+    #peb-privacy .duration-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div id="peb-privacy" role="region" aria-labelledby="priv-title">
+
+  <!-- Header -->
+  <h1 id="priv-title">Politique de <span>confidentialité</span></h1>
+  <p class="subtitle">Dernière mise à jour : 2 juillet 2025</p>
+
+  <!-- Table of contents -->
+  <nav class="toc" aria-label="Sommaire">
+    <p class="toc-title">Sommaire</p>
+    <ol class="toc-list">
+      <li><a href="#s1">Responsable du traitement</a></li>
+      <li><a href="#s2">Données collectées</a></li>
+      <li><a href="#s3">Finalités du traitement</a></li>
+      <li><a href="#s4">Base légale du traitement</a></li>
+      <li><a href="#s5">Durée de conservation</a></li>
+      <li><a href="#s6">Sécurité des données</a></li>
+      <li><a href="#s7">Accès aux données</a></li>
+      <li><a href="#s8">Vos droits</a></li>
+      <li><a href="#s9">Réclamation</a></li>
+      <li><a href="#s10">Cookies</a></li>
+      <li><a href="#s11">Mise à jour</a></li>
+    </ol>
+  </nav>
+
+  <p>Chez <strong>Pebify</strong>, nous respectons votre vie privée. Cette politique explique de manière claire et transparente comment nous collectons, utilisons, stockons et protégeons vos données personnelles, conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong>.</p>
+
+  <!-- 1 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s1">
+    <h2><span class="num">1</span> Responsable du traitement</h2>
+    <div class="contact-block">
+      <p>
+        <strong>Milad Mollaey Tabriz – Pebify</strong><br>
+        Rue Émile Wauters 58, 1020 Bruxelles, Belgique<br>
+        <a href="mailto:info@pebify.be">info@pebify.be</a><br>
+        <a href="tel:+32484690815">+32 484 69 08 15</a><br>
+        N° d'entreprise : BE0842.891.396
+      </p>
+    </div>
+  </article>
+
+  <!-- 2 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s2">
+    <h2><span class="num">2</span> Données collectées</h2>
+    <p>Nous collectons uniquement les données strictement nécessaires à la gestion de votre demande :</p>
+    <ul>
+      <li>Nom et prénom</li>
+      <li>Adresse e-mail</li>
+      <li>Numéro de téléphone</li>
+      <li>Adresse du bien à certifier (le cas échéant)</li>
+      <li>Toute information transmise volontairement via le formulaire de contact, e-mail ou téléphone</li>
+    </ul>
+  </article>
+
+  <!-- 3 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s3">
+    <h2><span class="num">3</span> Finalités du traitement</h2>
+    <p>Vos données sont utilisées pour :</p>
+    <ul>
+      <li>Répondre à vos demandes (contact, devis, rendez-vous)</li>
+      <li>Exécuter la prestation demandée (certificat PEB)</li>
+      <li>Assurer le suivi client et la gestion administrative</li>
+      <li>Vous informer ponctuellement sur nos services ou actualités</li>
+    </ul>
+  </article>
+
+  <!-- 4 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s4">
+    <h2><span class="num">4</span> Base légale du traitement</h2>
+    <p>Le traitement de vos données repose sur :</p>
+    <ul>
+      <li><strong>L'exécution d'un contrat</strong> ou d'une demande précontractuelle (article 6.1.b du RGPD)</li>
+      <li><strong>L'intérêt légitime</strong> de Pebify à fournir un service de qualité (article 6.1.f du RGPD)</li>
+      <li><strong>Le consentement explicite</strong>, lorsque celui-ci est requis pour certaines communications</li>
+    </ul>
+    <p>Vous pouvez à tout moment retirer votre consentement ou vous opposer à l'utilisation de vos données à des fins de communication en écrivant à <a href="mailto:info@pebify.be">info@pebify.be</a>.</p>
+  </article>
+
+  <!-- 5 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s5">
+    <h2><span class="num">5</span> Durée de conservation</h2>
+    <div class="duration-grid">
+      <div class="duration-card">
+        <span class="time">12 mois</span>
+        <span class="label">Demandes sans suite</span>
+      </div>
+      <div class="duration-card">
+        <span class="time">5 ans</span>
+        <span class="label">Dossiers clients (admin, légal, comptable)</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- 6 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s6">
+    <h2><span class="num">6</span> Sécurité des données</h2>
+    <p>Vos données sont stockées sur des serveurs sécurisés, hébergés par des prestataires fiables. Des mesures techniques et organisationnelles adaptées protègent vos informations contre tout accès non autorisé, perte ou altération.</p>
+    <p>Vos données ne sont <strong>jamais revendues</strong> ni partagées à des tiers à des fins commerciales.</p>
+  </article>
+
+  <!-- 7 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s7">
+    <h2><span class="num">7</span> Accès aux données</h2>
+    <p>Les données personnelles sont traitées exclusivement par <strong>Pebify (Milad Mollaey Tabriz)</strong>, responsable du traitement.</p>
+    <p>L'accès technique aux systèmes (site, hébergement, maintenance) peut être assuré par des prestataires techniques agissant en qualité de sous-traitants, uniquement pour les besoins d'exploitation, de maintenance et de sécurité, et dans le strict respect du RGPD.</p>
+    <p>Aucune donnée n'est utilisée à d'autres fins ni transmise à des tiers sans base légale.</p>
+  </article>
+
+  <!-- 8 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s8">
+    <h2><span class="num">8</span> Vos droits</h2>
+    <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+    <div class="rights-grid">
+      <div class="right-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Accès
+      </div>
+      <div class="right-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Rectification
+      </div>
+      <div class="right-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Effacement
+      </div>
+      <div class="right-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        Opposition
+      </div>
+      <div class="right-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Limitation
+      </div>
+      <div class="right-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Portabilité
+      </div>
+    </div>
+    <p>Pour exercer ces droits, contactez-nous :</p>
+    <div class="contact-block">
+      <p>
+        <a href="mailto:info@pebify.be">info@pebify.be</a> — ou par courrier :<br>
+        Rue Émile Wauters 58, 1020 Bruxelles
+      </p>
+    </div>
+  </article>
+
+  <!-- 9 ──────────────────────────────────────────────────────────── -->
+  <article class="section" id="s9">
+    <h2><span class="num">9</span> Réclamation auprès de l'autorité compétente</h2>
+    <p>En cas de non-respect de vos droits, vous pouvez introduire une réclamation auprès de :</p>
+    <div class="contact-block">
+      <p>
+        <strong>Autorité de protection des données (APD)</strong><br>
+        Rue de la Presse 35, 1000 Bruxelles<br>
+        +32 (0)2 274 48 00<br>
+        <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener">www.autoriteprotectiondonnees.be</a>
+      </p>
+    </div>
+  </article>
+
+  <!-- 10 ─────────────────────────────────────────────────────────── -->
+  <article class="section" id="s10">
+    <h2><span class="num">10</span> Cookies</h2>
+    <p>Le site <strong>Pebify.be</strong> utilise uniquement des cookies techniques nécessaires à son bon fonctionnement. Aucun cookie publicitaire ou de suivi n'est installé sans votre <strong>consentement explicite</strong>.</p>
+    <p>Vous pouvez gérer vos préférences à tout moment via le bandeau de cookies présent sur le site.</p>
+  </article>
+
+  <!-- 11 ─────────────────────────────────────────────────────────── -->
+  <article class="section" id="s11">
+    <h2><span class="num">11</span> Mise à jour de la politique</h2>
+    <p>Cette politique peut être mise à jour pour refléter les évolutions légales, techniques ou organisationnelles. La date de dernière mise à jour est indiquée en haut de cette page.</p>
+  </article>
+
+  <!-- Footer -->
+  <hr>
+  <div class="footer-block">
+    <p>
+      <em>Un service rapide, clair et conforme.</em><br>
+      Certificateur PEB agréé en Région de Bruxelles-Capitale.<br>
+      Respect des normes officielles de Bruxelles Environnement — n° 001862747
+    </p>
+    <a class="btn" href="/contact/">
+      Prendre rendez-vous
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+</div>
+
+<!-- Scroll reveal – lightweight IntersectionObserver (no library) -->
+<script>
+(function(){
+  var sections = document.querySelectorAll('#peb-privacy .section');
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: show all immediately
+    for (var i = 0; i < sections.length; i++) sections[i].classList.add('visible');
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        entries[i].target.classList.add('visible');
+        obs.unobserve(entries[i].target);
+      }
+    }
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  for (var i = 0; i < sections.length; i++) obs.observe(sections[i]);
+})();
+</script>
+<!-- ===================== Fin Politique de Confidentialité – Pebify ===================== -->
