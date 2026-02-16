@@ -20,66 +20,51 @@
       --shadow: 0 12px 40px rgba(8, 12, 30, 0.45);
       --radius: 16px;
     }
-
     * { box-sizing: border-box; }
     html, body { margin: 0; background: radial-gradient(circle at top, #131d3f 0, var(--bg) 45%); color: var(--text); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
     button, input, select, textarea { font: inherit; }
-    a { color: inherit; }
-
     .app { max-width: 1080px; margin: 0 auto; padding: 14px 14px 80px; }
     .header { display: grid; gap: 10px; padding: 16px; background: linear-gradient(145deg, rgba(125,140,255,.20), rgba(75,230,196,.10)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); }
     .brand { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
     .logo { display:flex; align-items:center; gap:10px; }
     .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; font-weight:900; color:#071126; }
     h1 { margin:0; font-size: 1.35rem; }
+    h2,h3 { margin: 0 0 8px; }
     .baseline { margin:0; color: var(--muted); font-size:.95rem; }
-
     .status-row { display:flex; gap:8px; flex-wrap:wrap; }
     .chip { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-size:.82rem; background: rgba(255,255,255,.02); }
     .dot { width:8px; height:8px; border-radius:999px; }
-
     .stats { display:flex; gap:10px; flex-wrap:wrap; }
     .kpi { background: rgba(0,0,0,.18); border:1px solid var(--line); border-radius: 12px; padding: 8px 12px; min-width: 88px; }
     .kpi strong { display:block; font-size:1.05rem; }
     .kpi span { color: var(--muted); font-size: .8rem; }
-
     .tabs { margin-top:12px; position:sticky; top:0; z-index: 5; backdrop-filter: blur(8px); background: rgba(11,16,32,.82); border:1px solid var(--line); border-radius: 14px; padding:6px; display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:6px; }
     .tabs button { min-height: 44px; border:0; border-radius:10px; color:var(--muted); background:transparent; font-weight:600; }
     .tabs button.active { background: var(--card); color: var(--text); border:1px solid var(--line); }
-
     .panel { margin-top:12px; background: rgba(16,24,49,.7); border:1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
     .grid-2 { display:grid; gap:10px; }
     @media (min-width: 860px) { .grid-2 { grid-template-columns: 1fr 1fr; } .tabs{grid-template-columns: repeat(8,minmax(0,1fr));} }
-
     .word-card { border:1px solid var(--line); border-radius: 14px; padding:12px; background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)); }
     .farsi { font-size: 1.7rem; direction: rtl; text-align: right; margin: 8px 0; font-weight:700; }
     .muted { color: var(--muted); }
     .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
     .between { display:flex; justify-content:space-between; align-items:center; gap:10px; }
-
     .btn { min-height:44px; border-radius: 12px; border:1px solid var(--line); color: var(--text); background: #1a2950; padding: 10px 12px; font-weight:700; cursor:pointer; }
     .btn.secondary { background: #13203f; }
     .btn.ghost { background:transparent; }
     .btn.good { background: #143c37; border-color:#226c61; }
     .btn.bad { background:#4a1f2b; border-color:#834050; }
     .btn:focus-visible, .tabs button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid var(--brand-2); outline-offset: 2px; }
-
     input, select, textarea { width:100%; background:#101a35; border:1px solid var(--line); color:var(--text); border-radius: 10px; min-height:44px; padding: 10px; }
-    textarea { min-height:100px; }
-
     .message { padding:10px 12px; border-radius:10px; border:1px solid var(--line); margin-top:8px; }
     .message.ok { background: rgba(53,211,158,.12); border-color: rgba(53,211,158,.35); }
     .message.warn { background: rgba(246,194,98,.12); border-color: rgba(246,194,98,.35); }
     .message.bad { background: rgba(255,107,122,.12); border-color: rgba(255,107,122,.35); }
-
     .hide { display:none !important; }
     .small { font-size:.86rem; }
-
     .onboarding-backdrop { position:fixed; inset:0; background: rgba(4,7,16,.65); display:grid; place-items:center; z-index:999; padding:18px; }
     .onboarding { width:min(560px,100%); background: var(--bg-elev); border:1px solid var(--line); border-radius: 18px; padding:18px; }
-    .onboarding h2{margin:0 0 8px}
     .slide { min-height:180px; }
-
     .list { display:grid; gap:8px; }
     .item { border:1px solid var(--line); border-radius:10px; padding:10px; }
     .pill { font-size:.78rem; padding:3px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted); }
@@ -104,9 +89,7 @@
       </div>
       <div class="status-row" id="statusRow"></div>
     </header>
-
     <nav class="tabs" aria-label="Navigation principale" id="tabs"></nav>
-
     <main id="main"></main>
   </div>
 
@@ -156,11 +139,17 @@
       todayXp: 0,
       dailyGoal: 60,
       audioAuto: { firstMeet: true, afterError: true, onReveal: true },
-      settings: { ttsProvider: 'auto', azureKey: '', azureRegion: 'francecentral' },
+      settings: {
+        ttsProvider: 'auto',
+        azureKey: '',
+        azureRegion: 'francecentral',
+        speechVoiceURI: '',
+        speechRate: 0.92,
+        speechPitch: 1
+      },
       onboardingDone: false,
       currentWord: 0,
       quiz: { current: 0, mode: 'listen', mistakes: 0 },
-      coachHistory: [],
       memoryBest: 0,
       speedBest: 0
     });
@@ -173,17 +162,24 @@
       netOnline: navigator.onLine,
       micAvailable: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
       db: null,
-      activeSlide: 0
+      activeSlide: 0,
+      voices: [],
+      speechReady: false,
+      playToken: 0
     };
 
     function loadState() {
       let obj = null;
-      const raw = localStorage.getItem(STORAGE_KEYS.canonical);
-      if (raw) obj = JSON.parse(raw);
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.canonical);
+        if (raw) obj = JSON.parse(raw);
+      } catch {}
       if (!obj) {
         for (const k of STORAGE_KEYS.legacy) {
-          const r = localStorage.getItem(k);
-          if (r) { obj = JSON.parse(r); break; }
+          try {
+            const r = localStorage.getItem(k);
+            if (r) { obj = JSON.parse(r); break; }
+          } catch {}
         }
       }
       const merged = {...defaultState(), ...(obj || {})};
@@ -245,38 +241,104 @@
     function renderHeader() {
       document.getElementById('xpVal').textContent = app.state.xp;
       document.getElementById('streakVal').textContent = app.state.streak;
-      const mastered = Object.values(app.state.leitner).filter(v => v >= 5).length;
-      document.getElementById('masteredVal').textContent = mastered;
-      const ttsStatus = app.state.settings.ttsProvider === 'azure' ? (app.state.settings.azureKey ? 'clé OK' : 'clé manquante') : (app.ttsSupport ? 'Web Speech' : 'indispo');
+      document.getElementById('masteredVal').textContent = Object.values(app.state.leitner).filter(v => v >= 5).length;
+      const usingAzure = app.state.settings.ttsProvider === 'azure';
+      const hasOnline = usingAzure && !!app.state.settings.azureKey;
+      const hasSpeech = app.ttsSupport && app.speechReady;
+      const ttsStatus = usingAzure ? (hasOnline ? 'Azure prêt' : 'clé manquante') : (hasSpeech ? 'Web Speech prêt' : 'indispo');
       document.getElementById('statusRow').innerHTML = [
         statusChip('Réseau', app.netOnline, app.netOnline ? 'online' : 'offline'),
         statusChip('Micro', app.micAvailable, app.micAvailable ? 'disponible' : 'indisponible'),
-        statusChip('TTS', app.ttsSupport || !!app.state.settings.azureKey, ttsStatus)
+        statusChip('TTS', hasOnline || hasSpeech, ttsStatus)
       ].join('');
     }
 
     function renderTabs() {
-      const el = document.getElementById('tabs');
-      el.innerHTML = TABS.map(t => `<button class="${app.state.activeTab===t?'active':''}" data-tab="${t}" aria-label="Ouvrir ${t}">${t}</button>`).join('');
+      document.getElementById('tabs').innerHTML = TABS
+        .map(t => `<button class="${app.state.activeTab===t?'active':''}" data-tab="${t}" aria-label="Ouvrir ${t}">${t}</button>`).join('');
     }
 
     function baseCard(html) { return `<section class="panel">${html}</section>`; }
 
     function wordCard(word) {
       return `<article class="word-card">
-        <div class="between"><strong>${word.fr}</strong><span class="pill">${word.cat}</span></div>
+        <div class="between"><strong>${word.fr}</strong><span class="pill">${word.cat || 'Lexique'}</span></div>
         <div class="farsi">${word.fa}</div>
         <div class="muted">Translittération : ${word.tr}</div>
       </article>`;
     }
 
+    function getPreferredVoice() {
+      if (!app.voices.length) return null;
+      const wantedUri = app.state.settings.speechVoiceURI;
+      if (wantedUri) {
+        const saved = app.voices.find(v => v.voiceURI === wantedUri);
+        if (saved) return saved;
+      }
+      const persian = app.voices.find(v => /^(fa|fa-IR)/i.test(v.lang));
+      if (persian) return persian;
+      const fuzzy = app.voices.find(v => /(farsi|persian|iran|parsi)/i.test(v.name + ' ' + v.lang));
+      return fuzzy || null;
+    }
+
+    function refreshVoices() {
+      if (!('speechSynthesis' in window)) return;
+      app.voices = window.speechSynthesis.getVoices() || [];
+      app.speechReady = app.voices.length > 0;
+      const pref = getPreferredVoice();
+      if (pref && !app.state.settings.speechVoiceURI) {
+        app.state.settings.speechVoiceURI = pref.voiceURI;
+        saveState();
+      }
+      renderHeader();
+      if (app.state.activeTab === 'Réglages') render();
+    }
+
+    function stopAudio() {
+      app.playToken += 1;
+      if (app.audioEl) {
+        app.audioEl.pause();
+        app.audioEl.currentTime = 0;
+        app.audioEl = null;
+      }
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      app.playingId = null;
+      render();
+    }
+
+    async function speakWithSpeechSynthesis(word, token) {
+      if (!('speechSynthesis' in window)) return false;
+      const voice = getPreferredVoice();
+      const u = new SpeechSynthesisUtterance(word.fa);
+      u.lang = voice?.lang || 'fa-IR';
+      u.voice = voice || null;
+      u.rate = Math.min(1.2, Math.max(0.75, Number(app.state.settings.speechRate) || 0.92));
+      u.pitch = Math.min(1.4, Math.max(0.8, Number(app.state.settings.speechPitch) || 1));
+      u.onend = () => {
+        if (token !== app.playToken) return;
+        app.playingId = null;
+        render();
+      };
+      u.onerror = () => {
+        if (token !== app.playToken) return;
+        app.playingId = null;
+        render();
+        toast('Lecture vocale locale indisponible.', 'warn');
+      };
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+      return true;
+    }
+
     async function speak(word, origin='manual') {
       if (!word) return;
       stopAudio();
+      const token = app.playToken;
       app.playingId = word.id;
       render();
       try {
-        if (app.state.settings.ttsProvider === 'azure' && app.state.settings.azureKey) {
+        const usingAzure = app.state.settings.ttsProvider === 'azure' && app.state.settings.azureKey;
+        if (usingAzure) {
           const cacheKey = `${word.id}:${app.state.settings.azureRegion}`;
           let blob = await dbGet(cacheKey);
           if (!blob) {
@@ -290,44 +352,55 @@
               },
               body: ssml
             });
-            if (!res.ok) throw new Error('TTS en ligne indisponible.');
+            if (!res.ok) throw new Error('TTS Azure indisponible.');
             blob = await res.blob();
             dbSet(cacheKey, blob);
           }
           const url = URL.createObjectURL(blob);
-          app.audioEl = new Audio(url);
-          app.audioEl.onended = () => { app.playingId = null; URL.revokeObjectURL(url); render(); };
-          await app.audioEl.play();
-        } else if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-          const u = new SpeechSynthesisUtterance(word.fa);
-          u.lang = 'fa-IR';
-          u.rate = 0.93;
-          u.onend = () => { app.playingId = null; render(); };
-          window.speechSynthesis.speak(u);
+          const audio = new Audio(url);
+          app.audioEl = audio;
+          audio.onended = () => {
+            if (token !== app.playToken) return;
+            app.playingId = null;
+            URL.revokeObjectURL(url);
+            render();
+          };
+          audio.onerror = async () => {
+            URL.revokeObjectURL(url);
+            if (token !== app.playToken) return;
+            const ok = await speakWithSpeechSynthesis(word, token);
+            if (!ok) {
+              app.playingId = null;
+              render();
+            }
+          };
+          await audio.play();
         } else {
-          toast('Aucune voix disponible sur cet appareil.', 'warn');
-          app.playingId = null;
-          render();
+          const ok = await speakWithSpeechSynthesis(word, token);
+          if (!ok) throw new Error('Aucun moteur vocal disponible.');
         }
       } catch (e) {
-        app.playingId = null;
-        render();
-        toast(e.message || 'Erreur audio.', 'bad');
+        if (token !== app.playToken) return;
+        const fallback = await speakWithSpeechSynthesis(word, token);
+        if (!fallback) {
+          app.playingId = null;
+          render();
+          toast(e.message || 'Erreur audio.', 'bad');
+        } else {
+          toast('Basculé en voix locale (fallback).', 'warn');
+        }
       }
       if (origin === 'first') app.state.autoPlayedSeen[word.id] = true;
       saveState();
     }
 
-    function stopAudio() {
-      if (app.audioEl) { app.audioEl.pause(); app.audioEl.currentTime = 0; }
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-      app.playingId = null;
-    }
-
     function maybeAutoPlay(word, context) {
-      if (!word) return;
-      if (context === 'first' && app.state.audioAuto.firstMeet && !app.state.autoPlayedSeen[word.id]) speak(word, 'first');
+      if (!word || app.playingId === word.id) return;
+      if (context === 'first' && app.state.audioAuto.firstMeet && !app.state.autoPlayedSeen[word.id]) {
+        app.state.autoPlayedSeen[word.id] = true;
+        saveState();
+        speak(word, 'first');
+      }
       if (context === 'error' && app.state.audioAuto.afterError) speak(word, 'error');
       if (context === 'reveal' && app.state.audioAuto.onReveal) speak(word, 'reveal');
     }
@@ -336,16 +409,16 @@
       const idx = app.state.currentWord % WORDS.length;
       const word = WORDS[idx];
       app.state.seenWordIds[word.id] = true;
-      maybeAutoPlay(word, 'first');
+      queueMicrotask(() => maybeAutoPlay(word, 'first'));
       return baseCard(`
         <div class="between"><h2>Apprendre</h2><span class="muted small">${idx+1}/${WORDS.length}</span></div>
         ${wordCard(word)}
         <div class="row" style="margin-top:10px">
           <button class="btn" data-action="play" data-word="${word.id}" aria-label="Écouter la prononciation">${app.playingId===word.id ? '⏸️ En cours' : '▶️ Écouter'}</button>
+          <button class="btn secondary" data-action="stopAudio" aria-label="Arrêter l'audio">⏹️ Stop</button>
           <button class="btn secondary" data-action="fav" data-word="${word.id}" aria-label="Basculer favori">${app.state.favorites[word.id] ? '★ Favori' : '☆ Favori'}</button>
           <button class="btn secondary" data-action="nextLearn" aria-label="Mot suivant">Suivant</button>
-        </div>
-      `);
+        </div>`);
     }
 
     function renderQuiz() {
@@ -354,124 +427,89 @@
         <h2>Quiz</h2>
         <p class="muted">Écoute puis écris la traduction française.</p>
         ${wordCard({ ...w, fa:'•••', tr:'•••' })}
-        <div class="row" style="margin-top:8px"><button class="btn" data-action="play" data-word="${w.id}" aria-label="Écouter le mot du quiz">${app.playingId===w.id ? '⏸️ En cours' : '▶️ Écouter'}</button></div>
+        <div class="row" style="margin-top:8px"><button class="btn" data-action="play" data-word="${w.id}" aria-label="Écouter le mot du quiz">${app.playingId===w.id ? '⏸️ En cours' : '▶️ Écouter'}</button><button class="btn secondary" data-action="stopAudio">⏹️ Stop</button></div>
         <label class="small" for="quizInput">Ta réponse</label>
         <input id="quizInput" placeholder="Ex: bonjour" autocomplete="off" />
-        <div class="row" style="margin-top:8px">
-          <button class="btn" data-action="checkQuiz" aria-label="Valider la réponse">Valider</button>
-          <button class="btn secondary" data-action="skipQuiz" aria-label="Passer la question">Passer</button>
-        </div>
-        <div id="quizFeedback"></div>
-      `);
+        <div class="row" style="margin-top:8px"><button class="btn" data-action="checkQuiz" data-word="${w.id}" aria-label="Valider la réponse">Valider</button><button class="btn secondary" data-action="skipQuiz" aria-label="Passer la question">Passer</button></div>
+        <div id="quizFeedback"></div>`);
     }
 
     function renderCoach() {
       return baseCard(`
         <h2>Coach prononciation</h2>
         <p class="muted">Parle si ton micro est disponible, sinon pratique en lecture guidée.</p>
-        <div class="row">
-          <button class="btn" data-action="coachMic" aria-label="Tester le micro">🎙️ Tester mon micro</button>
-          <button class="btn secondary" data-action="coachText" aria-label="Exercice texte">Mode texte</button>
-        </div>
-        <div id="coachOut" class="message warn">${app.micAvailable ? 'Prêt à écouter.' : 'Micro non disponible. Utilise le mode texte.'}</div>
-      `);
+        <div class="row"><button class="btn" data-action="coachMic" aria-label="Tester le micro">🎙️ Tester mon micro</button><button class="btn secondary" data-action="coachText" aria-label="Exercice texte">Mode texte</button></div>
+        <div id="coachOut" class="message ${app.micAvailable ? 'ok' : 'warn'}">${app.micAvailable ? 'Micro détecté. Entraîne-toi phrase par phrase.' : 'Micro non disponible. Utilise le mode texte.'}</div>`);
     }
 
     function renderGames() {
-      return baseCard(`
-        <h2>Jeux</h2>
+      return baseCard(`<h2>Jeux</h2>
         <div class="grid-2">
           <div class="item"><h3>Memory</h3><p class="muted">Associe farsi ↔ français.</p><button class="btn" data-action="playMemory" aria-label="Lancer memory">Lancer</button><p class="small muted">Meilleur score: ${app.state.memoryBest}</p></div>
           <div class="item"><h3>Speed</h3><p class="muted">30s pour traduire un maximum.</p><button class="btn" data-action="playSpeed" aria-label="Lancer speed">Lancer</button><p class="small muted">Meilleur score: ${app.state.speedBest}</p></div>
         </div>
-        <div id="gameOut"></div>
-      `);
+        <div id="gameOut"></div>`);
     }
 
     function renderReview() {
       const due = WORDS.filter(w => app.state.leitner[w.id] <= 3);
       const w = due[0];
       if (!w) return baseCard(`<h2>Révisions</h2><div class="message ok">Tout est à jour. Reviens demain ✨</div>`);
-      return baseCard(`
-        <h2>Révisions (Leitner)</h2>
-        <p class="muted">Cartes à revoir: ${due.length}</p>
-        <article class="word-card">
-          <div class="between"><strong>${w.fr}</strong><span class="pill">Boîte ${app.state.leitner[w.id]}</span></div>
-          <div class="farsi" id="revFa">••••</div>
-        </article>
-        <div class="row" style="margin-top:8px">
-          <button class="btn" data-action="reveal" data-word="${w.id}" aria-label="Montrer la réponse">Montrer</button>
-          <button class="btn good" data-action="good" data-word="${w.id}" aria-label="Je connais">Je connais</button>
-          <button class="btn bad" data-action="bad" data-word="${w.id}" aria-label="À revoir">À revoir</button>
-        </div>
-      `);
+      return baseCard(`<h2>Révisions (Leitner)</h2><p class="muted">Cartes à revoir: ${due.length}</p>
+        <article class="word-card"><div class="between"><strong>${w.fr}</strong><span class="pill">Boîte ${app.state.leitner[w.id]}</span></div><div class="farsi" id="revFa">••••</div></article>
+        <div class="row" style="margin-top:8px"><button class="btn" data-action="reveal" data-word="${w.id}" aria-label="Montrer la réponse">Montrer</button><button class="btn" data-action="play" data-word="${w.id}">▶️ Écouter</button><button class="btn good" data-action="good" data-word="${w.id}" aria-label="Je connais">Je connais</button><button class="btn bad" data-action="bad" data-word="${w.id}" aria-label="À revoir">À revoir</button></div>`);
     }
 
     function renderStats() {
       const seen = Object.keys(app.state.seenWordIds).length;
       const fav = Object.keys(app.state.favorites).filter(k => app.state.favorites[k]).length;
       const progress = Math.min(100, Math.round((app.state.todayXp / app.state.dailyGoal) * 100));
-      return baseCard(`
-        <h2>Stats</h2>
-        <div class="list">
-          <div class="item">Mots vus: <strong>${seen}/${WORDS.length}</strong></div>
-          <div class="item">Favoris: <strong>${fav}</strong></div>
-          <div class="item">Objectif quotidien: <strong>${app.state.todayXp}/${app.state.dailyGoal} XP (${progress}%)</strong></div>
-        </div>
-      `);
+      return baseCard(`<h2>Stats</h2><div class="list"><div class="item">Mots vus: <strong>${seen}/${WORDS.length}</strong></div><div class="item">Favoris: <strong>${fav}</strong></div><div class="item">Objectif quotidien: <strong>${app.state.todayXp}/${app.state.dailyGoal} XP (${progress}%)</strong></div></div>`);
     }
 
     function renderSettings() {
-      return baseCard(`
-        <h2>Réglages</h2>
+      const voiceOptions = app.voices.length
+        ? app.voices
+          .filter(v => /^(fa|en|fr)/i.test(v.lang) || /(farsi|persian|iran|parsi)/i.test(v.name + ' ' + v.lang))
+          .slice(0, 30)
+          .map(v => `<option value="${v.voiceURI}" ${app.state.settings.speechVoiceURI === v.voiceURI ? 'selected' : ''}>${v.name} (${v.lang})</option>`).join('')
+        : '<option value="">Aucune voix listée</option>';
+
+      return baseCard(`<h2>Réglages</h2>
         <div class="list">
-          <div class="item">
-            <strong>Audio auto</strong>
-            <label class="row"><input type="checkbox" id="autoFirst" ${app.state.audioAuto.firstMeet?'checked':''} /> 1ère rencontre (1 seule fois / mot)</label>
-            <label class="row"><input type="checkbox" id="autoErr" ${app.state.audioAuto.afterError?'checked':''} /> après erreur (avec aide)</label>
-            <label class="row"><input type="checkbox" id="autoRev" ${app.state.audioAuto.onReveal?'checked':''} /> en révision au moment “Montrer”</label>
+          <div class="item"><strong>Audio auto</strong>
+            <label class="row"><input type="checkbox" id="autoFirst" ${app.state.audioAuto.firstMeet?'checked':''}/> 1ère rencontre (1 seule fois / mot)</label>
+            <label class="row"><input type="checkbox" id="autoErr" ${app.state.audioAuto.afterError?'checked':''}/> après erreur (avec aide)</label>
+            <label class="row"><input type="checkbox" id="autoRev" ${app.state.audioAuto.onReveal?'checked':''}/> en révision au moment “Montrer”</label>
           </div>
-          <div class="item">
-            <label for="goal">Objectif XP / jour</label>
-            <input id="goal" type="number" min="10" step="10" value="${app.state.dailyGoal}" />
-          </div>
-          <div class="item">
-            <strong>TTS en ligne (optionnel)</strong>
+          <div class="item"><label for="goal">Objectif XP / jour</label><input id="goal" type="number" min="10" step="10" value="${app.state.dailyGoal}" /></div>
+          <div class="item"><strong>Voix farsi améliorée</strong>
             <label for="ttsProvider">Moteur</label>
-            <select id="ttsProvider">
-              <option value="auto" ${app.state.settings.ttsProvider==='auto'?'selected':''}>Auto (Web Speech local)</option>
-              <option value="azure" ${app.state.settings.ttsProvider==='azure'?'selected':''}>Azure Speech (clé perso)</option>
-            </select>
-            <label for="azureRegion">Région Azure</label>
-            <input id="azureRegion" value="${app.state.settings.azureRegion || ''}" placeholder="ex: francecentral" />
-            <label for="azureKey">Clé TTS (optionnelle, stockée localement uniquement)</label>
-            <input id="azureKey" value="${app.state.settings.azureKey || ''}" placeholder="Colle ta clé ici" />
+            <select id="ttsProvider"><option value="auto" ${app.state.settings.ttsProvider==='auto'?'selected':''}>Web Speech (local)</option><option value="azure" ${app.state.settings.ttsProvider==='azure'?'selected':''}>Azure (clé personnelle)</option></select>
+            <label for="speechVoiceURI">Voix locale (recommandé si fa-IR)</label>
+            <select id="speechVoiceURI">${voiceOptions}</select>
+            <div class="row"><div style="flex:1"><label for="speechRate">Vitesse</label><input id="speechRate" type="number" min="0.75" max="1.2" step="0.01" value="${app.state.settings.speechRate}" /></div><div style="flex:1"><label for="speechPitch">Tonalité</label><input id="speechPitch" type="number" min="0.8" max="1.4" step="0.05" value="${app.state.settings.speechPitch}" /></div></div>
+            <button class="btn secondary" data-action="testVoice" style="margin-top:8px">Tester la voix</button>
+            <label for="azureRegion">Région Azure</label><input id="azureRegion" value="${app.state.settings.azureRegion || ''}" placeholder="ex: francecentral" />
+            <label for="azureKey">Clé TTS (optionnelle, stockée localement uniquement)</label><input id="azureKey" value="${app.state.settings.azureKey || ''}" placeholder="Colle ta clé ici" />
           </div>
-          <div class="item">
-            <strong>Sauvegarde</strong>
-            <div class="row" style="margin-top:8px">
-              <button class="btn" data-action="export" aria-label="Exporter les données">Exporter JSON</button>
-              <label class="btn secondary" for="importJson" aria-label="Importer les données" style="display:inline-flex;align-items:center">Importer JSON</label>
-              <input id="importJson" type="file" accept="application/json" class="hide" />
-            </div>
-          </div>
-        </div>
-      `);
+          <div class="item"><strong>Sauvegarde</strong><div class="row" style="margin-top:8px"><button class="btn" data-action="export">Exporter JSON</button><label class="btn secondary" for="importJson" style="display:inline-flex;align-items:center">Importer JSON</label><input id="importJson" type="file" accept="application/json" class="hide" /></div></div>
+        </div>`);
     }
 
     function toast(msg, kind='warn') {
       const main = document.getElementById('main');
+      if (!main) return;
       const t = document.createElement('div');
       t.className = `message ${kind}`;
       t.textContent = msg;
       main.prepend(t);
-      setTimeout(() => t.remove(), 2600);
+      setTimeout(() => t.remove(), 3000);
     }
 
     function render() {
       renderHeader();
       renderTabs();
-      const main = document.getElementById('main');
       let html = '';
       switch (app.state.activeTab) {
         case 'Apprendre': html = renderLearn(); break;
@@ -482,7 +520,7 @@
         case 'Stats': html = renderStats(); break;
         case 'Réglages': html = renderSettings(); break;
       }
-      main.innerHTML = html;
+      document.getElementById('main').innerHTML = html;
     }
 
     function getWord(id) { return WORDS.find(w => w.id === id); }
@@ -498,9 +536,11 @@
         const action = btn.dataset.action;
         const word = getWord(btn.dataset.word);
         if (action === 'play') return speak(word, 'manual');
+        if (action === 'stopAudio') return stopAudio();
+        if (action === 'testVoice') return speak({id:'voice-test', fa:'سلام، خوش آمدی به فارسیو'}, 'manual');
         if (action === 'nextLearn') { app.state.currentWord++; gainXp(3); saveState(); render(); return; }
-        if (action === 'fav') { app.state.favorites[word.id] = !app.state.favorites[word.id]; saveState(); render(); return; }
-        if (action === 'checkQuiz') {
+        if (action === 'fav' && word) { app.state.favorites[word.id] = !app.state.favorites[word.id]; saveState(); render(); return; }
+        if (action === 'checkQuiz' && word) {
           const v = (document.getElementById('quizInput')?.value || '').trim().toLowerCase();
           const ok = v && (v === word.fr.toLowerCase());
           const fb = document.getElementById('quizFeedback');
@@ -523,12 +563,16 @@
         if (action === 'coachMic') {
           const out = document.getElementById('coachOut');
           if (!app.micAvailable) { out.className='message bad'; out.textContent='Micro non disponible sur cet appareil.'; return; }
-          out.className = 'message ok'; out.textContent = 'Micro détecté. Lis: « سلام، من فارسی یاد می‌گیرم »'; gainXp(5);
+          out.className = 'message ok';
+          out.textContent = 'Micro détecté. Lis: « سلام، من فارسی یاد می‌گیرم »';
+          gainXp(5);
           return;
         }
         if (action === 'coachText') {
           const out = document.getElementById('coachOut');
-          out.className = 'message warn'; out.textContent = 'Lis lentement: salâm, man fârsi yâd migiram.'; return;
+          out.className = 'message warn';
+          out.textContent = 'Lis lentement: salâm, man fârsi yâd migiram.';
+          return;
         }
         if (action === 'playMemory') {
           const s = Math.floor(Math.random()*20)+6;
@@ -544,17 +588,21 @@
           document.getElementById('gameOut').innerHTML = `<div class="message ok">30s finies. ${s} bonnes réponses.</div>`;
           saveState(); renderHeader(); return;
         }
-        if (action === 'reveal') {
-          const fa = document.getElementById('revFa'); if (fa) fa.textContent = word.fa;
+        if (action === 'reveal' && word) {
+          const fa = document.getElementById('revFa');
+          if (fa) fa.textContent = word.fa;
           maybeAutoPlay(word, 'reveal');
           return;
         }
-        if (action === 'good') { app.state.leitner[word.id] = Math.min(5, app.state.leitner[word.id]+1); gainXp(9); saveState(); render(); return; }
-        if (action === 'bad') { app.state.leitner[word.id] = 1; saveState(); render(); return; }
+        if (action === 'good' && word) { app.state.leitner[word.id] = Math.min(5, app.state.leitner[word.id]+1); gainXp(9); saveState(); render(); return; }
+        if (action === 'bad' && word) { app.state.leitner[word.id] = 1; saveState(); render(); return; }
         if (action === 'export') {
           const blob = new Blob([JSON.stringify(app.state, null, 2)], {type:'application/json'});
           const url = URL.createObjectURL(blob);
-          const a = document.createElement('a'); a.href = url; a.download = 'farsio-backup.json'; a.click();
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'farsio-backup.json';
+          a.click();
           URL.revokeObjectURL(url);
           return;
         }
@@ -567,6 +615,9 @@
         if (t.id === 'autoRev') app.state.audioAuto.onReveal = t.checked;
         if (t.id === 'goal') app.state.dailyGoal = Math.max(10, Number(t.value || 60));
         if (t.id === 'ttsProvider') app.state.settings.ttsProvider = t.value;
+        if (t.id === 'speechVoiceURI') app.state.settings.speechVoiceURI = t.value;
+        if (t.id === 'speechRate') app.state.settings.speechRate = Number(t.value || 0.92);
+        if (t.id === 'speechPitch') app.state.settings.speechPitch = Number(t.value || 1);
         if (t.id === 'azureRegion') app.state.settings.azureRegion = t.value.trim();
         if (t.id === 'azureKey') app.state.settings.azureKey = t.value.trim();
         if (t.id === 'importJson') {
@@ -576,11 +627,18 @@
           reader.onload = () => {
             try {
               const imported = JSON.parse(reader.result);
-              app.state = {...defaultState(), ...imported, settings:{...defaultState().settings, ...(imported.settings || {})}, audioAuto:{...defaultState().audioAuto, ...(imported.audioAuto || {})}};
+              app.state = {
+                ...defaultState(),
+                ...imported,
+                settings: {...defaultState().settings, ...(imported.settings || {})},
+                audioAuto: {...defaultState().audioAuto, ...(imported.audioAuto || {})}
+              };
               saveState();
               render();
               toast('Import réussi.', 'ok');
-            } catch { toast('Fichier JSON invalide.', 'bad'); }
+            } catch {
+              toast('Fichier JSON invalide.', 'bad');
+            }
           };
           reader.readAsText(f);
         }
@@ -594,7 +652,7 @@
 
     const slides = [
       `<h2>Bienvenue sur Farsio</h2><p class="muted">Une méthode claire: <strong>Écoute → Répète → Progresse</strong>.</p><p class="small muted">Quelques minutes par jour suffisent pour avancer.</p>`,
-      `<h2>Audio auto intelligent</h2><p class="muted">Tu peux activer la lecture auto à la 1ère rencontre, après erreur et en révision.</p><p class="small muted">Toujours contrôlable avec ▶️, sans rafale audio.</p>`,
+      `<h2>Audio auto intelligent</h2><p class="muted">Lecture auto possible à la 1ère rencontre, après erreur et en révision.</p><p class="small muted">Toujours pilotable avec ▶️ et ⏹️.</p>`,
       `<h2>Objectif quotidien</h2><label for="obGoal">XP / jour</label><input id="obGoal" type="number" min="10" step="10" value="${(loadState().dailyGoal || 60)}"/><label class="row" style="margin-top:10px"><input type="checkbox" id="obAuto" checked /> Activer Audio auto recommandé</label>`
     ];
 
@@ -627,6 +685,11 @@
       app.state = loadState();
       app.ttsSupport = 'speechSynthesis' in window;
       app.db = await openDB();
+      if (app.ttsSupport) {
+        refreshVoices();
+        window.speechSynthesis.onvoiceschanged = refreshVoices;
+        setTimeout(refreshVoices, 600);
+      }
       bindGlobalEvents();
       initOnboardingEvents();
       render();
