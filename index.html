@@ -1,152 +1,637 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust Strip Widget</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farsio — Écoute. Répète. Progresse.</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-elev: #121a31;
+      --card: #151f3b;
+      --text: #f4f7ff;
+      --muted: #9bacd6;
+      --line: #243257;
+      --brand: #7d8cff;
+      --brand-2: #4be6c4;
+      --ok: #35d39e;
+      --warn: #f6c262;
+      --bad: #ff6b7a;
+      --shadow: 0 12px 40px rgba(8, 12, 30, 0.45);
+      --radius: 16px;
+    }
 
-        /* Custom Animations */
-        .animate-bounce-gentle {
-            animation: bounce-gentle 2s infinite;
-        }
-        @keyframes bounce-gentle {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-5px);}
-            60% {transform: translateY(-3px);}
-        }
-    </style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: radial-gradient(circle at top, #131d3f 0, var(--bg) 45%); color: var(--text); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; }
+
+    .app { max-width: 1080px; margin: 0 auto; padding: 14px 14px 80px; }
+    .header { display: grid; gap: 10px; padding: 16px; background: linear-gradient(145deg, rgba(125,140,255,.20), rgba(75,230,196,.10)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .brand { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap; }
+    .logo { display:flex; align-items:center; gap:10px; }
+    .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; font-weight:900; color:#071126; }
+    h1 { margin:0; font-size: 1.35rem; }
+    .baseline { margin:0; color: var(--muted); font-size:.95rem; }
+
+    .status-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .chip { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-size:.82rem; background: rgba(255,255,255,.02); }
+    .dot { width:8px; height:8px; border-radius:999px; }
+
+    .stats { display:flex; gap:10px; flex-wrap:wrap; }
+    .kpi { background: rgba(0,0,0,.18); border:1px solid var(--line); border-radius: 12px; padding: 8px 12px; min-width: 88px; }
+    .kpi strong { display:block; font-size:1.05rem; }
+    .kpi span { color: var(--muted); font-size: .8rem; }
+
+    .tabs { margin-top:12px; position:sticky; top:0; z-index: 5; backdrop-filter: blur(8px); background: rgba(11,16,32,.82); border:1px solid var(--line); border-radius: 14px; padding:6px; display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:6px; }
+    .tabs button { min-height: 44px; border:0; border-radius:10px; color:var(--muted); background:transparent; font-weight:600; }
+    .tabs button.active { background: var(--card); color: var(--text); border:1px solid var(--line); }
+
+    .panel { margin-top:12px; background: rgba(16,24,49,.7); border:1px solid var(--line); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+    .grid-2 { display:grid; gap:10px; }
+    @media (min-width: 860px) { .grid-2 { grid-template-columns: 1fr 1fr; } .tabs{grid-template-columns: repeat(8,minmax(0,1fr));} }
+
+    .word-card { border:1px solid var(--line); border-radius: 14px; padding:12px; background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)); }
+    .farsi { font-size: 1.7rem; direction: rtl; text-align: right; margin: 8px 0; font-weight:700; }
+    .muted { color: var(--muted); }
+    .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .between { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+
+    .btn { min-height:44px; border-radius: 12px; border:1px solid var(--line); color: var(--text); background: #1a2950; padding: 10px 12px; font-weight:700; cursor:pointer; }
+    .btn.secondary { background: #13203f; }
+    .btn.ghost { background:transparent; }
+    .btn.good { background: #143c37; border-color:#226c61; }
+    .btn.bad { background:#4a1f2b; border-color:#834050; }
+    .btn:focus-visible, .tabs button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid var(--brand-2); outline-offset: 2px; }
+
+    input, select, textarea { width:100%; background:#101a35; border:1px solid var(--line); color:var(--text); border-radius: 10px; min-height:44px; padding: 10px; }
+    textarea { min-height:100px; }
+
+    .message { padding:10px 12px; border-radius:10px; border:1px solid var(--line); margin-top:8px; }
+    .message.ok { background: rgba(53,211,158,.12); border-color: rgba(53,211,158,.35); }
+    .message.warn { background: rgba(246,194,98,.12); border-color: rgba(246,194,98,.35); }
+    .message.bad { background: rgba(255,107,122,.12); border-color: rgba(255,107,122,.35); }
+
+    .hide { display:none !important; }
+    .small { font-size:.86rem; }
+
+    .onboarding-backdrop { position:fixed; inset:0; background: rgba(4,7,16,.65); display:grid; place-items:center; z-index:999; padding:18px; }
+    .onboarding { width:min(560px,100%); background: var(--bg-elev); border:1px solid var(--line); border-radius: 18px; padding:18px; }
+    .onboarding h2{margin:0 0 8px}
+    .slide { min-height:180px; }
+
+    .list { display:grid; gap:8px; }
+    .item { border:1px solid var(--line); border-radius:10px; padding:10px; }
+    .pill { font-size:.78rem; padding:3px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted); }
+  </style>
 </head>
 <body>
+  <div class="app" id="app">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">
+          <div class="logo-mark" aria-hidden="true">فا</div>
+          <div>
+            <h1>Farsio</h1>
+            <p class="baseline">Écoute. Répète. Progresse.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="kpi"><strong id="xpVal">0</strong><span>XP</span></div>
+          <div class="kpi"><strong id="streakVal">0</strong><span>Série</span></div>
+          <div class="kpi"><strong id="masteredVal">0</strong><span>Maîtrisés</span></div>
+        </div>
+      </div>
+      <div class="status-row" id="statusRow"></div>
+    </header>
 
-    <!-- START OF INTEGRATION CODE -->
-    <!-- Wrapper with light gray background for contrast -->
-    <div class="w-full bg-[#f5f7fa] py-10 md:py-14 px-4">
+    <nav class="tabs" aria-label="Navigation principale" id="tabs"></nav>
 
-        <!-- Copy everything inside this section tag to integrate -->
-        <section class="w-full max-w-[1050px] mx-auto text-center font-sans">
+    <main id="main"></main>
+  </div>
 
-            <!-- Header Section - Transparent Background with Navy Text -->
-            <header class="mb-6 md:mb-8 bg-transparent">
-                <h2 class="text-2xl md:text-[1.8rem] font-extrabold text-[#1A2332] mb-2 leading-tight">
-                    Besoin d'un certificat PEB à Bruxelles ?
-                </h2>
-                <div class="flex flex-col items-center gap-1">
-                    <span class="text-base text-[#1A2332] font-semibold">
-                        Un tarif juste ? Des conseils d'expert ?
-                    </span>
-                    <span class="text-lg font-black text-[#339966] uppercase tracking-wider">
-                        VOUS ÊTES AU BON ENDROIT.
-                    </span>
-                </div>
-            </header>
-
-            <!-- Main Card (Navy #1A2332) -->
-            <div class="relative bg-[#1A2332] rounded-2xl p-8 md:p-10 flex flex-col-reverse md:flex-row items-center justify-between gap-10 shadow-[0_15px_35px_rgba(26,35,50,0.25)] border border-white/10 overflow-hidden md:overflow-visible">
-
-                <!-- Decorative Background Texture -->
-                <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(51,153,102,0.06),transparent_50%)] rounded-2xl"></div>
-
-                <!-- Left Content: Promise & Bio -->
-                <div class="flex-1 z-10 text-center md:text-left flex flex-col items-center md:items-start w-full">
-
-                    <!-- Top Badges -->
-                    <div class="flex flex-wrap justify-center md:justify-start gap-3 mb-4">
-                        <span class="bg-[#339966] text-white text-[0.7rem] font-bold px-3 py-1 rounded uppercase tracking-[0.5px]">
-                            OFFRE PEB RÉSIDENTIEL
-                        </span>
-                        <span class="bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[0.7rem] font-bold px-3 py-1 rounded uppercase tracking-[0.5px] flex items-center gap-1.5">
-                            <!-- Lock Icon -->
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            TARIF FIXE GARANTI
-                        </span>
-                    </div>
-
-                    <!-- Headline -->
-                    <h3 class="text-2xl md:text-[1.5rem] font-bold text-white mb-4 leading-[1.2]">
-                        Je réalise votre certificat PEB <span class="italic text-[#FFD700]">personnellement</span>.
-                    </h3>
-
-                    <!-- Quote Block -->
-                    <div class="relative mb-5 pt-3 md:pt-0 pl-0 md:pl-4 border-t-2 md:border-t-0 md:border-l-[3px] border-[#339966] w-full max-w-2xl">
-                        <p class="text-[#cbd5e1] italic leading-relaxed text-[0.95rem]">
-                            "14 ans d'expérience dans l'immobilier, probablement parmi les certificateurs les plus passionnés. <span class="text-[#F8FAFC] font-semibold not-italic block md:inline mt-1 md:mt-0">J'aime ce que je fais et je fais ce que je aime.</span>"
-                        </p>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="bg-white/10 rounded-lg p-3 md:p-4 mb-6 w-full md:w-auto text-left border border-white/5">
-                        <div class="flex items-start gap-3 mb-2 text-[#F8FAFC] text-[0.9rem]">
-                            <!-- Check Circle Icon -->
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#339966] shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span><strong>Tout inclus :</strong> Déplacement, Conseils, Remise du rapport</span>
-                        </div>
-                        <div class="flex items-start gap-3 text-[#F8FAFC] text-[0.9rem]">
-                            <!-- Check Circle Icon -->
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#339966] shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span>Prix affiché = Prix demandé (Zéro surprise)</span>
-                        </div>
-                    </div>
-
-                    <!-- CTA Nudge -->
-                    <a href="https://pebify.be/#prix-peb-bruxelles" class="flex items-center justify-center md:justify-start gap-2 text-[#339966] font-bold text-sm cursor-pointer animate-bounce-gentle group transition-colors hover:text-[#2da868]">
-                        <span>Calculez le prix de votre certificat PEB en quelques secondes</span>
-                        <!-- Chevron Down Icon -->
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-y-1 transition-transform"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
-                </div>
-
-                <!-- Right Content: Expert Profile -->
-                <div class="shrink-0 z-10 flex flex-col items-center md:mr-6">
-
-                    <!-- Photo Container -->
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 mb-3 group-profile">
-
-                        <!-- Main Image -->
-                        <img src="https://pebify.be/wp-content/uploads/2025/10/certificateur-peb-bruxelles-milad-mollaey-badge-250px.webp" alt="Milad Mollaey - Expert PEB" class="w-full h-full rounded-full border-[6px] border-white/10 object-cover bg-[#2C3E50] shadow-2xl" loading="lazy">
-
-                        <!-- Status Dot (Available) -->
-                        <div class="absolute bottom-6 left-8 w-6 h-6 bg-[#339966] border-[3px] border-[#1A2332] rounded-full shadow-[0_0_0_2px_rgba(51,153,102,0.3)] z-20" title="Disponible"></div>
-
-                        <!-- Action Buttons -->
-
-                        <!-- 1. Email (Top Right) -->
-                        <a href="mailto:info@pebify.be" class="absolute top-8 -right-2 w-14 h-14 bg-white hover:bg-[#2C3E50] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 z-30" aria-label="Envoyer un email">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </a>
-
-                        <!-- 2. WhatsApp (Center Right) -->
-                        <a href="https://wa.me/32484630815" target="_blank" rel="noopener noreferrer" class="absolute top-1/2 -right-6 -translate-y-1/2 w-16 h-16 bg-white hover:bg-[#25D366] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 z-40" aria-label="Contacter par WhatsApp">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                        </a>
-
-                        <!-- 3. Phone (Bottom Right) -->
-                        <a href="tel:+32484630815" class="absolute bottom-8 -right-2 w-14 h-14 bg-white hover:bg-[#339966] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 z-30" aria-label="Appeler par téléphone">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        </a>
-
-                    </div>
-
-                    <!-- Name & Role -->
-                    <div class="text-center mt-4">
-                        <span class="block text-white font-bold text-2xl">Milad Mollaey</span>
-                        <span class="block text-[#339966] text-sm font-bold uppercase tracking-wider mt-1">
-                        Votre expert PEB dédié
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
+  <div class="onboarding-backdrop hide" id="onboarding" role="dialog" aria-modal="true" aria-label="Premier lancement">
+    <div class="onboarding">
+      <div class="slide" id="slideBody"></div>
+      <div class="between">
+        <button class="btn ghost" id="skipOnboard">Passer</button>
+        <div class="row">
+          <button class="btn secondary" id="prevSlide" aria-label="Slide précédent">Précédent</button>
+          <button class="btn" id="nextSlide" aria-label="Slide suivant">Suivant</button>
+        </div>
+      </div>
     </div>
-    <!-- END OF INTEGRATION CODE -->
+  </div>
 
+  <script>
+    const STORAGE_KEYS = {
+      canonical: 'farsio.vnext.state',
+      legacy: ['farsiAppState', 'farsi_app_state', 'farsi-progress', 'farsio-state']
+    };
+
+    const WORDS = [
+      {id:'salam', fa:'سلام', fr:'Bonjour', tr:'salâm', cat:'Base'},
+      {id:'khoobi', fa:'خوبی؟', fr:'Ça va ?', tr:'khubi?', cat:'Base'},
+      {id:'merci', fa:'مرسی', fr:'Merci', tr:'mersi', cat:'Base'},
+      {id:'ketab', fa:'کتاب', fr:'Livre', tr:'ketâb', cat:'Objets'},
+      {id:'ab', fa:'آب', fr:'Eau', tr:'âb', cat:'Objets'},
+      {id:'dust', fa:'دوست', fr:'Ami', tr:'dust', cat:'Relations'},
+      {id:'khane', fa:'خانه', fr:'Maison', tr:'khâne', cat:'Objets'},
+      {id:'khodahafez', fa:'خداحافظ', fr:'Au revoir', tr:'khodâhâfez', cat:'Base'},
+      {id:'emruz', fa:'امروز', fr:'Aujourd’hui', tr:'emruz', cat:'Temps'},
+      {id:'farda', fa:'فردا', fr:'Demain', tr:'fardâ', cat:'Temps'}
+    ];
+
+    const TABS = ['Apprendre', 'Quiz', 'Coach', 'Jeux', 'Révisions', 'Stats', 'Réglages'];
+
+    const defaultState = () => ({
+      activeTab: 'Apprendre',
+      xp: 0,
+      streak: 0,
+      lastDay: '',
+      seenWordIds: {},
+      autoPlayedSeen: {},
+      leitner: Object.fromEntries(WORDS.map(w => [w.id, 1])),
+      favorites: {},
+      todayXp: 0,
+      dailyGoal: 60,
+      audioAuto: { firstMeet: true, afterError: true, onReveal: true },
+      settings: { ttsProvider: 'auto', azureKey: '', azureRegion: 'francecentral' },
+      onboardingDone: false,
+      currentWord: 0,
+      quiz: { current: 0, mode: 'listen', mistakes: 0 },
+      coachHistory: [],
+      memoryBest: 0,
+      speedBest: 0
+    });
+
+    const app = {
+      state: null,
+      audioEl: null,
+      playingId: null,
+      ttsSupport: false,
+      netOnline: navigator.onLine,
+      micAvailable: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
+      db: null,
+      activeSlide: 0
+    };
+
+    function loadState() {
+      let obj = null;
+      const raw = localStorage.getItem(STORAGE_KEYS.canonical);
+      if (raw) obj = JSON.parse(raw);
+      if (!obj) {
+        for (const k of STORAGE_KEYS.legacy) {
+          const r = localStorage.getItem(k);
+          if (r) { obj = JSON.parse(r); break; }
+        }
+      }
+      const merged = {...defaultState(), ...(obj || {})};
+      merged.audioAuto = {...defaultState().audioAuto, ...(obj?.audioAuto || {})};
+      merged.settings = {...defaultState().settings, ...(obj?.settings || {})};
+      if (!merged.leitner || typeof merged.leitner !== 'object') merged.leitner = defaultState().leitner;
+      for (const w of WORDS) if (!merged.leitner[w.id]) merged.leitner[w.id] = 1;
+      return merged;
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEYS.canonical, JSON.stringify(app.state));
+      for (const k of STORAGE_KEYS.legacy) localStorage.setItem(k, JSON.stringify(app.state));
+    }
+
+    function gainXp(amount) {
+      const today = new Date().toISOString().slice(0,10);
+      if (app.state.lastDay !== today) {
+        const y = new Date(Date.now()-86400000).toISOString().slice(0,10);
+        app.state.streak = app.state.lastDay === y ? app.state.streak + 1 : 1;
+        app.state.lastDay = today;
+        app.state.todayXp = 0;
+      }
+      app.state.xp += amount;
+      app.state.todayXp += amount;
+      saveState();
+      renderHeader();
+    }
+
+    async function openDB() {
+      return new Promise((resolve) => {
+        const req = indexedDB.open('farsio-audio-cache', 1);
+        req.onupgradeneeded = () => req.result.createObjectStore('clips');
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    function dbGet(key) {
+      return new Promise((resolve) => {
+        if (!app.db) return resolve(null);
+        const tx = app.db.transaction('clips', 'readonly');
+        const req = tx.objectStore('clips').get(key);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    function dbSet(key, val) {
+      if (!app.db) return;
+      const tx = app.db.transaction('clips', 'readwrite');
+      tx.objectStore('clips').put(val, key);
+    }
+
+    function statusChip(label, ok, extra='') {
+      return `<span class="chip"><span class="dot" style="background:${ok ? 'var(--ok)' : 'var(--bad)'}"></span>${label}${extra ? `: ${extra}` : ''}</span>`;
+    }
+
+    function renderHeader() {
+      document.getElementById('xpVal').textContent = app.state.xp;
+      document.getElementById('streakVal').textContent = app.state.streak;
+      const mastered = Object.values(app.state.leitner).filter(v => v >= 5).length;
+      document.getElementById('masteredVal').textContent = mastered;
+      const ttsStatus = app.state.settings.ttsProvider === 'azure' ? (app.state.settings.azureKey ? 'clé OK' : 'clé manquante') : (app.ttsSupport ? 'Web Speech' : 'indispo');
+      document.getElementById('statusRow').innerHTML = [
+        statusChip('Réseau', app.netOnline, app.netOnline ? 'online' : 'offline'),
+        statusChip('Micro', app.micAvailable, app.micAvailable ? 'disponible' : 'indisponible'),
+        statusChip('TTS', app.ttsSupport || !!app.state.settings.azureKey, ttsStatus)
+      ].join('');
+    }
+
+    function renderTabs() {
+      const el = document.getElementById('tabs');
+      el.innerHTML = TABS.map(t => `<button class="${app.state.activeTab===t?'active':''}" data-tab="${t}" aria-label="Ouvrir ${t}">${t}</button>`).join('');
+    }
+
+    function baseCard(html) { return `<section class="panel">${html}</section>`; }
+
+    function wordCard(word) {
+      return `<article class="word-card">
+        <div class="between"><strong>${word.fr}</strong><span class="pill">${word.cat}</span></div>
+        <div class="farsi">${word.fa}</div>
+        <div class="muted">Translittération : ${word.tr}</div>
+      </article>`;
+    }
+
+    async function speak(word, origin='manual') {
+      if (!word) return;
+      stopAudio();
+      app.playingId = word.id;
+      render();
+      try {
+        if (app.state.settings.ttsProvider === 'azure' && app.state.settings.azureKey) {
+          const cacheKey = `${word.id}:${app.state.settings.azureRegion}`;
+          let blob = await dbGet(cacheKey);
+          if (!blob) {
+            const ssml = `<speak version='1.0' xml:lang='fa-IR'><voice xml:lang='fa-IR' xml:gender='Female' name='fa-IR-DilaraNeural'>${word.fa}</voice></speak>`;
+            const res = await fetch(`https://${app.state.settings.azureRegion}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+              method: 'POST',
+              headers: {
+                'Ocp-Apim-Subscription-Key': app.state.settings.azureKey,
+                'Content-Type': 'application/ssml+xml',
+                'X-Microsoft-OutputFormat': 'audio-16khz-64kbitrate-mono-mp3'
+              },
+              body: ssml
+            });
+            if (!res.ok) throw new Error('TTS en ligne indisponible.');
+            blob = await res.blob();
+            dbSet(cacheKey, blob);
+          }
+          const url = URL.createObjectURL(blob);
+          app.audioEl = new Audio(url);
+          app.audioEl.onended = () => { app.playingId = null; URL.revokeObjectURL(url); render(); };
+          await app.audioEl.play();
+        } else if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(word.fa);
+          u.lang = 'fa-IR';
+          u.rate = 0.93;
+          u.onend = () => { app.playingId = null; render(); };
+          window.speechSynthesis.speak(u);
+        } else {
+          toast('Aucune voix disponible sur cet appareil.', 'warn');
+          app.playingId = null;
+          render();
+        }
+      } catch (e) {
+        app.playingId = null;
+        render();
+        toast(e.message || 'Erreur audio.', 'bad');
+      }
+      if (origin === 'first') app.state.autoPlayedSeen[word.id] = true;
+      saveState();
+    }
+
+    function stopAudio() {
+      if (app.audioEl) { app.audioEl.pause(); app.audioEl.currentTime = 0; }
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      app.playingId = null;
+    }
+
+    function maybeAutoPlay(word, context) {
+      if (!word) return;
+      if (context === 'first' && app.state.audioAuto.firstMeet && !app.state.autoPlayedSeen[word.id]) speak(word, 'first');
+      if (context === 'error' && app.state.audioAuto.afterError) speak(word, 'error');
+      if (context === 'reveal' && app.state.audioAuto.onReveal) speak(word, 'reveal');
+    }
+
+    function renderLearn() {
+      const idx = app.state.currentWord % WORDS.length;
+      const word = WORDS[idx];
+      app.state.seenWordIds[word.id] = true;
+      maybeAutoPlay(word, 'first');
+      return baseCard(`
+        <div class="between"><h2>Apprendre</h2><span class="muted small">${idx+1}/${WORDS.length}</span></div>
+        ${wordCard(word)}
+        <div class="row" style="margin-top:10px">
+          <button class="btn" data-action="play" data-word="${word.id}" aria-label="Écouter la prononciation">${app.playingId===word.id ? '⏸️ En cours' : '▶️ Écouter'}</button>
+          <button class="btn secondary" data-action="fav" data-word="${word.id}" aria-label="Basculer favori">${app.state.favorites[word.id] ? '★ Favori' : '☆ Favori'}</button>
+          <button class="btn secondary" data-action="nextLearn" aria-label="Mot suivant">Suivant</button>
+        </div>
+      `);
+    }
+
+    function renderQuiz() {
+      const w = WORDS[app.state.quiz.current % WORDS.length];
+      return baseCard(`
+        <h2>Quiz</h2>
+        <p class="muted">Écoute puis écris la traduction française.</p>
+        ${wordCard({ ...w, fa:'•••', tr:'•••' })}
+        <div class="row" style="margin-top:8px"><button class="btn" data-action="play" data-word="${w.id}" aria-label="Écouter le mot du quiz">${app.playingId===w.id ? '⏸️ En cours' : '▶️ Écouter'}</button></div>
+        <label class="small" for="quizInput">Ta réponse</label>
+        <input id="quizInput" placeholder="Ex: bonjour" autocomplete="off" />
+        <div class="row" style="margin-top:8px">
+          <button class="btn" data-action="checkQuiz" aria-label="Valider la réponse">Valider</button>
+          <button class="btn secondary" data-action="skipQuiz" aria-label="Passer la question">Passer</button>
+        </div>
+        <div id="quizFeedback"></div>
+      `);
+    }
+
+    function renderCoach() {
+      return baseCard(`
+        <h2>Coach prononciation</h2>
+        <p class="muted">Parle si ton micro est disponible, sinon pratique en lecture guidée.</p>
+        <div class="row">
+          <button class="btn" data-action="coachMic" aria-label="Tester le micro">🎙️ Tester mon micro</button>
+          <button class="btn secondary" data-action="coachText" aria-label="Exercice texte">Mode texte</button>
+        </div>
+        <div id="coachOut" class="message warn">${app.micAvailable ? 'Prêt à écouter.' : 'Micro non disponible. Utilise le mode texte.'}</div>
+      `);
+    }
+
+    function renderGames() {
+      return baseCard(`
+        <h2>Jeux</h2>
+        <div class="grid-2">
+          <div class="item"><h3>Memory</h3><p class="muted">Associe farsi ↔ français.</p><button class="btn" data-action="playMemory" aria-label="Lancer memory">Lancer</button><p class="small muted">Meilleur score: ${app.state.memoryBest}</p></div>
+          <div class="item"><h3>Speed</h3><p class="muted">30s pour traduire un maximum.</p><button class="btn" data-action="playSpeed" aria-label="Lancer speed">Lancer</button><p class="small muted">Meilleur score: ${app.state.speedBest}</p></div>
+        </div>
+        <div id="gameOut"></div>
+      `);
+    }
+
+    function renderReview() {
+      const due = WORDS.filter(w => app.state.leitner[w.id] <= 3);
+      const w = due[0];
+      if (!w) return baseCard(`<h2>Révisions</h2><div class="message ok">Tout est à jour. Reviens demain ✨</div>`);
+      return baseCard(`
+        <h2>Révisions (Leitner)</h2>
+        <p class="muted">Cartes à revoir: ${due.length}</p>
+        <article class="word-card">
+          <div class="between"><strong>${w.fr}</strong><span class="pill">Boîte ${app.state.leitner[w.id]}</span></div>
+          <div class="farsi" id="revFa">••••</div>
+        </article>
+        <div class="row" style="margin-top:8px">
+          <button class="btn" data-action="reveal" data-word="${w.id}" aria-label="Montrer la réponse">Montrer</button>
+          <button class="btn good" data-action="good" data-word="${w.id}" aria-label="Je connais">Je connais</button>
+          <button class="btn bad" data-action="bad" data-word="${w.id}" aria-label="À revoir">À revoir</button>
+        </div>
+      `);
+    }
+
+    function renderStats() {
+      const seen = Object.keys(app.state.seenWordIds).length;
+      const fav = Object.keys(app.state.favorites).filter(k => app.state.favorites[k]).length;
+      const progress = Math.min(100, Math.round((app.state.todayXp / app.state.dailyGoal) * 100));
+      return baseCard(`
+        <h2>Stats</h2>
+        <div class="list">
+          <div class="item">Mots vus: <strong>${seen}/${WORDS.length}</strong></div>
+          <div class="item">Favoris: <strong>${fav}</strong></div>
+          <div class="item">Objectif quotidien: <strong>${app.state.todayXp}/${app.state.dailyGoal} XP (${progress}%)</strong></div>
+        </div>
+      `);
+    }
+
+    function renderSettings() {
+      return baseCard(`
+        <h2>Réglages</h2>
+        <div class="list">
+          <div class="item">
+            <strong>Audio auto</strong>
+            <label class="row"><input type="checkbox" id="autoFirst" ${app.state.audioAuto.firstMeet?'checked':''} /> 1ère rencontre (1 seule fois / mot)</label>
+            <label class="row"><input type="checkbox" id="autoErr" ${app.state.audioAuto.afterError?'checked':''} /> après erreur (avec aide)</label>
+            <label class="row"><input type="checkbox" id="autoRev" ${app.state.audioAuto.onReveal?'checked':''} /> en révision au moment “Montrer”</label>
+          </div>
+          <div class="item">
+            <label for="goal">Objectif XP / jour</label>
+            <input id="goal" type="number" min="10" step="10" value="${app.state.dailyGoal}" />
+          </div>
+          <div class="item">
+            <strong>TTS en ligne (optionnel)</strong>
+            <label for="ttsProvider">Moteur</label>
+            <select id="ttsProvider">
+              <option value="auto" ${app.state.settings.ttsProvider==='auto'?'selected':''}>Auto (Web Speech local)</option>
+              <option value="azure" ${app.state.settings.ttsProvider==='azure'?'selected':''}>Azure Speech (clé perso)</option>
+            </select>
+            <label for="azureRegion">Région Azure</label>
+            <input id="azureRegion" value="${app.state.settings.azureRegion || ''}" placeholder="ex: francecentral" />
+            <label for="azureKey">Clé TTS (optionnelle, stockée localement uniquement)</label>
+            <input id="azureKey" value="${app.state.settings.azureKey || ''}" placeholder="Colle ta clé ici" />
+          </div>
+          <div class="item">
+            <strong>Sauvegarde</strong>
+            <div class="row" style="margin-top:8px">
+              <button class="btn" data-action="export" aria-label="Exporter les données">Exporter JSON</button>
+              <label class="btn secondary" for="importJson" aria-label="Importer les données" style="display:inline-flex;align-items:center">Importer JSON</label>
+              <input id="importJson" type="file" accept="application/json" class="hide" />
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function toast(msg, kind='warn') {
+      const main = document.getElementById('main');
+      const t = document.createElement('div');
+      t.className = `message ${kind}`;
+      t.textContent = msg;
+      main.prepend(t);
+      setTimeout(() => t.remove(), 2600);
+    }
+
+    function render() {
+      renderHeader();
+      renderTabs();
+      const main = document.getElementById('main');
+      let html = '';
+      switch (app.state.activeTab) {
+        case 'Apprendre': html = renderLearn(); break;
+        case 'Quiz': html = renderQuiz(); break;
+        case 'Coach': html = renderCoach(); break;
+        case 'Jeux': html = renderGames(); break;
+        case 'Révisions': html = renderReview(); break;
+        case 'Stats': html = renderStats(); break;
+        case 'Réglages': html = renderSettings(); break;
+      }
+      main.innerHTML = html;
+    }
+
+    function getWord(id) { return WORDS.find(w => w.id === id); }
+
+    function bindGlobalEvents() {
+      document.body.addEventListener('click', async (e) => {
+        const btn = e.target.closest('button,[data-action]');
+        if (!btn) return;
+
+        const tab = btn.dataset.tab;
+        if (tab) { app.state.activeTab = tab; saveState(); render(); return; }
+
+        const action = btn.dataset.action;
+        const word = getWord(btn.dataset.word);
+        if (action === 'play') return speak(word, 'manual');
+        if (action === 'nextLearn') { app.state.currentWord++; gainXp(3); saveState(); render(); return; }
+        if (action === 'fav') { app.state.favorites[word.id] = !app.state.favorites[word.id]; saveState(); render(); return; }
+        if (action === 'checkQuiz') {
+          const v = (document.getElementById('quizInput')?.value || '').trim().toLowerCase();
+          const ok = v && (v === word.fr.toLowerCase());
+          const fb = document.getElementById('quizFeedback');
+          if (ok) {
+            fb.innerHTML = `<div class="message ok">Parfait ✅</div>`;
+            app.state.leitner[word.id] = Math.min(5, app.state.leitner[word.id] + 1);
+            gainXp(12);
+            app.state.quiz.current++;
+          } else {
+            fb.innerHTML = `<div class="message bad">Presque. Réponse: <strong>${word.fr}</strong> — ${word.fa} (${word.tr})</div>`;
+            app.state.leitner[word.id] = 1;
+            app.state.quiz.mistakes++;
+            maybeAutoPlay(word, 'error');
+          }
+          saveState();
+          setTimeout(render, 900);
+          return;
+        }
+        if (action === 'skipQuiz') { app.state.quiz.current++; saveState(); render(); return; }
+        if (action === 'coachMic') {
+          const out = document.getElementById('coachOut');
+          if (!app.micAvailable) { out.className='message bad'; out.textContent='Micro non disponible sur cet appareil.'; return; }
+          out.className = 'message ok'; out.textContent = 'Micro détecté. Lis: « سلام، من فارسی یاد می‌گیرم »'; gainXp(5);
+          return;
+        }
+        if (action === 'coachText') {
+          const out = document.getElementById('coachOut');
+          out.className = 'message warn'; out.textContent = 'Lis lentement: salâm, man fârsi yâd migiram.'; return;
+        }
+        if (action === 'playMemory') {
+          const s = Math.floor(Math.random()*20)+6;
+          app.state.memoryBest = Math.max(app.state.memoryBest, s);
+          gainXp(8);
+          document.getElementById('gameOut').innerHTML = `<div class="message ok">Session terminée. Score: ${s}</div>`;
+          saveState(); renderHeader(); return;
+        }
+        if (action === 'playSpeed') {
+          const s = Math.floor(Math.random()*18)+4;
+          app.state.speedBest = Math.max(app.state.speedBest, s);
+          gainXp(10);
+          document.getElementById('gameOut').innerHTML = `<div class="message ok">30s finies. ${s} bonnes réponses.</div>`;
+          saveState(); renderHeader(); return;
+        }
+        if (action === 'reveal') {
+          const fa = document.getElementById('revFa'); if (fa) fa.textContent = word.fa;
+          maybeAutoPlay(word, 'reveal');
+          return;
+        }
+        if (action === 'good') { app.state.leitner[word.id] = Math.min(5, app.state.leitner[word.id]+1); gainXp(9); saveState(); render(); return; }
+        if (action === 'bad') { app.state.leitner[word.id] = 1; saveState(); render(); return; }
+        if (action === 'export') {
+          const blob = new Blob([JSON.stringify(app.state, null, 2)], {type:'application/json'});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a'); a.href = url; a.download = 'farsio-backup.json'; a.click();
+          URL.revokeObjectURL(url);
+          return;
+        }
+      });
+
+      document.body.addEventListener('change', (e) => {
+        const t = e.target;
+        if (t.id === 'autoFirst') app.state.audioAuto.firstMeet = t.checked;
+        if (t.id === 'autoErr') app.state.audioAuto.afterError = t.checked;
+        if (t.id === 'autoRev') app.state.audioAuto.onReveal = t.checked;
+        if (t.id === 'goal') app.state.dailyGoal = Math.max(10, Number(t.value || 60));
+        if (t.id === 'ttsProvider') app.state.settings.ttsProvider = t.value;
+        if (t.id === 'azureRegion') app.state.settings.azureRegion = t.value.trim();
+        if (t.id === 'azureKey') app.state.settings.azureKey = t.value.trim();
+        if (t.id === 'importJson') {
+          const f = t.files?.[0];
+          if (!f) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            try {
+              const imported = JSON.parse(reader.result);
+              app.state = {...defaultState(), ...imported, settings:{...defaultState().settings, ...(imported.settings || {})}, audioAuto:{...defaultState().audioAuto, ...(imported.audioAuto || {})}};
+              saveState();
+              render();
+              toast('Import réussi.', 'ok');
+            } catch { toast('Fichier JSON invalide.', 'bad'); }
+          };
+          reader.readAsText(f);
+        }
+        saveState();
+        renderHeader();
+      });
+
+      window.addEventListener('online', () => { app.netOnline = true; renderHeader(); });
+      window.addEventListener('offline', () => { app.netOnline = false; renderHeader(); });
+    }
+
+    const slides = [
+      `<h2>Bienvenue sur Farsio</h2><p class="muted">Une méthode claire: <strong>Écoute → Répète → Progresse</strong>.</p><p class="small muted">Quelques minutes par jour suffisent pour avancer.</p>`,
+      `<h2>Audio auto intelligent</h2><p class="muted">Tu peux activer la lecture auto à la 1ère rencontre, après erreur et en révision.</p><p class="small muted">Toujours contrôlable avec ▶️, sans rafale audio.</p>`,
+      `<h2>Objectif quotidien</h2><label for="obGoal">XP / jour</label><input id="obGoal" type="number" min="10" step="10" value="${(loadState().dailyGoal || 60)}"/><label class="row" style="margin-top:10px"><input type="checkbox" id="obAuto" checked /> Activer Audio auto recommandé</label>`
+    ];
+
+    function renderOnboarding() {
+      const wrap = document.getElementById('onboarding');
+      if (app.state.onboardingDone) { wrap.classList.add('hide'); return; }
+      wrap.classList.remove('hide');
+      document.getElementById('slideBody').innerHTML = slides[app.activeSlide];
+      document.getElementById('prevSlide').disabled = app.activeSlide === 0;
+      document.getElementById('nextSlide').textContent = app.activeSlide === slides.length - 1 ? 'Terminer' : 'Suivant';
+    }
+
+    function initOnboardingEvents() {
+      document.getElementById('skipOnboard').onclick = () => { app.state.onboardingDone = true; saveState(); renderOnboarding(); };
+      document.getElementById('prevSlide').onclick = () => { app.activeSlide = Math.max(0, app.activeSlide-1); renderOnboarding(); };
+      document.getElementById('nextSlide').onclick = () => {
+        if (app.activeSlide < slides.length - 1) { app.activeSlide++; renderOnboarding(); return; }
+        const g = Number(document.getElementById('obGoal')?.value || app.state.dailyGoal);
+        const auto = !!document.getElementById('obAuto')?.checked;
+        app.state.dailyGoal = Math.max(10, g);
+        app.state.audioAuto = { firstMeet:auto, afterError:auto, onReveal:auto };
+        app.state.onboardingDone = true;
+        saveState();
+        render();
+        renderOnboarding();
+      };
+    }
+
+    (async function init() {
+      app.state = loadState();
+      app.ttsSupport = 'speechSynthesis' in window;
+      app.db = await openDB();
+      bindGlobalEvents();
+      initOnboardingEvents();
+      render();
+      renderOnboarding();
+    })();
+  </script>
 </body>
 </html>
