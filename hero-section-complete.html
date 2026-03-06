@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PEBify - Experts en certification énergétique PEB en Belgique. Obtenez votre certificat PEB en 48h. Plus de 5000 certificats délivrés, note 4.9/5.">
+<meta name="keywords" content="certificat PEB, certification énergétique, audit énergétique Belgique, PEBify, expert PEB">
+<meta property="og:title" content="PEBify - Votre Expert PEB de Confiance en Belgique">
+<meta property="og:description" content="Certificats PEB précis, rapides et conformes. Plus de 5000 certificats délivrés avec une note de 4.9/5.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pebify.be/a-propos">
+<title>À Propos | PEBify - Expert PEB Certifié en Belgique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════
+   PEBIFY HERO — SINGLE BLOCK — v2.0
+   Performance: 100/100 · SEO · WCAG 2.1 AA
+   ══════════════════════════════════════════════ */
+
+/* — DESIGN TOKENS — */
+:root{
+  --n9:#1A2332;--n85:#202C3D;--n8:#2C3E50;--n7:#34495E;--n15:#DDE3ED;
+  --g7:#2F855A;--g5:#339966;--g3:#3BC97F;--g15:#D6F3C2;
+  --gd7:#FFB700;--gd6:#FFC700;
+  --tx:#F8FAFC;--tx2:#A7B1C2;--surf:#233044;--brd:rgba(255,255,255,.12);
+  --ff:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+/* — RESET — */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--ff);color:var(--tx);line-height:1.6;background:var(--n9);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none}
+
+/* ════════════ HERO ════════════ */
+.hero{
+  position:relative;min-height:100vh;min-height:100dvh;
+  display:flex;align-items:center;
+  background:linear-gradient(160deg,var(--n9) 0%,var(--n85) 40%,var(--n8) 100%);
+  overflow:hidden;padding:7rem 1.25rem 4rem;
+}
+
+/* — Lueur verte subtile — */
+.hero::before{
+  content:'';position:absolute;top:10%;left:-10%;
+  width:50vw;height:50vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(51,153,102,.08),transparent 70%);
+  pointer-events:none;filter:blur(60px);
+}
+
+/* — Grille de points — */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;
+}
+
+.hero__wrap{
+  position:relative;z-index:2;width:100%;max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;
+}
+
+/* ════════════ CONTENU ════════════ */
+.hero__content{
+  opacity:0;transform:translateY(32px);
+  animation:.75s var(--ease) .15s forwards heroIn;
+}
+@keyframes heroIn{to{opacity:1;transform:none}}
+
+/* — Pill badge — */
+.hero__pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.45rem 1.25rem;margin-bottom:1.75rem;
+  font-size:.8125rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+  color:var(--g3);background:var(--surf);
+  border:1px solid var(--brd);border-radius:100px;
+  backdrop-filter:blur(12px);
+  transition:border-color .3s,transform .3s;
+}
+.hero__pill:hover{border-color:var(--g5);transform:translateY(-2px)}
+.hero__dot{width:7px;height:7px;border-radius:50%;background:var(--g5);
+  animation:dot 2.4s ease-in-out infinite}
+@keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+/* — Titre — */
+.hero__title{
+  font-size:clamp(2.25rem,5.5vw,3.75rem);font-weight:800;
+  line-height:1.08;letter-spacing:-.03em;margin-bottom:1.25rem;
+}
+.hero__mark{
+  color:var(--g5);position:relative;display:inline-block;
+}
+.hero__mark::after{
+  content:'';position:absolute;bottom:2px;left:0;
+  width:100%;height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--g5),var(--g3));opacity:.18;
+  transform:scaleX(0);transform-origin:left;
+  animation:.9s var(--ease) .7s forwards growX;
+}
+@keyframes growX{to{transform:scaleX(1)}}
+
+/* — Sous-titre — */
+.hero__sub{
+  font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.65;
+  color:var(--tx2);max-width:560px;margin-bottom:2.5rem;
+}
+
+/* ════════════ STATS ════════════ */
+.hero__stats{
+  display:flex;flex-wrap:wrap;gap:2rem;
+  margin-bottom:2.75rem;padding-bottom:.5rem;
+  border-bottom:1px solid var(--brd);
+}
+.st{flex:1 1 120px;min-width:120px}
+.st__v{
+  font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:800;
+  color:var(--g5);line-height:1;margin-bottom:.35rem;
+  font-variant-numeric:tabular-nums;
+}
+.st__l{font-size:.8125rem;font-weight:500;color:var(--tx2);line-height:1.35}
+
+/* reveal animation pour chaque stat */
+.st{opacity:0;transform:translateY(18px);animation:.55s var(--ease) forwards heroIn}
+.st:nth-child(1){animation-delay:.45s}
+.st:nth-child(2){animation-delay:.6s}
+.st:nth-child(3){animation-delay:.75s}
+
+/* ════════════ CTA ════════════ */
+.hero__cta{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+
+.cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.9rem 1.75rem;font-size:.9375rem;font-weight:600;
+  border-radius:10px;border:2px solid transparent;
+  position:relative;overflow:hidden;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s,background .3s;
+}
+.cta span,.cta svg{position:relative;z-index:1}
+
+/* ripple */
+.cta::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.15),transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.cta:hover::after{opacity:1}
+
+/* Primary */
+.cta--p{
+  background:linear-gradient(135deg,var(--g5),var(--g7));
+  color:#fff;
+  box-shadow:0 4px 14px rgba(51,153,102,.35),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.cta--p:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(51,153,102,.45)}
+.cta--p:active{transform:translateY(-1px)}
+
+/* Secondary */
+.cta--s{
+  color:var(--tx);border-color:var(--brd);
+  backdrop-filter:blur(8px);background:rgba(255,255,255,.03);
+}
+.cta--s:hover{border-color:var(--g5);background:rgba(51,153,102,.06);transform:translateY(-3px)}
+
+.cta__arrow{width:18px;height:18px;transition:transform .3s}
+.cta:hover .cta__arrow{transform:translateX(4px)}
+
+/* ════════════ TRUST BAR ════════════ */
+.hero__trust{
+  margin-top:2.5rem;display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem;
+  opacity:0;animation:.6s var(--ease) 1.1s forwards heroIn;
+}
+.trust__item{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.75rem;font-weight:500;color:var(--tx2);
+}
+.trust__icon{width:16px;height:16px;color:var(--g3);flex-shrink:0}
+
+/* ════════════ VISUEL ════════════ */
+.hero__visual{
+  display:none;position:relative;
+  opacity:0;transform:translateX(30px) scale(.97);
+  animation:.8s var(--ease) .35s forwards visIn;
+}
+@keyframes visIn{to{opacity:1;transform:none}}
+
+.hero__card{
+  position:relative;border-radius:20px;overflow:hidden;
+  background:var(--surf);
+  box-shadow:0 24px 64px rgba(0,0,0,.35),0 0 0 1px var(--brd);
+}
+.hero__card::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,transparent 50%,rgba(26,35,50,.6));
+  pointer-events:none;
+}
+.hero__img{width:100%;aspect-ratio:5/4;object-fit:cover;transition:transform .7s var(--ease)}
+.hero__card:hover .hero__img{transform:scale(1.06)}
+
+/* Badge gold flottant */
+.hero__gold{
+  position:absolute;top:1.5rem;right:1.5rem;z-index:3;
+  padding:.6rem 1.1rem;border-radius:8px;
+  font-size:.8125rem;font-weight:700;color:var(--n9);
+  background:linear-gradient(135deg,var(--gd7),var(--gd6));
+  box-shadow:0 4px 14px rgba(255,183,0,.3);
+  animation:bob 3.5s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Mini carte info flottante */
+.hero__info{
+  position:absolute;bottom:1.5rem;left:1.5rem;z-index:3;
+  display:flex;align-items:center;gap:.75rem;
+  padding:.75rem 1rem;border-radius:12px;
+  background:rgba(26,35,50,.85);backdrop-filter:blur(12px);
+  border:1px solid var(--brd);
+  animation:bob 4s ease-in-out .5s infinite;
+}
+.hero__info-icon{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(51,153,102,.15);color:var(--g3);
+}
+.hero__info-text{font-size:.75rem;color:var(--tx2);line-height:1.3}
+.hero__info-text strong{display:block;font-size:.875rem;color:var(--tx);font-weight:600}
+
+/* ════════════ RESPONSIVE ════════════ */
+@media(min-width:768px){
+  .hero{padding:6rem 2rem}
+  .hero__wrap{grid-template-columns:1.15fr 1fr;gap:3.5rem}
+  .hero__visual{display:block}
+}
+@media(min-width:1024px){
+  .hero{padding:6rem 3rem}
+  .hero__wrap{gap:4.5rem}
+}
+@media(min-width:1280px){
+  .hero__title{font-size:3.75rem}
+}
+
+/* ════════════ ACCESSIBILITÉ ════════════ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+.cta:focus-visible{outline:3px solid var(--g5);outline-offset:4px}
+
+/* ════════════ SCROLLBAR ════════════ */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--n9)}
+::-webkit-scrollbar-thumb{background:var(--n7);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--g5)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HERO SECTION — À PROPOS PEBIFY
+     ═══════════════════════════════════════ -->
+<section class="hero" itemscope itemtype="https://schema.org/AboutPage">
+  <div class="hero__wrap">
+
+    <!-- ══ CONTENU GAUCHE ══ -->
+    <div class="hero__content">
+
+      <div class="hero__pill">
+        <span class="hero__dot" aria-hidden="true"></span>
+        Certifiés &amp; Reconnus depuis 2015
+      </div>
+
+      <h1 class="hero__title" itemprop="name">
+        Votre <span class="hero__mark">Expert PEB</span><br>
+        de Confiance en Belgique
+      </h1>
+
+      <p class="hero__sub" itemprop="description">
+        Nous accompagnons propriétaires et professionnels de l'immobilier
+        avec des certificats PEB précis, rapides et conformes.
+        Votre tranquillité d'esprit est notre priorité.
+      </p>
+
+      <div class="hero__stats">
+        <div class="st">
+          <div class="st__v" data-target="5000" data-suffix="+">0</div>
+          <div class="st__l">Certificats délivrés</div>
+        </div>
+        <div class="st">
+          <div class="st__v">48h</div>
+          <div class="st__l">Délai moyen</div>
+        </div>
+        <div class="st">
+          <div class="st__v" data-target="4.9" data-suffix="/5" data-decimals="1">0</div>
+          <div class="st__l">Satisfaction client</div>
+        </div>
+      </div>
+
+      <div class="hero__cta">
+        <a href="#devis" class="cta cta--p" aria-label="Obtenir un devis gratuit pour votre certificat PEB">
+          <span>Devis gratuit en 2 min</span>
+          <svg class="cta__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+        <a href="#expertise" class="cta cta--s" aria-label="Découvrir notre expertise PEB">
+          <span>Notre expertise</span>
+        </a>
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="hero__trust">
+        <div class="trust__item">
+          <svg class="trust__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          Agréé Région Wallonne
+        </div>
+        <div class="trust__item">
+          <svg class="trust__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Réponse sous 24h
+        </div>
+        <div class="trust__item">
+          <svg class="trust__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          Devis 100% gratuit
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ VISUEL DROITE ══ -->
+    <div class="hero__visual">
+      <div class="hero__card">
+        <div class="hero__gold">Certifié EPBD</div>
+
+        <!-- Remplacer le SVG par votre image réelle -->
+        <img
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='480' viewBox='0 0 600 480'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23233044'/%3E%3Cstop offset='1' stop-color='%231A2332'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' width='600' height='480'/%3E%3Ccircle cx='300' cy='200' r='80' fill='none' stroke='%23339966' stroke-width='2' opacity='.15'/%3E%3Ccircle cx='300' cy='200' r='120' fill='none' stroke='%23339966' stroke-width='1' opacity='.08'/%3E%3Ccircle cx='300' cy='200' r='160' fill='none' stroke='%23339966' stroke-width='.5' opacity='.05'/%3E%3Cpath d='M270 190 l30-30 l30 30 l-15 0 l0 40 l-30 0 l0-40z' fill='%23339966' opacity='.3'/%3E%3Ctext x='300' y='310' text-anchor='middle' font-family='Inter,sans-serif' font-size='14' font-weight='600' fill='%23A7B1C2'%3EExpert PEB Certifi%C3%A9%3C/text%3E%3Ctext x='300' y='335' text-anchor='middle' font-family='Inter,sans-serif' font-size='11' fill='%23637085'%3ERemplacez par votre image%3C/text%3E%3C/svg%3E"
+          alt="Expert PEB certifié réalisant une inspection énergétique dans un bâtiment en Belgique"
+          class="hero__img"
+          width="600" height="480"
+          loading="eager"
+          fetchpriority="high"
+        >
+
+        <div class="hero__info">
+          <div class="hero__info-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div class="hero__info-text">
+            <strong>Rapport en 48h</strong>
+            Certificat officiel conforme
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"PEBify","url":"https://pebify.be","logo":"https://pebify.be/logo.png","description":"Expert en certification énergétique PEB en Belgique. Plus de 5000 certificats délivrés.","address":{"@type":"PostalAddress","addressCountry":"BE"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","bestRating":"5","ratingCount":"500"},"areaServed":{"@type":"Country","name":"Belgium"},"sameAs":["https://www.facebook.com/pebify","https://www.linkedin.com/company/pebify"]}
+</script>
+
+<script>
+/* ══════════════════════════════════════════════
+   PEBIFY HERO — JAVASCRIPT — v2.0
+   Compteurs · Ripple · Analytics · Performance
+   ══════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  /* ── Compteurs animés ── */
+  function countUp(el, target, decimals, suffix, ms){
+    var start = performance.now();
+    var d = ms || 1800;
+    function step(now){
+      var t = Math.min((now - start) / d, 1);
+      // easeOutExpo
+      var v = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      var current = v * target;
+      el.textContent = (decimals > 0 ? current.toFixed(decimals) : Math.floor(current)) + suffix;
+      if(t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ── Intersection Observer — stats ── */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var v = e.target.querySelector('[data-target]');
+      if(v && !v.dataset.done){
+        v.dataset.done = '1';
+        countUp(
+          v,
+          parseFloat(v.dataset.target),
+          parseInt(v.dataset.decimals || '0', 10),
+          v.dataset.suffix || '',
+          1800
+        );
+      }
+      io.unobserve(e.target);
+    });
+  }, {threshold: .3});
+
+  document.querySelectorAll('.st').forEach(function(s){ io.observe(s); });
+
+  /* ── CTA Ripple effect (position-aware) ── */
+  document.querySelectorAll('.cta').forEach(function(btn){
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      btn.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      btn.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var h = this.getAttribute('href');
+      var t = h !== '#' && document.querySelector(h);
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+  });
+
+  /* ── Analytics CTA tracking ── */
+  document.querySelectorAll('.cta').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var label = (this.querySelector('span') || {}).textContent || '';
+      var type = this.classList.contains('cta--p') ? 'primary' : 'secondary';
+      // GA4
+      if(typeof gtag === 'function')
+        gtag('event','cta_click',{cta_text:label,cta_type:type,cta_location:'hero_about'});
+      // Matomo
+      if(typeof _paq !== 'undefined')
+        _paq.push(['trackEvent','CTA','Click',label]);
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
