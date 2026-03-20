@@ -1,152 +1,238 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust Strip Widget</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEBIFY • Hero & Calculateur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-900: #0f1724;
+      --navy-800: #162034;
+      --gold: #ffd700;
+      --green: #32d48b;
+      --green-dark: #26976e;
+      --text-main: #f5f7fb;
+      --muted: #c7cfde;
+      --card-glow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --pad-x: clamp(1.25rem, 4vw, 3.5rem);
+      --pad-y: clamp(2rem, 6vw, 4rem);
+    }
 
-        /* Custom Animations */
-        .animate-bounce-gentle {
-            animation: bounce-gentle 2s infinite;
-        }
-        @keyframes bounce-gentle {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-5px);}
-            60% {transform: translateY(-3px);}
-        }
-    </style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--navy-900); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* Wrapper */
+    #pebify-hero-pricing { position: relative; width: 100%; overflow: hidden; background: radial-gradient(circle at 20% 20%, rgba(50, 212, 139, 0.12), transparent 35%), radial-gradient(circle at 80% 10%, rgba(255, 215, 0, 0.12), transparent 40%), linear-gradient(145deg, #0b1220 0%, #121a2b 50%, #0b1220 100%); }
+
+    /* Hero Base */
+    .hero { position: relative; min-height: 100vh; padding: calc(var(--pad-y) + 40px) var(--pad-x) var(--pad-y); display: flex; align-items: center; justify-content: center; }
+    .hero__media-wrapper { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .hero__video, .hero__image { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(1.05); }
+    .hero__image { display: none; }
+    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15, 23, 36, 0.65), rgba(15, 23, 36, 0.25)); z-index: 1; }
+    .hero__skeleton { position: absolute; inset: 0; background: linear-gradient(110deg, #1a2332 8%, #2c3e50 18%, #1a2332 33%); background-size: 200% 100%; z-index: 2; opacity: 1; transition: opacity 0.3s ease; }
+    .hero__skeleton.animating { animation: peb-shimmer 1.5s linear infinite; }
+    .hero__skeleton.loaded { opacity: 0; visibility: hidden; animation: none; }
+    @keyframes peb-shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+    .hero__container { position: relative; z-index: 5; width: 100%; max-width: 1220px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+    .hero__content { grid-column: span 7; background: rgba(18, 26, 43, 0.7); border: 1px solid rgba(255, 255, 255, 0.06); backdrop-filter: blur(12px); border-radius: 22px; padding: clamp(1.5rem, 4vw, 2.75rem); box-shadow: var(--card-glow); }
+    .hero__aside { grid-column: span 5; }
+
+    /* Text */
+    .hero__eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.05); color: #a5b3cf; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.75rem; }
+    .hero__title { font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 900; line-height: 1.1; margin: 16px 0 12px; color: #fff; letter-spacing: -0.02em; }
+    .hero__subtitle { font-size: 1.05rem; color: var(--muted); max-width: 640px; }
+
+    /* Price */
+    .hero__price-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 22px 0; }
+    .price-chip { display: inline-flex; align-items: baseline; gap: 6px; padding: 12px 18px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(50, 212, 139, 0.08)); border: 1px solid rgba(255, 215, 0, 0.4); color: #fff; border-radius: 14px; font-weight: 800; font-size: 1.4rem; box-shadow: 0 8px 30px rgba(255, 215, 0, 0.18); position: relative; cursor: default; }
+    .price-chip small { font-weight: 700; font-size: 0.65em; color: rgba(255, 255, 255, 0.85); text-transform: lowercase; }
+    .price-tooltip { position: absolute; top: 115%; left: 0; transform: translateY(8px); background: rgba(13, 19, 30, 0.96); color: #fff; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45); opacity: 0; visibility: hidden; transition: opacity 0.2s, transform 0.2s; width: max-content; max-width: 260px; }
+    .price-chip:hover .price-tooltip, .price-chip:focus-within .price-tooltip { opacity: 1; visibility: visible; transform: translateY(12px); }
+    .microcopy { color: #9fb2d1; font-weight: 600; letter-spacing: 0.01em; }
+
+    /* Badges */
+    .badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 18px 0 24px; }
+    .badge { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 12px 12px 10px; display: flex; align-items: center; gap: 10px; color: #e8edf7; font-weight: 700; transition: transform 0.2s, border-color 0.2s, background 0.2s; }
+    .badge svg { width: 20px; height: 20px; color: var(--gold); }
+    .badge:hover { transform: translateY(-2px); border-color: rgba(255, 215, 0, 0.4); background: rgba(255, 255, 255, 0.06); }
+
+    /* CTA */
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 22px; border-radius: 14px; font-weight: 800; font-size: 1rem; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease; border: 1px solid transparent; }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--green-dark)); color: #fff; box-shadow: 0 16px 40px rgba(50, 212, 139, 0.35); }
+    .btn-primary:hover { transform: translateY(-2px); border-color: rgba(255, 215, 0, 0.6); box-shadow: 0 20px 50px rgba(50, 212, 139, 0.45); }
+    .btn-ghost { background: rgba(255, 255, 255, 0.04); color: #e8edf7; border-color: rgba(255, 255, 255, 0.12); }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 215, 0, 0.35); transform: translateY(-2px); }
+
+    /* Expert Card */
+    .expert-card { position: relative; background: linear-gradient(140deg, rgba(18, 26, 43, 0.85), rgba(18, 26, 43, 0.7)); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: var(--card-glow); border-radius: 22px; padding: clamp(1.5rem, 3vw, 2.4rem); display: grid; gap: 18px; overflow: hidden; }
+    .expert-card::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(50, 212, 139, 0.18), transparent 40%); pointer-events: none; }
+    .expert-top { display: flex; align-items: center; gap: 16px; position: relative; z-index: 1; }
+    .avatar { position: relative; width: 92px; height: 92px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.1); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .status-dot { position: absolute; bottom: 6px; right: 6px; width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(135deg, var(--green), #0f9f72); border: 3px solid var(--navy-900); box-shadow: 0 0 0 6px rgba(50, 212, 139, 0.15); }
+    .expert-info { display: flex; flex-direction: column; gap: 4px; }
+    .expert-name { font-size: 1.3rem; font-weight: 800; color: #fff; }
+    .expert-role { color: #9cd5b8; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; font-size: 0.85rem; }
+    .rating { display: inline-flex; align-items: center; gap: 8px; color: #fbbf24; font-weight: 800; font-size: 0.95rem; }
+    .rating span { color: #9fb2d1; font-weight: 600; font-size: 0.85rem; }
+
+    .expert-body { display: grid; gap: 12px; position: relative; z-index: 1; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { background: rgba(255, 255, 255, 0.06); color: #d5deed; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .contact { flex: 1 1 140px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 14px; border-radius: 12px; text-decoration: none; font-weight: 800; color: #e8edf7; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); transition: transform 0.2s, background 0.2s, border-color 0.2s; }
+    .contact:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 215, 0, 0.35); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero { min-height: auto; padding: var(--pad-y) var(--pad-x); }
+      .hero__container { grid-template-columns: 1fr; }
+      .hero__content, .hero__aside { grid-column: span 12; }
+    }
+
+    @media (max-width: 720px) {
+      .hero { padding-top: calc(var(--pad-y) + 20px); }
+      .hero__content { padding: 1.25rem; }
+      .hero__title { font-size: 2rem; }
+      .hero__price-row { flex-direction: column; align-items: flex-start; }
+      .hero__actions { width: 100%; }
+      .btn { width: 100%; justify-content: center; }
+      .hero__video { display: none; }
+      .hero__image { display: block; }
+    }
+  </style>
 </head>
 <body>
+  <div id="pebify-hero-pricing">
+    <section class="hero" aria-label="Certificat PEB Bruxelles">
+      <div class="hero__media-wrapper" aria-hidden="true">
+        <div class="hero__skeleton" aria-hidden="true"></div>
+        <div class="hero__overlay"></div>
+        <video class="hero__video" playsinline muted loop preload="none" poster="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt-desktop.jpg">
+          <source src="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-panorama.webm" type="video/webm">
+          <source src="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt.mp4" type="video/mp4">
+        </video>
+        <picture>
+          <source media="(max-width: 640px)" srcset="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt-mobile-1.webp" type="image/webp">
+          <img class="hero__image" src="https://pebify.be/wp-content/uploads/2025/10/certificat-peb-bruxelles-pebify-hero-video-opt-mobile-1.jpg" alt="Bruxelles skyline" loading="lazy" decoding="async">
+        </picture>
+      </div>
 
-    <!-- START OF INTEGRATION CODE -->
-    <!-- Wrapper with light gray background for contrast -->
-    <div class="w-full bg-[#f5f7fa] py-10 md:py-14 px-4">
+      <div class="hero__container">
+        <div class="hero__content">
+          <span class="hero__eyebrow">PEBIFY • Bruxelles-Capitale</span>
+          <h1 class="hero__title">Prix instantané pour votre certificat PEB, avec un accompagnement premium.</h1>
+          <p class="hero__subtitle">Tarif fixe, rapport précis, rendez-vous sous 24h. Un expert dédié pour chaque bien résidentiel.</p>
 
-        <!-- Copy everything inside this section tag to integrate -->
-        <section class="w-full max-w-[1050px] mx-auto text-center font-sans">
-
-            <!-- Header Section - Transparent Background with Navy Text -->
-            <header class="mb-6 md:mb-8 bg-transparent">
-                <h2 class="text-2xl md:text-[1.8rem] font-extrabold text-[#1A2332] mb-2 leading-tight">
-                    Besoin d'un certificat PEB à Bruxelles ?
-                </h2>
-                <div class="flex flex-col items-center gap-1">
-                    <span class="text-base text-[#1A2332] font-semibold">
-                        Un tarif juste ? Des conseils d'expert ?
-                    </span>
-                    <span class="text-lg font-black text-[#339966] uppercase tracking-wider">
-                        VOUS ÊTES AU BON ENDROIT.
-                    </span>
-                </div>
-            </header>
-
-            <!-- Main Card (Navy #1A2332) -->
-            <div class="relative bg-[#1A2332] rounded-2xl p-8 md:p-10 flex flex-col-reverse md:flex-row items-center justify-between gap-10 shadow-[0_15px_35px_rgba(26,35,50,0.25)] border border-white/10 overflow-hidden md:overflow-visible">
-
-                <!-- Decorative Background Texture -->
-                <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(51,153,102,0.06),transparent_50%)] rounded-2xl"></div>
-
-                <!-- Left Content: Promise & Bio -->
-                <div class="flex-1 z-10 text-center md:text-left flex flex-col items-center md:items-start w-full">
-
-                    <!-- Top Badges -->
-                    <div class="flex flex-wrap justify-center md:justify-start gap-3 mb-4">
-                        <span class="bg-[#339966] text-white text-[0.7rem] font-bold px-3 py-1 rounded uppercase tracking-[0.5px]">
-                            OFFRE PEB RÉSIDENTIEL
-                        </span>
-                        <span class="bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[0.7rem] font-bold px-3 py-1 rounded uppercase tracking-[0.5px] flex items-center gap-1.5">
-                            <!-- Lock Icon -->
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            TARIF FIXE GARANTI
-                        </span>
-                    </div>
-
-                    <!-- Headline -->
-                    <h3 class="text-2xl md:text-[1.5rem] font-bold text-white mb-4 leading-[1.2]">
-                        Je réalise votre certificat PEB <span class="italic text-[#FFD700]">personnellement</span>.
-                    </h3>
-
-                    <!-- Quote Block -->
-                    <div class="relative mb-5 pt-3 md:pt-0 pl-0 md:pl-4 border-t-2 md:border-t-0 md:border-l-[3px] border-[#339966] w-full max-w-2xl">
-                        <p class="text-[#cbd5e1] italic leading-relaxed text-[0.95rem]">
-                            "14 ans d'expérience dans l'immobilier, probablement parmi les certificateurs les plus passionnés. <span class="text-[#F8FAFC] font-semibold not-italic block md:inline mt-1 md:mt-0">J'aime ce que je fais et je fais ce que je aime.</span>"
-                        </p>
-                    </div>
-
-                    <!-- Features List -->
-                    <div class="bg-white/10 rounded-lg p-3 md:p-4 mb-6 w-full md:w-auto text-left border border-white/5">
-                        <div class="flex items-start gap-3 mb-2 text-[#F8FAFC] text-[0.9rem]">
-                            <!-- Check Circle Icon -->
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#339966] shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span><strong>Tout inclus :</strong> Déplacement, Conseils, Remise du rapport</span>
-                        </div>
-                        <div class="flex items-start gap-3 text-[#F8FAFC] text-[0.9rem]">
-                            <!-- Check Circle Icon -->
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#339966] shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span>Prix affiché = Prix demandé (Zéro surprise)</span>
-                        </div>
-                    </div>
-
-                    <!-- CTA Nudge -->
-                    <a href="https://pebify.be/#prix-peb-bruxelles" class="flex items-center justify-center md:justify-start gap-2 text-[#339966] font-bold text-sm cursor-pointer animate-bounce-gentle group transition-colors hover:text-[#2da868]">
-                        <span>Calculez le prix de votre certificat PEB en quelques secondes</span>
-                        <!-- Chevron Down Icon -->
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-y-1 transition-transform"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
-                </div>
-
-                <!-- Right Content: Expert Profile -->
-                <div class="shrink-0 z-10 flex flex-col items-center md:mr-6">
-
-                    <!-- Photo Container -->
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 mb-3 group-profile">
-
-                        <!-- Main Image -->
-                        <img src="https://pebify.be/wp-content/uploads/2025/10/certificateur-peb-bruxelles-milad-mollaey-badge-250px.webp" alt="Milad Mollaey - Expert PEB" class="w-full h-full rounded-full border-[6px] border-white/10 object-cover bg-[#2C3E50] shadow-2xl" loading="lazy">
-
-                        <!-- Status Dot (Available) -->
-                        <div class="absolute bottom-6 left-8 w-6 h-6 bg-[#339966] border-[3px] border-[#1A2332] rounded-full shadow-[0_0_0_2px_rgba(51,153,102,0.3)] z-20" title="Disponible"></div>
-
-                        <!-- Action Buttons -->
-
-                        <!-- 1. Email (Top Right) -->
-                        <a href="mailto:info@pebify.be" class="absolute top-8 -right-2 w-14 h-14 bg-white hover:bg-[#2C3E50] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 z-30" aria-label="Envoyer un email">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </a>
-
-                        <!-- 2. WhatsApp (Center Right) -->
-                        <a href="https://wa.me/32484630815" target="_blank" rel="noopener noreferrer" class="absolute top-1/2 -right-6 -translate-y-1/2 w-16 h-16 bg-white hover:bg-[#25D366] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 z-40" aria-label="Contacter par WhatsApp">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                        </a>
-
-                        <!-- 3. Phone (Bottom Right) -->
-                        <a href="tel:+32484630815" class="absolute bottom-8 -right-2 w-14 h-14 bg-white hover:bg-[#339966] hover:text-white text-[#1A2332] rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 z-30" aria-label="Appeler par téléphone">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        </a>
-
-                    </div>
-
-                    <!-- Name & Role -->
-                    <div class="text-center mt-4">
-                        <span class="block text-white font-bold text-2xl">Milad Mollaey</span>
-                        <span class="block text-[#339966] text-sm font-bold uppercase tracking-wider mt-1">
-                        Votre expert PEB dédié
-                        </span>
-                    </div>
-
-                </div>
-
+          <div class="hero__price-row">
+            <div class="price-chip" tabindex="0" aria-label="Prix dès 105 euros TTC">
+              <small>dès</small>
+              105 € TTC
+              <div class="price-tooltip">Exemple : studio &lt; 40 m², prix tout compris.</div>
             </div>
-        </section>
+            <div class="microcopy">Calculez en fonction du type de bien et de la superficie en moins de 30 secondes.</div>
+          </div>
 
-    </div>
-    <!-- END OF INTEGRATION CODE -->
+          <div class="badge-grid" aria-label="Garanties PEBIFY">
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              RDV 24h
+            </div>
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Agréé officiel
+            </div>
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18a7 7 0 1 1 0-12"></path><path d="M4 10h12"></path><path d="M4 14h9"></path></svg>
+              Prix fixe
+            </div>
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Qualité détaillée
+            </div>
+          </div>
 
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="https://pebify.be/#tarifs-certificat-peb-bruxelles">Calculer mon prix maintenant</a>
+            <a class="btn btn-ghost" href="https://wa.me/32484630815" target="_blank" rel="noopener">Devis express WhatsApp</a>
+          </div>
+        </div>
+
+        <aside class="hero__aside">
+          <div class="expert-card">
+            <div class="expert-top">
+              <div class="avatar">
+                <img src="https://pebify.be/wp-content/uploads/2025/10/certificateur-peb-bruxelles-milad-mollaey-badge-250px.webp" alt="Milad Mollaey">
+                <span class="status-dot" aria-label="En ligne"></span>
+              </div>
+              <div class="expert-info">
+                <div class="expert-name">Milad Mollaey</div>
+                <div class="expert-role">Votre expert PEB dédié</div>
+                <div class="rating">★★★★★ <span>(4,9 / 5)</span></div>
+              </div>
+            </div>
+
+            <div class="expert-body">
+              <div class="pill-row">
+                <span class="pill">Tarif tout inclus</span>
+                <span class="pill">Conseils personnalisés</span>
+                <span class="pill">Réponse en 2h</span>
+              </div>
+
+              <div class="contact-row">
+                <a class="contact" href="https://wa.me/32484630815" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                  Devis instantané
+                </a>
+                <a class="contact" href="tel:+32484630815" aria-label="Appeler PEBIFY">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>
+                  Appeler
+                </a>
+                <a class="contact" href="mailto:info@pebify.be" aria-label="Email PEBIFY">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function() {
+      const section = document.getElementById('pebify-hero-pricing');
+      if (!section) return;
+
+      const skeleton = section.querySelector('.hero__skeleton');
+      const video = section.querySelector('.hero__video');
+      const image = section.querySelector('.hero__image');
+      const isDesktop = window.matchMedia('(min-width: 721px)').matches;
+
+      if (isDesktop && video) {
+        skeleton.classList.add('animating');
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            video.play().finally(() => skeleton.classList.add('loaded'));
+            observer.disconnect();
+          }
+        }, { rootMargin: '80px' });
+        observer.observe(video);
+      } else if (image) {
+        if (image.complete) {
+          skeleton.classList.add('loaded');
+        } else {
+          image.onload = () => skeleton.classList.add('loaded');
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
